@@ -918,6 +918,235 @@ body {
   50% { transform: translateY(-6px); }
 }
 
+/* 2.1 森林小超市收银台 */
+.supermarket-shelf-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%);
+  border: 3px solid #fde68a;
+  border-radius: 24px;
+  padding: 14px 16px;
+  width: 100%;
+  box-shadow: 0 6px 14px rgba(245, 158, 11, 0.08);
+}
+
+.shelf-header-tag {
+  font-size: 14px;
+  font-weight: 800;
+  color: #b45309;
+  background: #ffffff;
+  padding: 4px 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #fde68a;
+}
+
+.shelf-goods-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.goods-item-card {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 18px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+}
+
+.goods-item-card.q-box {
+  border-color: #8b5cf6;
+  background: #f5f3ff;
+  animation: pulseQ 1.6s infinite ease-in-out;
+}
+
+.goods-icon {
+  font-size: 38px;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.goods-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: #334155;
+}
+
+.goods-price-tag {
+  font-size: 12px;
+  font-weight: 800;
+  color: #d97706;
+  margin-top: 2px;
+}
+
+.coins-badge {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.shelf-symbol {
+  font-size: 24px;
+  font-weight: 900;
+  color: #6366f1;
+}
+
+/* 2.2 目标心愿卡 (小兔拔萝卜) */
+.target-card-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 3px solid #86efac;
+  border-radius: 24px;
+  padding: 14px 18px;
+  width: 100%;
+}
+
+.target-badge {
+  font-size: 14px;
+  font-weight: 800;
+  color: #15803d;
+  background: #ffffff;
+  padding: 4px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #86efac;
+}
+
+.target-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 10px 16px;
+  border: 2px solid #bbf7d0;
+  box-shadow: 0 4px 0 rgba(22, 101, 52, 0.08);
+}
+
+.target-avatar {
+  font-size: 42px;
+  animation: bounceItem 2.5s infinite ease-in-out;
+}
+
+.target-bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bubble-text {
+  font-size: 15px;
+  font-weight: 900;
+  color: #166534;
+}
+
+.target-num {
+  font-size: 20px;
+  color: #ea580c;
+}
+
+.target-slots {
+  font-size: 22px;
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+
+.target-hint-tag {
+  font-size: 13px;
+  font-weight: 800;
+  color: #15803d;
+  margin-top: 8px;
+}
+
+/* 2.3 立体遮挡积木城堡 (2层空间透视) */
+.blocks-puzzle-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #faf5ff 0%, #ede9fe 100%);
+  border: 3px solid #c4b5fd;
+  border-radius: 24px;
+  padding: 14px 18px;
+  width: 100%;
+}
+
+.blocks-header-tag {
+  font-size: 14px;
+  font-weight: 800;
+  color: #6d28d9;
+  background: #ffffff;
+  padding: 4px 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #c4b5fd;
+}
+
+.blocks-3d-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.blocks-layer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.block-cube {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  min-width: 60px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.06);
+}
+
+.block-cube.hidden-support-cube {
+  border: 2px dashed #8b5cf6;
+  background: #f5f3ff;
+  animation: pulseQ 1.6s infinite ease-in-out;
+}
+
+.cube-icon {
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.cube-badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.blocks-sub-text {
+  font-size: 13px;
+  font-weight: 800;
+  color: #6d28d9;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd6fe;
+  text-align: center;
+}
+
 /* 3. 聪聪小猫温柔引导气泡 */
 .gentle-hint-box {
   display: none;
@@ -1930,11 +2159,14 @@ const DefaultLevels = {
       questionText: '兔妈妈说要吃 5 根胡萝卜，数数看哪一组正好是 5 根？',
       speechPrompt: '兔妈妈想吃5根胡萝卜，小朋友，帮小兔找一找，哪一组正好是5根呢？',
       displayType: 'grouped_cards',
+      icon: '🐰🥕',
+      targetCount: 5,
+      subText: '兔妈妈的目标：正好拔 5 根大胡萝卜！',
       hintPrompt: '兔妈妈要吃 5 根胡萝卜，数数每组的胡萝卜，哪一组正好有 5 根呢？',
       options: [
-        { icon: '🥕🥕🥕', text: '3 根萝卜', isCorrect: false },
-        { icon: '🥕🥕🥕🥕🥕', text: '5 根萝卜', isCorrect: true, cheer: '太厉害啦！小兔子吃饱啦，送你一颗大金星！' },
-        { icon: '🥕🥕🥕🥕', text: '4 根萝卜', isCorrect: false }
+        { icon: '🥕🥕🥕', text: '3 根萝卜', dots: '●●●', isCorrect: false },
+        { icon: '🥕🥕🥕🥕🥕', text: '5 根萝卜', dots: '●●●●●', isCorrect: true, cheer: '太厉害啦！小兔子吃饱啦，送你一颗大金星！' },
+        { icon: '🥕🥕🥕🥕', text: '4 根萝卜', dots: '●●●●', isCorrect: false }
       ]
     },
     {
@@ -1996,9 +2228,9 @@ const DefaultLevels = {
       questionText: '盘子里原本有 5 个大桃子，小猴吃掉了 2 个，盘子里还剩下几个？',
       speechPrompt: '盘子里原本有5个香甜的大桃子。小猴肚子饿吃了2个，盘子里还剩下几个呢？',
       displayType: 'items',
-      plateLabel: '🍑 诱人大桃盘',
-      items: ['🍑', '🍑', '🍑', '🍽️', '🍽️'],
-      subText: '原本有5个桃子，吃掉了2个(变空盘)，数数还剩几个桃？',
+      plateLabel: '🍑 诱人大桃盘 (吃了2个)',
+      items: ['🍑', '🍑', '🍑', '❌ 吃了', '❌ 吃了'],
+      subText: '原本有5个桃子，吃掉了2个(打叉)，数数还剩几个完好的桃？',
       hintPrompt: '数一数盘子里还没被吃掉的红桃子：一个、两个、三个！还剩几个呢？',
       options: [
         { icon: '2', text: '还剩 2 个', dots: '●●', isCorrect: false },
@@ -2029,16 +2261,16 @@ const DefaultLevels = {
       tier: 'expert',
       stage: '高阶阶：天平平衡与等式感知',
       title: '第8关：神奇小天平',
-      questionText: '天平左边放了一个数字 5，右边放了一个数字 3 和一个问号箱。天平怎样才能平衡？',
-      speechPrompt: '看神奇的小天平：左边是重量5，右边是重量3加一个问号箱。问号箱放几，两边才能一样平？',
+      questionText: '天平左边放了 5 块积木，右边放了 3 块和一个问号箱。问号箱放几块，两边天平才能平衡？',
+      speechPrompt: '看神奇的小天平：左边是5块积木，右边是3块加一个问号箱。问号箱放几块，两边才能一样平？',
       displayType: 'versus',
-      left: { label: '左边秤盘', items: ['⚖️ 重量 5'] },
-      right: { label: '右边秤盘', items: ['重量 3 ➕ ❓'] },
-      hintPrompt: '要让两边一样平，右边已经有了3，还要再加几才能变成5呢？3加几等于5？',
+      left: { label: '左边秤盘 (5块)', items: ['⚖️ 🟧🟧🟧🟧🟧 (5)'] },
+      right: { label: '右边秤盘 (3块+❓)', items: ['🟧🟧🟧 (3) ➕ ❓'] },
+      hintPrompt: '要让两边一样平，右边已经有了3块，还要再加几块才能变成5块呢？3加几等于5？',
       options: [
-        { icon: '1', text: '放 1 个', isCorrect: false },
-        { icon: '2', text: '放 2 个', isCorrect: true, cheer: '天平平衡啦！3加2等于5，你已经学会简单的代数思维了！' },
-        { icon: '3', text: '放 3 个', isCorrect: false }
+        { icon: '1', text: '放 1 块', dots: '●', isCorrect: false },
+        { icon: '2', text: '放 2 块', dots: '●●', isCorrect: true, cheer: '天平平衡啦！3加2等于5，你已经学会简单的代数思维了！' },
+        { icon: '3', text: '放 3 块', dots: '●●●', isCorrect: false }
       ]
     }
   ],
@@ -2145,9 +2377,9 @@ const DefaultLevels = {
       subText: '上方悬空1块 ➔ 下方必须有 ❓ 块积木支撑垫着！',
       hintPrompt: '上面的积木不能漂浮在空中，它的正下方一定有一块看不见的积木稳稳托着它！',
       options: [
-        { icon: '🧱', text: '藏了 1 块在底下托着', isCorrect: true, cheer: '空间透视感真强！没有底下的那1块支撑，上面的积木就会掉下来啦！' },
-        { icon: '🈳', text: '底下空空没积木', isCorrect: false },
-        { icon: '5️⃣', text: '藏了 5 块', isCorrect: false }
+        { icon: '1', text: '藏了 1 块在底下托着', dots: '🧱', isCorrect: true, cheer: '空间透视感真强！没有底下的那1块支撑，上面的积木就会掉下来啦！' },
+        { icon: '0', text: '底下空空没积木', dots: '🈳', isCorrect: false },
+        { icon: '5', text: '藏了 5 块', dots: '🧱🧱🧱🧱🧱', isCorrect: false }
       ]
     },
     {
@@ -2162,9 +2394,9 @@ const DefaultLevels = {
       right: { label: '需要几只小松鼠？', items: ['🐿️ ?'] },
       hintPrompt: '1只小猴换2只松鼠，那2只小猴就是两组松鼠，2加2等于几只呢？',
       options: [
-        { icon: '🐿️', text: '4 只小松鼠 (2 + 2 = 4)', isCorrect: true, cheer: '天才小神童！1只换2只，2只就是2+2=4只！这就是等量代换思维！' },
-        { icon: '3️⃣', text: '3 只小松鼠', isCorrect: false },
-        { icon: '5️⃣', text: '5 只小松鼠', isCorrect: false }
+        { icon: '4', text: '4 只小松鼠 (2 + 2 = 4)', dots: '🐿️🐿️🐿️🐿️', isCorrect: true, cheer: '天才小神童！1只换2只，2只就是2+2=4只！这就是等量代换思维！' },
+        { icon: '3', text: '3 只小松鼠', dots: '🐿️🐿️🐿️', isCorrect: false },
+        { icon: '5', text: '5 只小松鼠', dots: '🐿️🐿️🐿️🐿️🐿️', isCorrect: false }
       ]
     },
     {
@@ -2290,11 +2522,11 @@ const DefaultLevels = {
       speechPrompt: '森林小超市开张啦！小熊拿了2块钱的面包，又拿了1块钱的棒棒糖。小收银员，算算一共几块钱？',
       displayType: 'supermarket',
       items: ['🍞 面包 2元 (🪙🪙)', '➕', '🍭 棒棒糖 1元 (🪙)'],
-      hintPrompt: '买面包要2个硬币，买棒棒糖要1个硬币，伸出手指加一加，2加1等于几？',
+      hintPrompt: '买面包要2个金币，买棒棒糖要1个金币，伸出手指加一加，2加1等于几？',
       options: [
-        { icon: '2️⃣', text: '2 元钱', isCorrect: false },
-        { icon: '3️⃣', text: '3 元钱 (🪙🪙🪙)', isCorrect: true, cheer: '恭喜小收银员结账成功！2元加1元等于3元，小熊非常感谢你！' },
-        { icon: '4️⃣', text: '4 元钱', isCorrect: false }
+        { icon: '2', text: '2 元钱', dots: '🪙🪙', isCorrect: false },
+        { icon: '3', text: '3 元钱', dots: '🪙🪙🪙', isCorrect: true, cheer: '恭喜小收银员结账成功！2元加1元等于3元，小熊非常感谢你！' },
+        { icon: '4', text: '4 元钱', dots: '🪙🪙🪙🪙', isCorrect: false }
       ]
     },
     {
@@ -2309,9 +2541,9 @@ const DefaultLevels = {
       subText: '5 ➔ 4 ➔ 3 ➔ 2 ➔ ❓ 倒计时发射！',
       hintPrompt: '倒计时数字越来越小：5、4、3、2……数到1就喊发射点火！',
       options: [
-        { icon: '1️⃣', text: '1 (点火发射！)', isCorrect: true, cheer: '轰！点火成功！小火箭飞向宇宙啦！' },
-        { icon: '0️⃣', text: '0', isCorrect: false },
-        { icon: '3️⃣', text: '3', isCorrect: false }
+        { icon: '1', text: '数字 1 (发射！)', dots: '●', isCorrect: true, cheer: '轰！点火成功！小火箭飞向宇宙啦！' },
+        { icon: '0', text: '数字 0', dots: '', isCorrect: false },
+        { icon: '3', text: '数字 3', dots: '●●●', isCorrect: false }
       ]
     }
   ]
@@ -3349,11 +3581,95 @@ class App {
         </div>
       `;
     }
-    // 8. 拼音情境 / 象形字 / 空间方位 (hint_image)
-    else {
+    // 8. 森林小超市收银台 (实物与硬币直观对应)
+    else if (task.displayType === 'supermarket') {
       this.visualContainer.innerHTML = `
-        <div style="text-align:center;">
-          <div style="font-size:68px; animation:bounceItem 2.5s infinite ease-in-out; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));">${task.icon || '🌟'}</div>
+        <div class="supermarket-shelf-box">
+          <div class="shelf-header-tag">🛒 森林爱心小超市收银台</div>
+          <div class="shelf-goods-row">
+            <div class="goods-item-card">
+              <div class="goods-icon">🍞</div>
+              <div class="goods-name">香甜面包</div>
+              <div class="goods-price-tag">标价：2 元 <span class="coins-badge">🪙🪙</span></div>
+            </div>
+            <div class="shelf-symbol">➕</div>
+            <div class="goods-item-card">
+              <div class="goods-icon">🍭</div>
+              <div class="goods-name">七彩棒棒糖</div>
+              <div class="goods-price-tag">标价：1 元 <span class="coins-badge">🪙</span></div>
+            </div>
+            <div class="shelf-symbol">🟰</div>
+            <div class="goods-item-card q-box" style="border-style:dashed;">
+              <div class="goods-icon">❓</div>
+              <div class="goods-name">一共应付</div>
+              <div class="goods-price-tag" style="color:#7c3aed; font-weight:900;">几元钱？</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    // 9. 目标心愿卡 (小兔拔萝卜 5根对应)
+    else if (task.displayType === 'grouped_cards') {
+      this.visualContainer.innerHTML = `
+        <div class="target-card-box">
+          <div class="target-badge">🎯 兔妈妈的心愿清单</div>
+          <div class="target-hero">
+            <span class="target-avatar">🐰</span>
+            <div class="target-bubble">
+              <div class="bubble-text">“我想吃 <span class="target-num">5</span> 根大胡萝卜！”</div>
+              <div class="target-slots">🥕 🥕 🥕 🥕 🥕</div>
+            </div>
+          </div>
+          <div class="target-hint-tag">👇 请在下面选项中，选出正好是 5 根胡萝卜的那一组：</div>
+        </div>
+      `;
+    }
+    // 10. 立体遮挡积木城堡 (2层空间透视)
+    else if (task.displayType === 'blocks') {
+      this.visualContainer.innerHTML = `
+        <div class="blocks-puzzle-box">
+          <div class="blocks-header-tag">🏰 观察立体积木城堡 (共2层)</div>
+          <div class="blocks-3d-stage">
+            <!-- 上层 -->
+            <div class="blocks-layer top-layer">
+              <div class="block-cube visible-cube" title="上层积木">
+                <span class="cube-icon">🧱</span>
+                <span class="cube-badge">上层 1 块</span>
+              </div>
+            </div>
+            <!-- 下层 -->
+            <div class="blocks-layer bottom-layer">
+              <div class="block-cube visible-cube">
+                <span class="cube-icon">🧱</span>
+                <span class="cube-badge">看得见</span>
+              </div>
+              <div class="block-cube hidden-support-cube q-box">
+                <span class="cube-icon" style="color:#7c3aed;">❓</span>
+                <span class="cube-badge" style="color:#7c3aed;">正下方垫着</span>
+              </div>
+              <div class="block-cube visible-cube">
+                <span class="cube-icon">🧱</span>
+                <span class="cube-badge">看得见</span>
+              </div>
+            </div>
+          </div>
+          <div class="blocks-sub-text">💡 提示：上层的积木不能漂浮，它的正下方一定有一块看不见的积木稳稳托着它！</div>
+        </div>
+      `;
+    }
+    // 11. 拼音情境 / 象形字 / 空间方位 (hint_image 及杜绝孤独黄星的安全备用)
+    else {
+      let icon = task.icon;
+      if (!icon) {
+        if (task.options && task.options[0] && task.options[0].icon) {
+          icon = task.options[0].icon;
+        } else {
+          icon = '💡';
+        }
+      }
+      this.visualContainer.innerHTML = `
+        <div class="rich-hint-container" style="text-align:center;">
+          <div style="font-size:68px; animation:bounceItem 2.5s infinite ease-in-out; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));">${icon}</div>
           ${task.subText ? `<div style="font-size:15px; font-weight:800; color:#b45309; background:#fffdf0; border:2px solid #fef08a; padding:6px 16px; border-radius:14px; margin-top:10px; display:inline-block;">${task.subText}</div>` : ''}
         </div>
       `;
