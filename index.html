@@ -140,6 +140,7 @@ body {
   margin-bottom: 24px;
   box-shadow: 0 8px 24px rgba(52, 168, 83, 0.08);
   position: relative;
+  overflow: hidden; /* 防止移动端小猫被挤压出卡片外悬空 */
 }
 
 .hero-mascots-row {
@@ -147,6 +148,8 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* 真实高精度水彩原画萌宠 */
@@ -769,28 +772,127 @@ body {
 .arena-visual-container {
   min-height: 140px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 18px;
+  padding: 16px;
   background: #faf7ee;
   border: 2px solid var(--border-soft);
   border-radius: var(--radius-lg);
-  margin-bottom: 22px;
-  font-size: 46px;
+  margin-bottom: 16px;
+  position: relative;
 }
 
-.items-group {
+/* 1. 小火车规律轨道 */
+.train-track-box {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 12px 8px;
+  background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 3px dashed #86efac;
+  border-radius: 24px;
+}
+
+.train-engine {
+  font-size: 48px;
+  line-height: 1;
+  animation: trainBounce 1.8s infinite ease-in-out;
+}
+
+@keyframes trainBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.train-car-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 3px solid #cbd5e1;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.06);
+  min-width: 64px;
+  background: #ffffff;
+  position: relative;
+}
+
+.train-car-card.q-box {
+  border-color: #8b5cf6;
+  background: #f5f3ff;
+  animation: pulseQ 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseQ {
+  0%, 100% { transform: scale(1); box-shadow: 0 5px 0 rgba(139, 92, 246, 0.2); }
+  50% { transform: scale(1.06); box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3); }
+}
+
+.train-car-icon {
+  font-size: 46px;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.train-car-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #475569;
+}
+
+.train-arrow {
+  font-size: 18px;
+  color: #94a3b8;
+  font-weight: 900;
+}
+
+/* 2. 实物大果盘/水池草地卡片 */
+.items-plate-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fffbeb;
+  border: 3px solid #fde68a;
+  border-radius: 24px;
+  padding: 12px 18px 16px;
+  width: 100%;
+  box-shadow: 0 6px 14px rgba(245, 158, 11, 0.08);
+}
+
+.plate-header-tag {
+  font-size: 14px;
+  font-weight: 800;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 4px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #fde68a;
+}
+
+.plate-items-row {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 14px;
 }
 
-.interactive-item {
-  animation: bounceItem 2.5s ease-in-out infinite;
+.plate-item {
+  font-size: 52px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-block;
+  animation: bounceItem 2.8s ease-in-out infinite;
+}
+
+.plate-item:active {
+  transform: scale(1.3) rotate(-12deg);
 }
 
 @keyframes bounceItem {
@@ -798,35 +900,80 @@ body {
   50% { transform: translateY(-6px); }
 }
 
-/* 选项大按钮网格 */
+/* 3. 聪聪小猫温柔引导气泡 */
+.gentle-hint-box {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background: #fffbeb;
+  border: 2px solid #fde68a;
+  border-radius: 20px;
+  padding: 10px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
+  animation: slideUpHint 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@keyframes slideUpHint {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.hint-avatar {
+  font-size: 32px;
+  flex-shrink: 0;
+  animation: catNod 2s infinite ease-in-out;
+}
+
+.hint-content {
+  flex: 1;
+}
+
+.hint-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #b45309;
+  margin-bottom: 2px;
+}
+
+.hint-text {
+  font-size: 14px;
+  font-weight: 800;
+  color: #78350f;
+  line-height: 1.4;
+}
+
+/* 4. 选项超大触控卡片网格 */
 .arena-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
 }
 
 .option-btn {
   background: #ffffff;
   border: 3px solid var(--border-soft);
-  border-radius: var(--radius-lg);
-  padding: 16px 12px;
-  font-size: 21px;
-  font-weight: 900;
-  color: var(--brown-main);
+  border-radius: 22px;
+  padding: 12px 6px;
   cursor: pointer;
   transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 5px 0 var(--border-soft);
-  min-height: 76px;
+  box-shadow: 0 6px 0 var(--border-soft);
+  min-height: 94px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  user-select: none;
 }
 
 .option-btn:hover {
   transform: translateY(-3px);
   border-color: #3b82f6;
-  box-shadow: 0 8px 0 #bfdbfe;
+  box-shadow: 0 9px 0 #bfdbfe;
 }
 
 .option-btn:active {
@@ -834,26 +981,48 @@ body {
   box-shadow: 0 1px 0 var(--border-soft);
 }
 
+.opt-big-icon {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+}
+
+.opt-text-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--brown-main);
+  line-height: 1.2;
+}
+
+.opt-dots-row {
+  font-size: 11px;
+  color: #f59e0b;
+  letter-spacing: 2px;
+  margin-top: 2px;
+  font-weight: 900;
+}
+
 .option-btn.correct-burst {
-  border-color: #22c55e;
+  border-color: #22c55e !important;
   background: #dcfce7 !important;
-  color: #15803d;
-  box-shadow: 0 5px 0 #86efac !important;
+  color: #15803d !important;
+  box-shadow: 0 6px 0 #86efac !important;
   animation: correctJelly 0.45s ease;
 }
 
 .option-btn.wrong-shake {
-  border-color: #ef4444;
-  background: #fee2e2 !important;
-  color: #b91c1c;
-  box-shadow: 0 5px 0 #fca5a5 !important;
+  border-color: #f59e0b !important;
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+  box-shadow: 0 6px 0 #fde68a !important;
   animation: shake 0.4s ease;
 }
 
 @keyframes correctJelly {
   0% { transform: scale(1); }
-  30% { transform: scale(1.15); }
-  50% { transform: scale(0.95); }
+  30% { transform: scale(1.12); }
+  50% { transform: scale(0.96); }
   100% { transform: scale(1); }
 }
 
@@ -861,6 +1030,60 @@ body {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-8px); }
   40%, 80% { transform: translateX(8px); }
+}
+
+/* 5. 答对超级欢呼弹层 */
+.super-cheer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 34px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 20px;
+  text-align: center;
+}
+
+.cheer-star-burst {
+  font-size: 72px;
+  line-height: 1;
+  animation: starSpinBounce 1.2s infinite alternate ease-in-out;
+  filter: drop-shadow(0 6px 14px rgba(245, 158, 11, 0.45));
+}
+
+@keyframes starSpinBounce {
+  0% { transform: scale(0.9) rotate(-10deg); }
+  100% { transform: scale(1.2) rotate(15deg); }
+}
+
+.cheer-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #ea580c;
+  margin: 12px 0 6px;
+}
+
+.cheer-desc {
+  font-size: 16px;
+  font-weight: 800;
+  color: #16a34a;
+  margin-bottom: 12px;
+}
+
+.cheer-mascots-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.cheer-mascot-avatar {
+  font-size: 40px;
+  animation: catNod 1s infinite ease-in-out;
 }
 
 /* ================== 家长中心 Modal ================== */
@@ -989,32 +1212,143 @@ body {
 /* ================== 响应式适配 ================== */
 @media (max-width: 640px) {
   .storybook-wrapper {
-    padding: 14px 12px 24px;
-    margin: 8px auto;
+    padding: 12px 10px 24px;
+    margin: 6px auto;
     border-radius: 26px;
+    width: 96%;
   }
+
+  /* 修复手机端顶部萌宠横幅排版，小猫与机器人对称贴合内边距，小猫不再悬挂出边框 */
+  .cloud-header-banner {
+    padding: 10px 12px 12px;
+    margin-bottom: 16px;
+    border-radius: 26px;
+    overflow: hidden;
+  }
+
+  .hero-mascots-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   .mascot-img-wrap {
-    width: 75px;
-    height: 75px;
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
   }
+
+  .hero-title-box {
+    flex: 1;
+    padding: 0 4px;
+    min-width: 0;
+  }
+
+  .title-row {
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .deco-star-sm {
+    width: 18px;
+    height: 18px;
+  }
+
   .hero-main-title {
-    font-size: 26px;
+    font-size: 21px;
+    gap: 4px;
   }
+
   .title-badge-orange {
-    width: 32px;
-    height: 32px;
-    font-size: 18px;
-  }
-  .hero-subtitle {
+    width: 26px;
+    height: 26px;
     font-size: 15px;
   }
-  .tab-btn {
-    font-size: 14px;
-    padding: 10px 8px;
+
+  .hero-subtitle {
+    font-size: 13px;
   }
+
+  .deco-heart-sm {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tab-btn {
+    font-size: 13px;
+    padding: 9px 6px;
+  }
+
+  /* 移动端答题擂台大图卡片自适应 */
+  .arena-card {
+    padding: 18px 14px;
+    border-radius: 28px;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .arena-question-box {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+
+  .question-text {
+    font-size: 16px;
+  }
+
+  .btn-replay-speech {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .arena-visual-container {
+    padding: 12px 8px;
+    min-height: 110px;
+    margin-bottom: 12px;
+  }
+
+  .train-engine {
+    font-size: 38px;
+  }
+
+  .train-car-card {
+    padding: 6px 8px;
+    min-width: 52px;
+    border-radius: 16px;
+  }
+
+  .train-car-icon {
+    font-size: 38px;
+  }
+
+  .train-car-label {
+    font-size: 11px;
+  }
+
+  .plate-item {
+    font-size: 42px;
+  }
+
+  .arena-options-grid {
+    gap: 8px;
+  }
+
   .option-btn {
-    font-size: 18px;
-    min-height: 68px;
+    min-height: 82px;
+    padding: 10px 4px;
+    border-radius: 18px;
+  }
+
+  .opt-big-icon {
+    font-size: 36px;
+  }
+
+  .opt-text-label {
+    font-size: 13px;
   }
 }
 
@@ -1178,9 +1512,30 @@ body {
         <!-- 动态注入 -->
       </div>
 
-      <!-- 超大触控选项区 -->
+      <!-- 聪聪小猫温柔引导气泡 (答错时启发，不气馁) -->
+      <div id="gentleHintBox" class="gentle-hint-box">
+        <span class="hint-avatar">🐱</span>
+        <div class="hint-content">
+          <div class="hint-title">聪聪小猫悄悄提示：</div>
+          <div id="hintText" class="hint-text">仔细观察上面的图案，再试一试别的答案哦！</div>
+        </div>
+      </div>
+
+      <!-- 超大触控选项区 (大图卡片为主，文字辅助) -->
       <div id="arenaOptionsGrid" class="arena-options-grid">
         <!-- 动态生成选项按钮 -->
+      </div>
+
+      <!-- 答对超级欢呼庆祝弹层 (金星旋转 + 撒花 + 萌宠点赞) -->
+      <div id="superCheerOverlay" class="super-cheer-overlay">
+        <div class="cheer-star-burst">⭐</div>
+        <h2 id="cheerTitle" class="cheer-title">太棒啦！答对啦！</h2>
+        <p id="cheerDesc" class="cheer-desc">🌟 获得 1 颗闪亮大金星！</p>
+        <div class="cheer-mascots-row">
+          <span class="cheer-mascot-avatar" title="小猫点赞">🐱</span>
+          <span style="font-size:24px;">🎉 🎉 🎉</span>
+          <span class="cheer-mascot-avatar" title="机器人欢呼">🤖</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1476,13 +1831,15 @@ const DefaultLevels = {
       subject: 'math',
       badge: '🔢 数学数感',
       questionText: '数一数，盘子里一共有几颗大草莓？',
-      speechPrompt: '数一数，盘子里一共有几颗红彤彤的大草莓呢？点击正确的数字吧！',
+      speechPrompt: '数一数，盘子里一共有几颗红彤彤的大草莓呢？伸出小手指点一点，选出正确的数字吧！',
       displayType: 'items',
       items: ['🍓', '🍓', '🍓'],
+      plateLabel: '🍓 香甜草莓盘 (点一点数一数)',
+      hintPrompt: '伸出小食指，我们一颗一颗点一点：一颗、两颗、三颗……盘子里一共有几颗呢？',
       options: [
-        { text: '2', isCorrect: false },
-        { text: '3', isCorrect: true, cheer: '答对啦！就是3颗大草莓！' },
-        { text: '4', isCorrect: false }
+        { icon: '2', text: '2 颗', dots: '●●', isCorrect: false },
+        { icon: '3', text: '3 颗', dots: '●●●', isCorrect: true, cheer: '答对啦！盘子里正好是 3 颗甜甜的大草莓！' },
+        { icon: '4', text: '4 颗', dots: '●●●●', isCorrect: false }
       ]
     },
     {
@@ -1490,14 +1847,15 @@ const DefaultLevels = {
       subject: 'pinyin',
       badge: '🔤 拼音认读',
       questionText: '张大嘴巴发什么音？选出对应的拼音字母吧！',
-      speechPrompt: '圆圆脸蛋羊角辫，张大嘴巴，发什么音呢？',
+      speechPrompt: '圆圆脸蛋羊角辫，张大嘴巴，发什么音呢？看看哪个字母长得像小女孩张大嘴巴！',
       displayType: 'hint_image',
       icon: '👧',
-      subText: '张大嘴巴...',
+      subText: '圆圆脸蛋扎小辫，张大嘴巴 a a a！',
+      hintPrompt: '仔细看图上的小女孩，圆圆脸蛋扎着羊角辫，张大嘴巴发出的音是 a 哦！',
       options: [
-        { text: 'a', isCorrect: true, cheer: '太棒啦！张大嘴巴 a a a！' },
-        { text: 'o', isCorrect: false },
-        { text: 'e', isCorrect: false }
+        { icon: 'a', text: '大嘴巴 a', isCorrect: true, cheer: '太棒啦！张大嘴巴 a a a！' },
+        { icon: 'o', text: '圆圆嘴 o', isCorrect: false },
+        { icon: 'e', text: '扁扁嘴 e', isCorrect: false }
       ]
     },
     {
@@ -1505,13 +1863,19 @@ const DefaultLevels = {
       subject: 'logic',
       badge: '💡 思维常识',
       questionText: '观察小火车上的花朵规律：红花、黄花、红花，下一朵是什么花？',
-      speechPrompt: '仔细看小火车上花朵的颜色：红花、黄花、红花，问号处应该放什么花呢？',
+      speechPrompt: '仔细看小火车上花朵的颜色规律：红花、黄花、红花，问号车厢应该放什么花呢？',
       displayType: 'pattern',
-      sequence: ['🌸 (红)', '🌼 (黄)', '🌸 (红)', '❓'],
+      sequence: [
+        { icon: '🌸', label: '红花', bg: '#ffe4e6', color: '#e11d48' },
+        { icon: '🌼', label: '黄花', bg: '#fef3c7', color: '#d97706' },
+        { icon: '🌸', label: '红花', bg: '#ffe4e6', color: '#e11d48' },
+        { icon: '❓', label: '下一朵？', bg: '#ede9fe', color: '#6d28d9' }
+      ],
+      hintPrompt: '仔细看小火车的花朵颜色：一朵红花、一朵黄花、又是一朵红花……那下一朵轮到什么花呢？',
       options: [
-        { text: '🌼 黄花', isCorrect: true, cheer: '观察得真仔细！规律就是红黄红黄！' },
-        { text: '🌸 红花', isCorrect: false },
-        { text: '🍀 绿叶', isCorrect: false }
+        { icon: '🌼', text: '黄花', isCorrect: true, cheer: '观察得真仔细！规律就是红花、黄花、红花、黄花！' },
+        { icon: '🌸', text: '红花', isCorrect: false },
+        { icon: '🍀', text: '绿叶', isCorrect: false }
       ]
     }
   ],
@@ -1525,11 +1889,14 @@ const DefaultLevels = {
       title: '第1关：数池塘小鸭',
       questionText: '池塘里有几只可爱的小黄鸭？',
       speechPrompt: '门前大桥下，游过一群鸭。小朋友，数一数池塘里有几只小鸭子呀？',
+      displayType: 'items',
+      plateLabel: '🦆 欢乐鸭鸭水池 (点一点数一数)',
       items: ['🦆', '🦆', '🦆', '🦆'],
+      hintPrompt: '小鸭子排排游，伸出手指点一点：一只、两只、三只、四只！一共几只呢？',
       options: [
-        { text: '3', isCorrect: false },
-        { text: '4', isCorrect: true, cheer: '真棒！一二三四，正好是4只小鸭子！' },
-        { text: '5', isCorrect: false }
+        { icon: '3', text: '3 只', dots: '●●●', isCorrect: false },
+        { icon: '4', text: '4 只', dots: '●●●●', isCorrect: true, cheer: '真棒！一二三四，正好是4只可爱的小黄鸭！' },
+        { icon: '5', text: '5 只', dots: '●●●●●', isCorrect: false }
       ]
     },
     {
@@ -1540,10 +1907,11 @@ const DefaultLevels = {
       questionText: '兔妈妈说要吃 5 根胡萝卜，数数看哪一组正好是 5 根？',
       speechPrompt: '兔妈妈想吃5根胡萝卜，小朋友，帮小兔找一找，哪一组正好是5根呢？',
       displayType: 'grouped_cards',
+      hintPrompt: '兔妈妈要吃 5 根胡萝卜，数数每组的胡萝卜，哪一组正好有 5 根呢？',
       options: [
-        { text: '🥕🥕🥕 (3根)', isCorrect: false },
-        { text: '🥕🥕🥕🥕🥕 (5根)', isCorrect: true, cheer: '太厉害啦！小兔子吃饱啦，送你一颗星星！' },
-        { text: '🥕🥕🥕🥕 (4根)', isCorrect: false }
+        { icon: '🥕🥕🥕', text: '3 根萝卜', isCorrect: false },
+        { icon: '🥕🥕🥕🥕🥕', text: '5 根萝卜', isCorrect: true, cheer: '太厉害啦！小兔子吃饱啦，送你一颗大金星！' },
+        { icon: '🥕🥕🥕🥕', text: '4 根萝卜', isCorrect: false }
       ]
     },
     {
@@ -1552,14 +1920,15 @@ const DefaultLevels = {
       stage: '基础阶：比多少与排序',
       title: '第3关：水果数量大比拼',
       questionText: '哪一种水果的数量更多一些？',
-      speechPrompt: '左边是红苹果，右边是香蕉。小朋友比一比，哪边的水果更多呢？',
+      speechPrompt: '左边盘子里是红苹果，右边盘子里是香蕉。小朋友比一比，哪边的水果更多呢？',
       displayType: 'versus',
-      left: { label: '红苹果', items: ['🍎', '🍎', '🍎', '🍎', '🍎'] },
-      right: { label: '香蕉', items: ['🍌', '🍌', '🍌'] },
+      left: { label: '🍎 红苹果 (5个)', items: ['🍎', '🍎', '🍎', '🍎', '🍎'] },
+      right: { label: '🍌 香蕉 (3根)', items: ['🍌', '🍌', '🍌'] },
+      hintPrompt: '看两个盘子：左边有5个红苹果，右边只有3根香蕉，5个比3根更多哦！',
       options: [
-        { text: '🍎 苹果更多 (5个)', isCorrect: true, cheer: '答对了！5个苹果比3根香蕉多！' },
-        { text: '🍌 香蕉更多 (3个)', isCorrect: false },
-        { text: '一样多', isCorrect: false }
+        { icon: '🍎', text: '苹果更多 (5个)', isCorrect: true, cheer: '答对了！5个苹果比3根香蕉数量更多！' },
+        { icon: '🍌', text: '香蕉更多 (3根)', isCorrect: false },
+        { icon: '⚖️', text: '一样多', isCorrect: false }
       ]
     },
     {
@@ -1568,13 +1937,14 @@ const DefaultLevels = {
       stage: '进阶阶：相邻数与序列',
       title: '第4关：小火车找邻居',
       questionText: '小火车的车厢排排坐：3的前面是2，3的后面是谁呢？',
-      speechPrompt: '嘟嘟嘟！小火车站到了。数字3的后面好邻居是谁呢？',
+      speechPrompt: '嘟嘟嘟！小火车站到了。车厢排着2、3，后面紧跟着的好邻居数字是谁呢？',
       displayType: 'train',
       trainCars: ['2', '3', '❓'],
+      hintPrompt: '数数排排队：1、2、3……接下来紧接着该数几呢？',
       options: [
-        { text: '4', isCorrect: true, cheer: '回答正确！2、3、4是排在一起的好邻居！' },
-        { text: '5', isCorrect: false },
-        { text: '1', isCorrect: false }
+        { icon: '4', text: '数字 4', dots: '●●●●', isCorrect: true, cheer: '回答正确！2、3、4是排在一起的好邻居！' },
+        { icon: '5', text: '数字 5', dots: '●●●●●', isCorrect: false },
+        { icon: '1', text: '数字 1', dots: '●', isCorrect: false }
       ]
     },
     {
@@ -1583,15 +1953,16 @@ const DefaultLevels = {
       stage: '进阶阶：5的分解与合成',
       title: '第5关：神奇分气球',
       questionText: '小猴子手里一共拿了 5 个气球。左手拿了 2 个，右手拿了几个？',
-      speechPrompt: '小猴子有5个彩色气球。如果左手拿着2个气球，那么右手拿着几个呢？',
+      speechPrompt: '小猴子有5个彩色气球。左手拿着2个气球，那么右手拿着几个呢？',
       displayType: 'split',
-      total: '🎈🎈🎈🎈🎈 (共5个)',
+      total: '🎈🎈🎈🎈🎈 (共5个彩色气球)',
       leftPart: '🎈🎈 (左手2个)',
       rightPart: '❓ (右手几个？)',
+      hintPrompt: '一共有5个气球，左手拿走2个，伸出5根手指收回去2根，还剩几根呢？',
       options: [
-        { text: '2个', isCorrect: false },
-        { text: '3个', isCorrect: true, cheer: '太聪明了！5可以分成2和3，这是减法的小秘密哦！' },
-        { text: '4个', isCorrect: false }
+        { icon: '2', text: '2 个', dots: '●●', isCorrect: false },
+        { icon: '3', text: '3 个', dots: '●●●', isCorrect: true, cheer: '太聪明了！5可以分成2和3，右手拿着3个！' },
+        { icon: '4', text: '4 个', dots: '●●●●', isCorrect: false }
       ]
     },
     {
@@ -1601,11 +1972,15 @@ const DefaultLevels = {
       title: '第6关：小猴吃桃子 (逆向举一反三)',
       questionText: '盘子里原本有 5 个大桃子，小猴吃掉了 2 个，盘子里还剩下几个？',
       speechPrompt: '盘子里原本有5个香甜的大桃子。小猴肚子饿吃了2个，盘子里还剩下几个呢？',
-      items: ['🍑', '🍑', '🍑', '❌', '❌'],
+      displayType: 'items',
+      plateLabel: '🍑 诱人大桃盘',
+      items: ['🍑', '🍑', '🍑', '🍽️', '🍽️'],
+      subText: '原本有5个桃子，吃掉了2个(变空盘)，数数还剩几个桃？',
+      hintPrompt: '数一数盘子里还没被吃掉的红桃子：一个、两个、三个！还剩几个呢？',
       options: [
-        { text: '2个', isCorrect: false },
-        { text: '3个', isCorrect: true, cheer: '算得真准确！5个吃掉2个，还剩3个！' },
-        { text: '4个', isCorrect: false }
+        { icon: '2', text: '还剩 2 个', dots: '●●', isCorrect: false },
+        { icon: '3', text: '还剩 3 个', dots: '●●●', isCorrect: true, cheer: '算得真准确！5个吃掉2个，盘子里还剩3个！' },
+        { icon: '4', text: '还剩 4 个', dots: '●●●●', isCorrect: false }
       ]
     },
     {
@@ -1616,13 +1991,14 @@ const DefaultLevels = {
       questionText: '存钱罐要装满 10 枚金币。现在里面已经有 7 枚，还要放几枚才满？',
       speechPrompt: '小猪存钱罐要存满10枚金币。数一数现在有7枚，还差几枚正好凑成10呢？',
       displayType: 'split',
-      total: '🪙🪙🪙🪙🪙🪙🪙🪙🪙🪙 (目标10枚)',
-      leftPart: '已有 7 枚',
+      total: '🪙🪙🪙🪙🪙🪙🪙🪙🪙🪙 (目标10枚金币)',
+      leftPart: '已有 7 枚 🪙',
       rightPart: '还差 ❓ 枚',
+      hintPrompt: '目标是10枚，已有7枚，接着7往后数：8、9、10……伸出手指看差几个？',
       options: [
-        { text: '2枚', isCorrect: false },
-        { text: '3枚', isCorrect: true, cheer: '太棒啦！7和3做朋友凑成10，这是小学凑十法的基础哦！' },
-        { text: '4枚', isCorrect: false }
+        { icon: '2', text: '还差 2 枚', dots: '●●', isCorrect: false },
+        { icon: '3', text: '还差 3 枚', dots: '●●●', isCorrect: true, cheer: '太棒啦！7和3做朋友凑成10，这是小学凑十法的基础哦！' },
+        { icon: '4', text: '还差 4 枚', dots: '●●●●', isCorrect: false }
       ]
     },
     {
@@ -1633,12 +2009,13 @@ const DefaultLevels = {
       questionText: '天平左边放了一个数字 5，右边放了一个数字 3 和一个问号箱。天平怎样才能平衡？',
       speechPrompt: '看神奇的小天平：左边是重量5，右边是重量3加一个问号箱。问号箱放几，两边才能一样平？',
       displayType: 'versus',
-      left: { label: '左边秤盘', items: ['⚖️ 数字 5'] },
-      right: { label: '右边秤盘', items: ['数字 3 ➕ ❓'] },
+      left: { label: '左边秤盘', items: ['⚖️ 重量 5'] },
+      right: { label: '右边秤盘', items: ['重量 3 ➕ ❓'] },
+      hintPrompt: '要让两边一样平，右边已经有了3，还要再加几才能变成5呢？3加几等于5？',
       options: [
-        { text: '1', isCorrect: false },
-        { text: '2', isCorrect: true, cheer: '天平平衡啦！3加2等于5，你已经学会简单的代数思维了！' },
-        { text: '3', isCorrect: false }
+        { icon: '1', text: '放 1 个', isCorrect: false },
+        { icon: '2', text: '放 2 个', isCorrect: true, cheer: '天平平衡啦！3加2等于5，你已经学会简单的代数思维了！' },
+        { icon: '3', text: '放 3 个', isCorrect: false }
       ]
     }
   ],
@@ -1652,12 +2029,14 @@ const DefaultLevels = {
       title: '第1关：公鸡打鸣找字母',
       questionText: '大公鸡清早啼叫，喔喔喔！嘴巴拢圆发什么音？',
       speechPrompt: '太阳公公出来啦，公鸡喔喔喔叫。嘴巴圆圆，对应哪个拼音字母呢？',
+      displayType: 'hint_image',
       icon: '🐓',
-      subText: '公鸡打鸣 喔 喔 喔...',
+      subText: '大公鸡打鸣：嘴巴拢圆 喔 喔 喔！',
+      hintPrompt: '大公鸡早晨啼叫：喔喔喔，嘴巴拢得圆圆的，选字母 o 吧！',
       options: [
-        { text: 'a', isCorrect: false },
-        { text: 'o', isCorrect: true, cheer: '真棒！圆圆嘴巴 o o o！' },
-        { text: 'e', isCorrect: false }
+        { icon: 'a', text: '大嘴巴 a', isCorrect: false },
+        { icon: 'o', text: '圆圆嘴 o', isCorrect: true, cheer: '真棒！圆圆嘴巴 o o o，公鸡打鸣喔喔啼！' },
+        { icon: 'e', text: '扁扁嘴 e', isCorrect: false }
       ]
     },
     {
@@ -1667,12 +2046,14 @@ const DefaultLevels = {
       title: '第2关：清清池塘白鹅游',
       questionText: '水中小白鹅，倒影清又清！扁扁嘴巴对应哪个字母？',
       speechPrompt: '清清池塘一只鹅，水中倒影真美丽。嘴巴扁扁，选出它对应的拼音字母吧！',
+      displayType: 'hint_image',
       icon: '🦢',
-      subText: '白鹅白鹅 扁扁嘴...',
+      subText: '清清池塘白鹅游，扁扁嘴巴 e e e！',
+      hintPrompt: '白鹅白鹅水中游，嘴巴咧开扁又平，发音是 e 哦！',
       options: [
-        { text: 'e', isCorrect: true, cheer: '答对了！扁扁嘴巴 e e e！' },
-        { text: 'u', isCorrect: false },
-        { text: 'a', isCorrect: false }
+        { icon: 'e', text: '扁扁嘴 e', isCorrect: true, cheer: '答对了！扁扁嘴巴 e e e，白鹅倒影清又清！' },
+        { icon: 'u', text: '小火车 u', isCorrect: false },
+        { icon: 'a', text: '大嘴巴 a', isCorrect: false }
       ]
     },
     {
@@ -1682,12 +2063,14 @@ const DefaultLevels = {
       title: '第3关：收音机与小红旗 (b 与 d)',
       questionText: '像个收音机，右下半圆是什么字母？（右下半圆 b b b，左下半圆 d d d）',
       speechPrompt: '听广播，右下半圆，是小喇叭字母 b 还是字母 d 呢？',
+      displayType: 'hint_image',
       icon: '📻',
-      subText: '仔细看半圆在右边下方...',
+      subText: '仔细看收音机：一竖加右下半圆是 b！',
+      hintPrompt: '像一台小收音机拉出天线，半圆在右边下方，是听广播的 b 哦！',
       options: [
-        { text: 'b', isCorrect: true, cheer: '眼睛真准！右下半圆 b b b，再也不会和 d 搞混啦！' },
-        { text: 'd', isCorrect: false },
-        { text: 'p', isCorrect: false }
+        { icon: 'b', text: '右下半圆 b', isCorrect: true, cheer: '眼睛真准！右下半圆 b b b，再也不会和 d 搞混啦！' },
+        { icon: 'd', text: '左下半圆 d', isCorrect: false },
+        { icon: 'p', text: '右上半圆 p', isCorrect: false }
       ]
     },
     {
@@ -1698,11 +2081,12 @@ const DefaultLevels = {
       questionText: '大西瓜圆又甜！声母 g 和韵母 u-ā 碰在一起怎么读？',
       speechPrompt: '夏天吃大西瓜！声母哥，碰到哇，快速拼在一起怎么读？',
       displayType: 'spell',
-      formula: 'g + uā ➔ ？',
+      formula: 'g + uā ➔ 🍉 ？',
+      hintPrompt: '哥碰上哇：g-u-ā 快速连读，碰出夏天甘甜的大西瓜！',
       options: [
-        { text: 'guā (瓜)', isCorrect: true, cheer: '哇！你已经掌握三拼音节连读啦！大西瓜的瓜！' },
-        { text: 'huā (花)', isCorrect: false },
-        { text: 'kā (卡)', isCorrect: false }
+        { icon: '🍉', text: 'guā (大西瓜)', isCorrect: true, cheer: '哇！你已经掌握三拼音节连读啦！大西瓜的瓜！' },
+        { icon: '🌸', text: 'huā (小红花)', isCorrect: false },
+        { icon: '💳', text: 'kǎ (小卡片)', isCorrect: false }
       ]
     }
   ],
@@ -1715,13 +2099,15 @@ const DefaultLevels = {
       stage: '右脑空间：镜面对称与反转',
       title: '🧠 右脑第1关：小猫照镜子',
       questionText: '小猫在它的【左耳】戴了一朵红花。它照镜子时，镜子里的小猫红花在它的哪一侧？',
-      speechPrompt: '小花猫在自己的左耳朵戴了一朵红花去照镜子。小朋友想一想，镜子里的小猫红花是在你的左手边还是右手边呢？',
+      speechPrompt: '小花猫在自己的左耳朵戴了一朵红花去照镜子。镜子里的小猫红花是在你的左手边还是右手边呢？',
+      displayType: 'hint_image',
       icon: '🪞🐱',
-      subText: '镜像世界：左右相反的奇妙空间！',
+      subText: '镜像世界：面对面站立，左右是相反的哦！',
+      hintPrompt: '就像你跟好朋友面对面做游戏，你举左手，朋友正对你的是右手边！所以视觉在右手边哦！',
       options: [
-        { text: '在镜中猫咪的同一侧 (视觉右侧)', isCorrect: true, cheer: '太震撼了！右脑空间想象力满分！镜子里像面对面招手一样，左右是相反的！' },
-        { text: '小花直接消失了', isCorrect: false },
-        { text: '跑到头顶上了', isCorrect: false }
+        { icon: '👉', text: '视觉在右手侧 (面对面相反)', isCorrect: true, cheer: '太震撼了！右脑空间想象力满分！镜子里像面对面招手一样，左右是相反的！' },
+        { icon: '❓', text: '小花直接消失了', isCorrect: false },
+        { icon: '🙆', text: '跑到头顶上了', isCorrect: false }
       ]
     },
     {
@@ -1729,15 +2115,16 @@ const DefaultLevels = {
       tier: 'expert',
       stage: '右脑空间：立体透视遮挡积木',
       title: '🧠 右脑第2关：数数被挡住的积木',
-      questionText: '小熊用小方块搭了一个2层城堡：上层有1块积木，下层看得到2块。请问上层积木底下一定藏了几块积木才不会掉下来？',
+      questionText: '小熊搭了一个2层城堡：上层有1块积木，下层看得到2块。上层积木底下一定藏了几块积木才不会掉下来？',
       speechPrompt: '仔细看立体积木：上面有一块悬空的积木，它的正下方必须有一块积木垫着才不会掉下来对不对？那底下藏了几块呢？',
       displayType: 'blocks',
       icon: '🧱🏰',
-      subText: '上方：1块 ； 下方支撑隐藏：❓块',
+      subText: '上方悬空1块 ➔ 下方必须有 ❓ 块积木支撑垫着！',
+      hintPrompt: '上面的积木不能漂浮在空中，它的正下方一定有一块看不见的积木稳稳托着它！',
       options: [
-        { text: '至少藏了 1 块垫在下面', isCorrect: true, cheer: '空间透视感真强！没有底下的那1块支撑，上面的积木就会掉下来啦！' },
-        { text: '底下是空的', isCorrect: false },
-        { text: '藏了 5 块', isCorrect: false }
+        { icon: '🧱', text: '藏了 1 块在底下托着', isCorrect: true, cheer: '空间透视感真强！没有底下的那1块支撑，上面的积木就会掉下来啦！' },
+        { icon: '🈳', text: '底下空空没积木', isCorrect: false },
+        { icon: '5️⃣', text: '藏了 5 块', isCorrect: false }
       ]
     },
     {
@@ -1748,12 +2135,13 @@ const DefaultLevels = {
       questionText: '跷跷板上：1 只小猴子的重量 ＝ 2 只小松鼠。那么 2 只小猴子的重量，可以换成几只小松鼠？',
       speechPrompt: '动脑筋想一想：1只小猴子正好等于2只小松鼠的重量。如果来了2只小猴子，需要几只小松鼠才能平呢？',
       displayType: 'versus',
-      left: { label: '2只小猴子', items: ['🐵', '🐵'] },
-      right: { label: '需要几只小松鼠？', items: ['❓'] },
+      left: { label: '2只小猴子 (🐒🐒)', items: ['🐵', '🐵'] },
+      right: { label: '需要几只小松鼠？', items: ['🐿️ ?'] },
+      hintPrompt: '1只小猴换2只松鼠，那2只小猴就是两组松鼠，2加2等于几只呢？',
       options: [
-        { text: '4 只小松鼠 (2 + 2 = 4)', isCorrect: true, cheer: '天才小神童！1只换2只，2只就是2+2=4只！这就是等量代换思维！' },
-        { text: '3 只小松鼠', isCorrect: false },
-        { text: '5 只小松鼠', isCorrect: false }
+        { icon: '🐿️', text: '4 只小松鼠 (2 + 2 = 4)', isCorrect: true, cheer: '天才小神童！1只换2只，2只就是2+2=4只！这就是等量代换思维！' },
+        { icon: '3️⃣', text: '3 只小松鼠', isCorrect: false },
+        { icon: '5️⃣', text: '5 只小松鼠', isCorrect: false }
       ]
     },
     {
@@ -1761,14 +2149,15 @@ const DefaultLevels = {
       tier: 'expert',
       stage: '左脑逻辑：4格动物数独初探',
       title: '🧠 左脑第4关：森林魔法四宫格',
-      questionText: '一排4个小座位，必须坐着【🐱小猫、🐶小狗、🐰小兔、🐻小熊】各一只且不重复。现在坐了【🐱、🐶、❓、🐻】，问号是谁？',
+      questionText: '一排4个座位，必须坐着【小猫、小狗、小兔、小熊】各一只且不重复。现在坐了【🐱、🐶、❓、🐻】，问号是谁？',
       speechPrompt: '森林排排坐规则：四个动物好朋友各坐一个，不能重复。数一数小猫小狗小熊都到了，问号处是谁还没来？',
       displayType: 'train',
       trainCars: ['🐱', '🐶', '❓', '🐻'],
+      hintPrompt: '名单里有小猫、小狗、小兔、小熊，看看车厢里，谁还没有上车呢？',
       options: [
-        { text: '🐰 小兔子还没来！', isCorrect: true, cheer: '名侦探！用排除法一眼找到了还没上车的小兔子！' },
-        { text: '🐱 小猫', isCorrect: false },
-        { text: '🦁 小狮子', isCorrect: false }
+        { icon: '🐰', text: '小兔子还没来', isCorrect: true, cheer: '名侦探！用排除法一眼找到了还没上车的小兔子！' },
+        { icon: '🐱', text: '小猫', isCorrect: false },
+        { icon: '🦁', text: '小狮子', isCorrect: false }
       ]
     },
     {
@@ -1776,15 +2165,16 @@ const DefaultLevels = {
       tier: 'expert',
       stage: '左右脑协同：斯特鲁普视觉抗干扰挑战',
       title: '🧠 左右脑协同第5关：火眼金睛颜色字',
-      questionText: '屏幕上写了一个汉字“蓝”，但是这个字是用【鲜红色】的画笔写的。请回答：这个字是用什么颜色的颜料写的？',
+      questionText: '屏幕上写了一个汉字“蓝”，但是这个字是用【鲜红色】的画笔写的。请回答：这个字是用什么颜色的画笔画出来的？',
       speechPrompt: '注意听清指令哦！文字写的是蓝，但画笔颜色是鲜红色。请问：画笔用的颜料是什么颜色？',
       displayType: 'stroop',
       icon: '🎨',
-      subText: '【字的内容是：蓝】 ➔ 【画笔颜色是：红色】',
+      subText: '【字形是：蓝】 ➔ 【眼睛看到的画笔颜色是：红色】',
+      hintPrompt: '别看汉字念什么，用你的眼睛观察文字真实的颜色，是红色的还是蓝色的？',
       options: [
-        { text: '红色 (看画笔真实颜色)', isCorrect: true, cheer: '哇塞！没有被文字干扰，左右脑协同抗干扰能力太棒啦！' },
-        { text: '蓝色 (被文字带偏啦)', isCorrect: false },
-        { text: '黄色', isCorrect: false }
+        { icon: '🔴', text: '红色 (看真实画笔)', isCorrect: true, cheer: '哇塞！没有被文字干扰，左右脑协同抗干扰能力太棒啦！' },
+        { icon: '🔵', text: '蓝色 (被文字带偏啦)', isCorrect: false },
+        { icon: '🟡', text: '黄色', isCorrect: false }
       ]
     }
   ],
@@ -1798,12 +2188,14 @@ const DefaultLevels = {
       title: '第1关：红红的太阳',
       questionText: '古人画了一个圆圈中间一点代表天上的太阳，这个字后来变成了什么？',
       speechPrompt: '看一看古时候的象形画，圆圆的太阳，现在演变成了哪一个汉字？',
+      displayType: 'hint_image',
       icon: '☀️',
-      subText: '圆圆太阳，中间有光...',
+      subText: '天上的大太阳，圆圆的发光体演变为“日”！',
+      hintPrompt: '圆圆的太阳就是“日”，日光、日出都是太阳的意思哦！',
       options: [
-        { text: '日 (太阳)', isCorrect: true, cheer: '聪明！日就是太阳的意思！' },
-        { text: '月 (月亮)', isCorrect: false },
-        { text: '目 (眼睛)', isCorrect: false }
+        { icon: '☀️', text: '日 (太阳)', isCorrect: true, cheer: '聪明！日就是太阳的意思！' },
+        { icon: '🌙', text: '月 (月亮)', isCorrect: false },
+        { icon: '👀', text: '目 (眼睛)', isCorrect: false }
       ]
     },
     {
@@ -1813,12 +2205,14 @@ const DefaultLevels = {
       title: '第2关：大象与小老鼠',
       questionText: '大象身材特别大，老鼠小。下面哪一个是“大”字？',
       speechPrompt: '大象身材特别大，一个人张开手脚就是大字。指出哪一个是“大”吧！',
+      displayType: 'hint_image',
       icon: '🐘 VS 🐭',
-      subText: '一个人张开双臂是大...',
+      subText: '一个人张开双臂和大腿，就是“大”字！',
+      hintPrompt: '伸开双臂和双腿站得大大的，就是“大”字，大象的大！',
       options: [
-        { text: '大', isCorrect: true, cheer: '选对啦！大人、大树都是这个“大”！' },
-        { text: '小', isCorrect: false },
-        { text: '天', isCorrect: false }
+        { icon: '🐘', text: '大 (高大)', isCorrect: true, cheer: '选对啦！大象、大树都是这个“大”！' },
+        { icon: '🐭', text: '小 (小巧)', isCorrect: false },
+        { icon: '☁️', text: '天 (天空)', isCorrect: false }
       ]
     }
   ],
@@ -1832,12 +2226,14 @@ const DefaultLevels = {
       title: '第1关：捉迷藏的小猫',
       questionText: '小猫躲在纸箱的什么位置？（在箱子里面、上面还是下面？）',
       speechPrompt: '看图片，顽皮的小花猫现在是在箱子的里面，还是外面呢？',
+      displayType: 'hint_image',
       icon: '📦🐱',
-      subText: '小猫钻进了箱子里...',
+      subText: '小花猫正舒服地钻在纸箱里面呢！',
+      hintPrompt: '看纸箱被小猫占领啦，小猫缩在纸箱的里面哦！',
       options: [
-        { text: '里面', isCorrect: true, cheer: '回答正确！小猫正舒服地躺在箱子里面呢！' },
-        { text: '下面', isCorrect: false },
-        { text: '后面', isCorrect: false }
+        { icon: '📦', text: '里面', isCorrect: true, cheer: '回答正确！小猫正舒服地躺在箱子里面呢！' },
+        { icon: '⬇️', text: '下面', isCorrect: false },
+        { icon: '🔙', text: '后面', isCorrect: false }
       ]
     },
     {
@@ -1847,11 +2243,15 @@ const DefaultLevels = {
       title: '第2关：找出不同类的一项',
       questionText: '下面四个物品里，哪一个不是吃的水果？',
       speechPrompt: '四个好朋友聚在一起，小朋友找一找，哪一个不能吃，不是水果呢？',
-      items: ['🍎 苹果', '🍌 香蕉', '🚗 小汽车', '🍇 葡萄'],
+      displayType: 'items',
+      plateLabel: '🔍 火眼金睛找不同',
+      items: ['🍎', '🍌', '🚗', '🍇'],
+      subText: '苹果、香蕉、葡萄都是水果，只有小汽车是玩具！',
+      hintPrompt: '苹果、香蕉、葡萄都是香甜的水果，哪一个是开在马路上的玩具车呢？',
       options: [
-        { text: '🚗 小汽车 (是玩具不是吃的)', isCorrect: true, cheer: '眼睛真亮！小汽车是玩具不是水果，太棒啦！' },
-        { text: '🍎 苹果', isCorrect: false },
-        { text: '🍇 葡萄', isCorrect: false }
+        { icon: '🚗', text: '小汽车 (是玩具不能吃)', isCorrect: true, cheer: '眼睛真亮！小汽车是玩具不是水果，太棒啦！' },
+        { icon: '🍎', text: '苹果 (是水果)', isCorrect: false },
+        { icon: '🍇', text: '葡萄 (是水果)', isCorrect: false }
       ]
     }
   ],
@@ -1866,11 +2266,12 @@ const DefaultLevels = {
       questionText: '小熊买了一个 2 元的面包和一个 1 元的棒棒糖，一共需要付几元钱？',
       speechPrompt: '森林小超市开张啦！小熊拿了2块钱的面包，又拿了1块钱的棒棒糖。小收银员，算算一共几块钱？',
       displayType: 'supermarket',
-      items: ['🍞 面包 2元', '➕', '🍭 棒棒糖 1元'],
+      items: ['🍞 面包 2元 (🪙🪙)', '➕', '🍭 棒棒糖 1元 (🪙)'],
+      hintPrompt: '买面包要2个硬币，买棒棒糖要1个硬币，伸出手指加一加，2加1等于几？',
       options: [
-        { text: '2元', isCorrect: false },
-        { text: '3元', isCorrect: true, cheer: '恭喜小收银员结账成功！2元加1元等于3元，小熊非常感谢你！' },
-        { text: '4元', isCorrect: false }
+        { icon: '2️⃣', text: '2 元钱', isCorrect: false },
+        { icon: '3️⃣', text: '3 元钱 (🪙🪙🪙)', isCorrect: true, cheer: '恭喜小收银员结账成功！2元加1元等于3元，小熊非常感谢你！' },
+        { icon: '4️⃣', text: '4 元钱', isCorrect: false }
       ]
     },
     {
@@ -1880,18 +2281,25 @@ const DefaultLevels = {
       title: '探险任务：火箭倒计时点火',
       questionText: '太空火箭发射倒计时：5、4、3、2，下一个数字喊几？',
       speechPrompt: '十秒准备！小宇航员，倒计时5、4、3、2，接下来数字该数几准备点火啦？',
+      displayType: 'hint_image',
       icon: '🚀',
-      subText: '5 ➔ 4 ➔ 3 ➔ 2 ➔ ❓',
+      subText: '5 ➔ 4 ➔ 3 ➔ 2 ➔ ❓ 倒计时发射！',
+      hintPrompt: '倒计时数字越来越小：5、4、3、2……数到1就喊发射点火！',
       options: [
-        { text: '1 (点火发射！)', isCorrect: true, cheer: '轰！点火成功！小火箭飞向宇宙啦！' },
-        { text: '0', isCorrect: false },
-        { text: '3', isCorrect: false }
+        { icon: '1️⃣', text: '1 (点火发射！)', isCorrect: true, cheer: '轰！点火成功！小火箭飞向宇宙啦！' },
+        { icon: '0️⃣', text: '0', isCorrect: false },
+        { icon: '3️⃣', text: '3', isCorrect: false }
       ]
     }
   ]
 };
 
-window.DefaultLevels = DefaultLevels;
+if (typeof window !== 'undefined') {
+  window.DefaultLevels = DefaultLevels;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { DefaultLevels };
+}
 
 </script>
 <script>
@@ -2410,6 +2818,11 @@ class App {
     this.questionText = document.getElementById('questionText');
     this.visualContainer = document.getElementById('arenaVisualContainer');
     this.optionsGrid = document.getElementById('arenaOptionsGrid');
+    this.gentleHintBox = document.getElementById('gentleHintBox');
+    this.hintText = document.getElementById('hintText');
+    this.superCheerOverlay = document.getElementById('superCheerOverlay');
+    this.cheerTitle = document.getElementById('cheerTitle');
+    this.cheerDesc = document.getElementById('cheerDesc');
 
     // 家长中心 Modal
     this.parentModal = document.getElementById('parentModal');
@@ -2703,14 +3116,18 @@ class App {
     this.activeTask = task;
     this.activeCategory = category;
 
+    // 清理之前的引导气泡与欢呼状态
+    if (this.gentleHintBox) this.gentleHintBox.style.display = 'none';
+    if (this.superCheerOverlay) this.superCheerOverlay.style.display = 'none';
+
     // 设置题干与标识
-    this.arenaBadge.textContent = task.badge || task.stage || task.themeTitle || '启蒙挑战';
+    this.arenaBadge.textContent = task.badge || task.stage || task.themeTitle || '知识挑战';
     this.questionText.textContent = task.questionText;
 
-    // 渲染视觉内容
+    // 渲染超大具象视觉内容 (小火车/规律序列/大果盘/拼音卡)
     this.renderArenaVisual(task);
 
-    // 渲染大按钮选项
+    // 渲染大图卡片选项
     this.renderArenaOptions(task);
 
     // 展示弹窗
@@ -2726,75 +3143,135 @@ class App {
   renderArenaVisual(task) {
     this.visualContainer.innerHTML = '';
 
-    if (task.items && Array.isArray(task.items)) {
-      const group = document.createElement('div');
-      group.className = 'items-group';
-      task.items.forEach(item => {
-        const span = document.createElement('span');
-        span.className = 'interactive-item';
-        span.textContent = item;
-        group.appendChild(span);
+    // 1. 小火车规律序列题 (例如红花、黄花、红花、问号)
+    if (task.displayType === 'pattern') {
+      const seq = task.sequence || [];
+      const carsHtml = seq.map((item, idx) => {
+        const isObj = typeof item === 'object';
+        const icon = isObj ? item.icon : item.split(' ')[0];
+        const label = isObj ? item.label : (item.split(' ')[1] || '').replace(/[()]/g, '');
+        const bg = (isObj && item.bg) ? item.bg : '#ffffff';
+        const color = (isObj && item.color) ? item.color : '#334155';
+        const isQ = icon === '❓';
+
+        return `
+          <div class="train-car-card ${isQ ? 'q-box' : ''}" style="background:${bg};">
+            <div class="train-car-icon" style="color:${color};">${icon}</div>
+            <div class="train-car-label">${label}</div>
+          </div>
+          ${idx < seq.length - 1 ? '<span class="train-arrow">➔</span>' : ''}
+        `;
+      }).join('');
+
+      this.visualContainer.innerHTML = `
+        <div class="train-track-box">
+          <span class="train-engine">🚂</span>
+          <span class="train-arrow">➔</span>
+          ${carsHtml}
+        </div>
+      `;
+    }
+    // 2. 实物大果盘/草地水池点数题 (可轻触互动交互)
+    else if (task.displayType === 'items' || (task.items && Array.isArray(task.items) && !task.displayType)) {
+      const plateTitle = task.plateLabel || '🍓 趣味数物盘 (伸出小手指点一点数一数)';
+      const itemsHtml = task.items.map((item, i) => `
+        <span class="plate-item" data-idx="${i}" title="轻触数数">${item}</span>
+      `).join('');
+
+      this.visualContainer.innerHTML = `
+        <div class="items-plate-box">
+          <div class="plate-header-tag">${plateTitle}</div>
+          <div class="plate-items-row">
+            ${itemsHtml}
+          </div>
+          ${task.subText ? `<div style="font-size:13px; font-weight:800; color:#b45309; margin-top:8px;">${task.subText}</div>` : ''}
+        </div>
+      `;
+
+      // 绑定轻触微跳动效和提示音，引导孩子动手点数
+      this.visualContainer.querySelectorAll('.plate-item').forEach(el => {
+        el.addEventListener('click', () => {
+          window.soundEngine.playClick();
+          el.style.transform = 'scale(1.35) rotate(-15deg)';
+          setTimeout(() => { el.style.transform = ''; }, 220);
+        });
       });
-      this.visualContainer.appendChild(group);
-    } else if (task.displayType === 'versus') {
+    }
+    // 3. 左右数量大比拼/天平题
+    else if (task.displayType === 'versus') {
       this.visualContainer.innerHTML = `
-        <div style="display:flex; justify-content:space-around; width:100%; font-size:20px; font-weight:800;">
-          <div style="text-align:center;">
-            <div>${task.left.label}</div>
-            <div style="font-size:38px; margin-top:8px;">${task.left.items.join(' ')}</div>
+        <div style="display:flex; justify-content:space-around; align-items:center; width:100%; gap:8px;">
+          <div class="train-car-card" style="flex:1; background:#f0fdf4; border-color:#86efac; padding:12px 8px;">
+            <div style="font-size:14px; font-weight:900; color:#15803d; margin-bottom:6px;">${task.left.label}</div>
+            <div style="font-size:36px; line-height:1.2;">${task.left.items.join(' ')}</div>
           </div>
-          <div style="align-self:center; font-size:30px; color:#94a3b8;">⚖️ VS</div>
-          <div style="text-align:center;">
-            <div>${task.right.label}</div>
-            <div style="font-size:38px; margin-top:8px;">${task.right.items.join(' ')}</div>
+          <div style="font-size:24px; color:#f59e0b; font-weight:900;">⚖️ VS</div>
+          <div class="train-car-card" style="flex:1; background:#fffbeb; border-color:#fde68a; padding:12px 8px;">
+            <div style="font-size:14px; font-weight:900; color:#b45309; margin-bottom:6px;">${task.right.label}</div>
+            <div style="font-size:36px; line-height:1.2;">${task.right.items.join(' ')}</div>
           </div>
         </div>
       `;
-    } else if (task.displayType === 'train') {
+    }
+    // 4. 小火车相邻数 / 动物排排坐
+    else if (task.displayType === 'train') {
       this.visualContainer.innerHTML = `
-        <div style="display:flex; align-items:center; gap:10px; font-size:28px; font-weight:900;">
-          <span>🚂</span>
-          ${task.trainCars.map(c => `
-            <div style="background:#ffffff; border:3px solid #6366f1; border-radius:14px; padding:10px 18px; color:#4f46e5; box-shadow:0 4px 0 #cbd5e1;">
-              ${c}
+        <div class="train-track-box">
+          <span class="train-engine">🚂</span>
+          <span class="train-arrow">➔</span>
+          ${task.trainCars.map((c, idx) => `
+            <div class="train-car-card ${c === '❓' ? 'q-box' : ''}">
+              <div class="train-car-icon" style="color:${c === '❓' ? '#7c3aed' : '#2563eb'};">${c}</div>
             </div>
-          `).join(' ➔ ')}
+            ${idx < task.trainCars.length - 1 ? '<span class="train-arrow">➔</span>' : ''}
+          `).join('')}
         </div>
       `;
-    } else if (task.displayType === 'split') {
+    }
+    // 5. 数的分解与合成 (气球、存钱罐)
+    else if (task.displayType === 'split') {
       this.visualContainer.innerHTML = `
-        <div style="text-align:center; font-size:20px; font-weight:900; width:100%;">
-          <div style="color:#d97706; margin-bottom:12px;">${task.total}</div>
-          <div style="display:flex; justify-content:center; gap:20px; font-size:19px;">
-            <span style="background:#ffffff; padding:10px 16px; border-radius:14px; border:3px solid #cbd5e1; box-shadow:0 4px 0 #e2e8f0;">${task.leftPart}</span>
-            <span style="align-self:center; color:#6366f1; font-size:26px;">➕</span>
-            <span style="background:#ffffff; padding:10px 16px; border-radius:14px; border:3px solid #cbd5e1; box-shadow:0 4px 0 #e2e8f0;">${task.rightPart}</span>
+        <div style="text-align:center; width:100%;">
+          <div class="plate-header-tag" style="display:inline-block; margin-bottom:12px;">${task.total}</div>
+          <div style="display:flex; justify-content:center; align-items:center; gap:16px;">
+            <div class="train-car-card" style="background:#f0fdf4; border-color:#86efac; min-width:88px;">
+              <span style="font-size:17px; font-weight:900; color:#15803d;">${task.leftPart}</span>
+            </div>
+            <span style="color:#6366f1; font-size:26px; font-weight:900;">➕</span>
+            <div class="train-car-card q-box" style="min-width:88px;">
+              <span style="font-size:17px; font-weight:900; color:#7c3aed;">${task.rightPart}</span>
+            </div>
           </div>
         </div>
       `;
-    } else if (task.displayType === 'stroop') {
-      // 斯特鲁普抗干扰：显示大大的红色的“蓝”字
+    }
+    // 6. 斯特鲁普视觉抗干扰
+    else if (task.displayType === 'stroop') {
       this.visualContainer.innerHTML = `
         <div style="text-align:center;">
-          <div style="font-size:80px; font-weight:900; color:#ef4444; text-shadow:0 4px 10px rgba(239,68,68,0.3);">
+          <div style="font-size:78px; font-weight:900; color:#ef4444; text-shadow:0 4px 10px rgba(239,68,68,0.25);">
             蓝
           </div>
-          <div style="font-size:15px; font-weight:800; color:#991b1b; margin-top:6px;">
-            （仔细看：这个汉字是用什么颜色的画笔画出来的？）
+          <div style="font-size:14px; font-weight:800; color:#991b1b; margin-top:6px; background:#fef2f2; padding:6px 14px; border-radius:12px;">
+            👀 火眼金睛：看眼睛看到的画笔真实颜色！
           </div>
         </div>
       `;
-    } else if (task.displayType === 'spell') {
+    }
+    // 7. 拼读大西瓜
+    else if (task.displayType === 'spell') {
       this.visualContainer.innerHTML = `
-        <div style="font-size:40px; font-weight:900; color:#6d28d9; letter-spacing:4px;">
+        <div style="font-size:38px; font-weight:900; color:#6d28d9; letter-spacing:4px; background:#f5f3ff; padding:12px 20px; border-radius:20px; border:2px dashed #c4b5fd;">
           ${task.formula}
         </div>
       `;
-    } else {
+    }
+    // 8. 拼音情境 / 象形字 / 空间方位 (hint_image)
+    else {
       this.visualContainer.innerHTML = `
         <div style="text-align:center;">
-          <div style="font-size:68px;">${task.icon || '🌟'}</div>
-          ${task.subText ? `<div style="font-size:16px; font-weight:800; color:#64748b; margin-top:8px;">${task.subText}</div>` : ''}
+          <div style="font-size:68px; animation:bounceItem 2.5s infinite ease-in-out; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));">${task.icon || '🌟'}</div>
+          ${task.subText ? `<div style="font-size:15px; font-weight:800; color:#b45309; background:#fffdf0; border:2px solid #fef08a; padding:6px 16px; border-radius:14px; margin-top:10px; display:inline-block;">${task.subText}</div>` : ''}
         </div>
       `;
     }
@@ -2805,7 +3282,29 @@ class App {
     task.options.forEach(opt => {
       const btn = document.createElement('button');
       btn.className = 'option-btn';
-      btn.textContent = opt.text;
+
+      // 智能提取大图图标与文字说明
+      let icon = opt.icon || '';
+      let text = opt.text || '';
+      let dots = opt.dots || '';
+
+      if (!icon) {
+        // 如果未单独配置 icon，自动解析表情或前缀
+        const matchEmoji = text.match(/^([\p{Emoji_Presentation}\p{Extended_Pictographic}\d]+)\s*(.*)$/u);
+        if (matchEmoji) {
+          icon = matchEmoji[1];
+          text = matchEmoji[2] || matchEmoji[1];
+        } else {
+          icon = text.charAt(0);
+          text = text;
+        }
+      }
+
+      btn.innerHTML = `
+        <div class="opt-big-icon">${icon}</div>
+        <div class="opt-text-label">${text}</div>
+        ${dots ? `<div class="opt-dots-row">${dots}</div>` : ''}
+      `;
 
       btn.addEventListener('click', () => {
         this.handleOptionClick(btn, opt, task);
@@ -2821,20 +3320,51 @@ class App {
       window.soundEngine.playCorrect();
       window.soundEngine.playStar();
 
-      const cheerSpeech = opt.cheer || '太棒啦！你答对啦！';
-      window.soundEngine.speak(cheerSpeech);
+      // 隐藏答错引导气泡
+      if (this.gentleHintBox) this.gentleHintBox.style.display = 'none';
+
+      // 弹出答对超级多感官欢呼层
+      const cheerQuotes = [
+        opt.cheer,
+        '哇！太棒啦！你真是一个观察小天才！',
+        '答对啦！聪聪小猫为你竖起大拇指！',
+        '太厉害了！奖励你一颗闪亮大金星！',
+        '真聪明！一眼就找到了正确的答案！'
+      ].filter(Boolean);
+      const cheerText = cheerQuotes[Math.floor(Math.random() * cheerQuotes.length)];
+
+      if (this.superCheerOverlay) {
+        if (this.cheerTitle) this.cheerTitle.textContent = '🎉 太棒啦！闯关成功！';
+        if (this.cheerDesc) this.cheerDesc.textContent = cheerText;
+        this.superCheerOverlay.style.display = 'flex';
+      }
+
+      // 播放元气赞美语音
+      window.soundEngine.speak(cheerText);
 
       window.syncManager.completeLevel(this.activeCategory, task.id, 1);
       this.updateNavStats();
 
       setTimeout(() => {
+        if (this.superCheerOverlay) this.superCheerOverlay.style.display = 'none';
         this.arenaOverlay.style.display = 'none';
         this.renderAll();
-      }, 1500);
+      }, 1800);
     } else {
       btn.classList.add('wrong-shake');
       window.soundEngine.playWrong();
-      window.soundEngine.speak('再看一看哦，试一试别的答案吧！');
+
+      // 温柔安抚与针对性启发引导 (绝不批评否定，给予温和提示)
+      const defaultHint = '仔细看一看上面的大图，再试一试别的卡片吧！';
+      const hint = task.hintPrompt || defaultHint;
+
+      if (this.gentleHintBox && this.hintText) {
+        this.hintText.textContent = hint;
+        this.gentleHintBox.style.display = 'flex';
+      }
+
+      // 播放温暖鼓励语音与启发
+      window.soundEngine.speak('没关系，差一点点就对啦！' + hint);
 
       setTimeout(() => {
         btn.classList.remove('wrong-shake');
