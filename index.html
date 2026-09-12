@@ -837,6 +837,24 @@ body {
   font-size: 46px;
   line-height: 1.1;
   margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 跨平台绝对保真纯正颜色绘本矢量花朵 */
+.svg-flower-box {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-flower {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.12));
 }
 
 .train-car-label {
@@ -1323,6 +1341,11 @@ body {
 
   .train-car-icon {
     font-size: 38px;
+  }
+
+  .svg-flower-box {
+    width: 38px;
+    height: 38px;
   }
 
   .train-car-label {
@@ -1866,16 +1889,16 @@ const DefaultLevels = {
       speechPrompt: '仔细看小火车上花朵的颜色规律：红花、黄花、红花，问号车厢应该放什么花呢？',
       displayType: 'pattern',
       sequence: [
-        { icon: '🌸', label: '红花', bg: '#ffe4e6', color: '#e11d48' },
-        { icon: '🌼', label: '黄花', bg: '#fef3c7', color: '#d97706' },
-        { icon: '🌸', label: '红花', bg: '#ffe4e6', color: '#e11d48' },
+        { flowerType: 'red', label: '红花', bg: '#ffe4e6', color: '#e11d48' },
+        { flowerType: 'yellow', label: '黄花', bg: '#fef9c3', color: '#ca8a04' },
+        { flowerType: 'red', label: '红花', bg: '#ffe4e6', color: '#e11d48' },
         { icon: '❓', label: '下一朵？', bg: '#ede9fe', color: '#6d28d9' }
       ],
-      hintPrompt: '仔细看小火车的花朵颜色：一朵红花、一朵黄花、又是一朵红花……那下一朵轮到什么花呢？',
+      hintPrompt: '仔细看小火车的花朵颜色：一朵红花、一朵金黄色花、又是一朵红花……那下一朵轮到什么花呢？',
       options: [
-        { icon: '🌼', text: '黄花', isCorrect: true, cheer: '观察得真仔细！规律就是红花、黄花、红花、黄花！' },
-        { icon: '🌸', text: '红花', isCorrect: false },
-        { icon: '🍀', text: '绿叶', isCorrect: false }
+        { flowerType: 'yellow', text: '黄花', isCorrect: true, cheer: '观察得真仔细！规律就是红花、黄花、红花、黄花！' },
+        { flowerType: 'red', text: '红花', isCorrect: false },
+        { flowerType: 'green', text: '绿叶', isCorrect: false }
       ]
     }
   ],
@@ -3140,6 +3163,59 @@ class App {
     }, 250);
   }
 
+  // 获取纯正无歧义色彩的标准矢量花朵 (解决各系统字体将🌼画成紫花的严重认知Bug)
+  getFlowerSvg(colorType) {
+    if (colorType === 'yellow') {
+      return `
+        <div class="svg-flower-box" title="纯正金黄花">
+          <svg viewBox="0 0 100 100" class="svg-flower">
+            <g fill="#facc15" stroke="#eab308" stroke-width="2">
+              <circle cx="50" cy="24" r="16"/>
+              <circle cx="72" cy="38" r="16"/>
+              <circle cx="64" cy="68" r="16"/>
+              <circle cx="36" cy="68" r="16"/>
+              <circle cx="28" cy="38" r="16"/>
+            </g>
+            <circle cx="50" cy="48" r="15" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+            <circle cx="46" cy="44" r="3.5" fill="#ffffff" opacity="0.7"/>
+          </svg>
+        </div>
+      `;
+    } else if (colorType === 'red') {
+      return `
+        <div class="svg-flower-box" title="纯正鲜红花">
+          <svg viewBox="0 0 100 100" class="svg-flower">
+            <g fill="#f43f5e" stroke="#e11d48" stroke-width="2">
+              <circle cx="50" cy="24" r="16"/>
+              <circle cx="72" cy="38" r="16"/>
+              <circle cx="64" cy="68" r="16"/>
+              <circle cx="36" cy="68" r="16"/>
+              <circle cx="28" cy="38" r="16"/>
+            </g>
+            <circle cx="50" cy="48" r="14" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+            <circle cx="46" cy="44" r="3.5" fill="#ffffff" opacity="0.7"/>
+          </svg>
+        </div>
+      `;
+    } else if (colorType === 'green') {
+      return `
+        <div class="svg-flower-box" title="纯正翠绿叶">
+          <svg viewBox="0 0 100 100" class="svg-flower">
+            <g fill="#22c55e" stroke="#16a34a" stroke-width="2">
+              <circle cx="50" cy="28" r="15"/>
+              <circle cx="68" cy="46" r="15"/>
+              <circle cx="50" cy="64" r="15"/>
+              <circle cx="32" cy="46" r="15"/>
+            </g>
+            <circle cx="50" cy="46" r="6" fill="#15803d"/>
+            <path d="M50 52 Q52 86 42 90" stroke="#16a34a" stroke-width="6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      `;
+    }
+    return '';
+  }
+
   renderArenaVisual(task) {
     this.visualContainer.innerHTML = '';
 
@@ -3148,15 +3224,22 @@ class App {
       const seq = task.sequence || [];
       const carsHtml = seq.map((item, idx) => {
         const isObj = typeof item === 'object';
-        const icon = isObj ? item.icon : item.split(' ')[0];
+        let iconHtml = '';
+        if (isObj && item.flowerType) {
+          iconHtml = this.getFlowerSvg(item.flowerType);
+        } else {
+          const icon = isObj ? item.icon : item.split(' ')[0];
+          iconHtml = `<span style="font-size:42px;">${icon}</span>`;
+        }
+
         const label = isObj ? item.label : (item.split(' ')[1] || '').replace(/[()]/g, '');
         const bg = (isObj && item.bg) ? item.bg : '#ffffff';
         const color = (isObj && item.color) ? item.color : '#334155';
-        const isQ = icon === '❓';
+        const isQ = (isObj && item.icon === '❓') || (!isObj && item.includes('❓'));
 
         return `
           <div class="train-car-card ${isQ ? 'q-box' : ''}" style="background:${bg};">
-            <div class="train-car-icon" style="color:${color};">${icon}</div>
+            <div class="train-car-icon" style="color:${color};">${iconHtml}</div>
             <div class="train-car-label">${label}</div>
           </div>
           ${idx < seq.length - 1 ? '<span class="train-arrow">➔</span>' : ''}
@@ -3288,7 +3371,16 @@ class App {
       let text = opt.text || '';
       let dots = opt.dots || '';
 
-      if (!icon) {
+      // 纯正色彩矢量花朵拦截 (杜绝系统 Emoji 颜色失真/黄花变紫花)
+      if (opt.flowerType) {
+        icon = this.getFlowerSvg(opt.flowerType);
+      } else if (text.includes('黄花') || icon === '🌼') {
+        icon = this.getFlowerSvg('yellow');
+      } else if (text.includes('红花') || icon === '🌸') {
+        icon = this.getFlowerSvg('red');
+      } else if (text.includes('绿叶') || icon === '🍀') {
+        icon = this.getFlowerSvg('green');
+      } else if (!icon) {
         // 如果未单独配置 icon，自动解析表情或前缀
         const matchEmoji = text.match(/^([\p{Emoji_Presentation}\p{Extended_Pictographic}\d]+)\s*(.*)$/u);
         if (matchEmoji) {
