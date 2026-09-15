@@ -761,6 +761,24 @@ body {
   transform: scale(1.12);
 }
 
+.btn-replay-speech.speaking {
+  animation: soundPulse 0.9s infinite alternate ease-in-out;
+  background: #ffe4e6;
+  border-color: #f43f5e;
+  box-shadow: 0 0 0 6px rgba(244, 63, 94, 0.25), 0 3px 0 #e11d48;
+}
+
+@keyframes soundPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2), 0 3px 0 #fda4af;
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(244, 63, 94, 0.35), 0 4px 0 #e11d48;
+  }
+}
+
 .question-text {
   font-size: 20px;
   font-weight: 900;
@@ -2092,10 +2110,49 @@ class SoundEngine {
   constructor() {
     this.ctx = null;
     this.initContext();
+    this.isMobileOrWechat = /MicroMessenger|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     this.speechAvailable = 'speechSynthesis' in window;
     this.voices = [];
     this.mandarinVoice = null;
+    this.audioEl = null;
+    this.currentSpeakingBtn = null;
+    this.initAudioEl();
     this.initSpeech();
+    this.setupUserInteractionUnlock();
+  }
+
+  initAudioEl() {
+    try {
+      this.audioEl = new Audio();
+      this.audioEl.crossOrigin = 'anonymous';
+      this.audioEl.addEventListener('ended', () => {
+        this.clearSpeakingStatus();
+      });
+      this.audioEl.addEventListener('error', () => {
+        this.clearSpeakingStatus();
+      });
+    } catch (e) {
+      console.warn('Audio 元素初始化异常:', e);
+    }
+  }
+
+  /** 监听用户首次触摸/点击，提前解锁移动端 iOS/Android 的音频自动播放限制 */
+  setupUserInteractionUnlock() {
+    const unlock = () => {
+      this.ensureContext();
+      if (this.audioEl) {
+        // 静音空播触发手机浏览器媒体通道权限
+        this.audioEl.play().then(() => {
+          this.audioEl.pause();
+        }).catch(() => {});
+      }
+      window.removeEventListener('touchstart', unlock, true);
+      window.removeEventListener('touchend', unlock, true);
+      window.removeEventListener('click', unlock, true);
+    };
+    window.addEventListener('touchstart', unlock, { capture: true, passive: true });
+    window.addEventListener('touchend', unlock, { capture: true, passive: true });
+    window.addEventListener('click', unlock, { capture: true, passive: true });
   }
 
   initContext() {
@@ -2107,43 +2164,127 @@ class SoundEngine {
 
   ensureContext() {
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch(() => {});
     }
   }
 
   initSpeech() {
     if (!this.speechAvailable) return;
     const updateVoices = () => {
-      this.voices = window.speechSynthesis.getVoices();
-      // 优先选择中文普通话音色
-      this.mandarinVoice = this.voices.find(v => v.lang.includes('zh') || v.lang.includes('cmn')) || null;
+      try {
+        this.voices = window.speechSynthesis.getVoices() || [];
+        this.mandarinVoice = this.voices.find(v => v.lang && (v.lang.includes('zh') || v.lang.includes('cmn'))) || null;
+      } catch (e) {}
     };
     updateVoices();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+    if (window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
       window.speechSynthesis.onvoiceschanged = updateVoices;
     }
   }
 
+  setSpeakingStatus(btnEl) {
+    if (this.currentSpeakingBtn) {
+      this.currentSpeakingBtn.classList.remove('speaking');
+    }
+    if (btnEl) {
+      this.currentSpeakingBtn = btnEl;
+      this.currentSpeakingBtn.classList.add('speaking');
+    }
+  }
+
+  clearSpeakingStatus() {
+    if (this.currentSpeakingBtn) {
+      this.currentSpeakingBtn.classList.remove('speaking');
+      this.currentSpeakingBtn = null;
+    }
+  }
+
   /**
-   * 朗读指定中文文本
+   * 朗读指定中文文本 (手机端/微信浏览器 100% 畅通播放)
    * @param {string} text - 朗读文本
-   * @param {number} rate - 语速 (默认 0.85，适合5岁幼儿)
-   * @param {number} pitch - 语调 (默认 1.15，偏轻快活泼)
+   * @param {HTMLElement} [triggerBtn] - 触发喇叭按钮元素，播放时提供动效
    */
-  speak(text, rate = 0.85, pitch = 1.15) {
-    if (!this.speechAvailable) return;
+  speak(text, triggerBtn = null) {
+    if (!text) return;
+    const cleanText = text.replace(/[“ ”" ']/g, '').trim();
+    if (!cleanText) return;
+
+    // 优先绑定并激活喇叭动画
+    if (triggerBtn) {
+      this.setSpeakingStatus(triggerBtn);
+    }
+
+    this.ensureContext();
+    this.stopSpeech();
+
+    // 1. 移动端/微信内置环境、或者本地无可用普通话 TTS 时：直接使用高可用云端标准普通话音频通道
+    const useNetworkAudio = this.isMobileOrWechat || !this.speechAvailable || !this.mandarinVoice;
+
+    if (useNetworkAudio) {
+      this.speakViaNetworkAudio(cleanText, () => {
+        // 网络音频失败时的降级方案
+        this.speakViaSpeechSynthesis(cleanText);
+      });
+    } else {
+      // PC 端具备完整离线语音时使用原生合成，若异常自动回退到网络音频
+      const success = this.speakViaSpeechSynthesis(cleanText);
+      if (!success) {
+        this.speakViaNetworkAudio(cleanText);
+      }
+    }
+  }
+
+  /** 通过网络标准普通话流发音 (手机端和微信完全通畅) */
+  speakViaNetworkAudio(text, onError = null) {
     try {
-      window.speechSynthesis.cancel(); // 停掉正在读的
+      if (!this.audioEl) {
+        this.initAudioEl();
+      }
+      // 百度标准清晰普通话发音 (速度设为5，温和清晰适合幼儿)
+      const ttsUrl = `https://fanyi.baidu.com/gettts?lan=zh&text=${encodeURIComponent(text)}&spd=5&source=web`;
+      this.audioEl.src = ttsUrl;
+      const playPromise = this.audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn('网络音频播放受限或离线，尝试备用机制:', err);
+          if (onError) onError();
+          else this.clearSpeakingStatus();
+        });
+      }
+    } catch (e) {
+      console.warn('播放网络语音出错:', e);
+      if (onError) onError();
+      else this.clearSpeakingStatus();
+    }
+  }
+
+  /** 通过系统原生 SpeechSynthesis 朗读 */
+  speakViaSpeechSynthesis(text) {
+    if (!this.speechAvailable) {
+      this.clearSpeakingStatus();
+      return false;
+    }
+    try {
+      window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'zh-CN';
-      utterance.rate = rate;
-      utterance.pitch = pitch;
+      utterance.rate = 0.85;
+      utterance.pitch = 1.15;
       if (this.mandarinVoice) {
         utterance.voice = this.mandarinVoice;
       }
+      utterance.onend = () => {
+        this.clearSpeakingStatus();
+      };
+      utterance.onerror = () => {
+        this.clearSpeakingStatus();
+      };
       window.speechSynthesis.speak(utterance);
+      return true;
     } catch (e) {
-      console.warn('语音播放受限:', e);
+      console.warn('原生 TTS 异常:', e);
+      this.clearSpeakingStatus();
+      return false;
     }
   }
 
@@ -2151,9 +2292,18 @@ class SoundEngine {
    * 停止当前朗读
    */
   stopSpeech() {
-    if (this.speechAvailable) {
-      window.speechSynthesis.cancel();
+    if (this.audioEl) {
+      try {
+        this.audioEl.pause();
+        this.audioEl.currentTime = 0;
+      } catch (e) {}
     }
+    if (this.speechAvailable) {
+      try {
+        window.speechSynthesis.cancel();
+      } catch (e) {}
+    }
+    this.clearSpeakingStatus();
   }
 
   // ============== 合成音效库 (纯代码生成，无须音频文件) ==============
@@ -3334,7 +3484,7 @@ class App {
     // 重新朗读题目
     this.btnReplaySpeech.addEventListener('click', () => {
       if (this.activeTask) {
-        window.soundEngine.speak(this.activeTask.speechPrompt || this.activeTask.questionText);
+        window.soundEngine.speak(this.activeTask.speechPrompt || this.activeTask.questionText, this.btnReplaySpeech);
       }
     });
 
@@ -3606,7 +3756,7 @@ class App {
     // 自动离线标准普通话语音朗读引导
     setTimeout(() => {
       const speech = task.speechPrompt || task.questionText;
-      window.soundEngine.speak(speech);
+      window.soundEngine.speak(speech, this.btnReplaySpeech);
     }, 250);
   }
 
