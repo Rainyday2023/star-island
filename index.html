@@ -2254,6 +2254,373 @@ body {
   line-height: 1.5;
 }
 
+/* ==============================================================
+   5岁儿童拼音与偏旁部首具象认知系统 (小汽车坡道/汉字乐高/魔法道具)
+   ============================================================== */
+
+/* 1. 声调小汽车坡道舞台 */
+.tone-car-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+  border: 3px solid #93c5fd;
+  border-radius: 24px;
+  padding: 14px 18px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.tone-car-track-box {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 90px;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tone-car-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.tone-hero-syllable {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  background: #ffffff;
+  padding: 4px 20px;
+  border-radius: 20px;
+  border: 2px solid #bfdbfe;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.tone-syllable-pinyin {
+  font-size: 38px;
+  font-weight: 900;
+  color: #1d4ed8;
+  letter-spacing: 2px;
+}
+
+.tone-mark-tag {
+  font-size: 14px;
+  font-weight: 800;
+  color: #3b82f6;
+  background: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+/* 2. 偏旁乐高积木合体舞台 */
+.radical-lego-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #fefce8 0%, #fef08a 100%);
+  border: 3px solid #facc15;
+  border-radius: 24px;
+  padding: 14px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lego-blocks-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px 0;
+  flex-wrap: wrap;
+}
+
+.lego-brick {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  height: 80px;
+  border-radius: 16px;
+  border: 3px solid;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.lego-brick:active {
+  transform: scale(0.95);
+}
+
+.lego-left {
+  background: #e0f2fe;
+  border-color: #38bdf8;
+  color: #0369a1;
+}
+
+.lego-right {
+  background: #ffedd5;
+  border-color: #fb923c;
+  color: #c2410c;
+}
+
+.lego-result-slot {
+  background: #f3e8ff;
+  border-color: #c084fc;
+  border-style: dashed;
+  color: #7e22ce;
+  min-width: 82px;
+}
+
+/* 乐高顶部凸粒点缀 */
+.lego-brick::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  width: 32px;
+  height: 8px;
+  background: inherit;
+  border: 3px solid inherit;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+.brick-char {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.brick-label {
+  font-size: 11px;
+  font-weight: 800;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.lego-connector {
+  font-size: 26px;
+  font-weight: 900;
+  color: #eab308;
+}
+
+/* 3. b/d/p/q 魔法道具镜像对比舞台 */
+.bd-contrast-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 3px solid #cbd5e1;
+  border-radius: 24px;
+  padding: 12px 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bd-cards-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  gap: 12px;
+  margin: 6px 0;
+}
+
+.bd-contrast-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 3px solid;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.06);
+}
+
+.bd-card-b {
+  border-color: #60a5fa;
+  background: #eff6ff;
+}
+
+.bd-card-d {
+  border-color: #f472b6;
+  background: #fdf2f8;
+}
+
+.bd-tool-icon {
+  font-size: 36px;
+  margin-bottom: 4px;
+}
+
+.bd-char-display {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.bd-card-b .bd-char-display { color: #2563eb; }
+.bd-card-d .bd-char-display { color: #db2777; }
+
+.bd-chant-tip {
+  font-size: 11px;
+  font-weight: 800;
+  color: #475569;
+  margin-top: 4px;
+  text-align: center;
+}
+
+.bd-versus-badge {
+  font-size: 18px;
+  font-weight: 900;
+  color: #94a3b8;
+}
+
+/* 4. 声母韵母滑滑梯舞台 */
+.slide-spell-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #faf5ff 0%, #ede9fe 100%);
+  border: 3px solid #c4b5fd;
+  border-radius: 24px;
+  padding: 14px 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.slide-track-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 10px 18px;
+  border: 2px solid #ddd6fe;
+  box-shadow: 0 4px 0 rgba(109, 40, 217, 0.08);
+}
+
+.slide-char-ball {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+.slide-shengmu { background: #3b82f6; }
+.slide-yunmu { background: #ec4899; }
+.slide-result-ball {
+  background: #8b5cf6;
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  animation: pulseSlot 1.8s infinite;
+}
+
+@keyframes pulseSlot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.slide-arrow-symbol {
+  font-size: 26px;
+  color: #a855f7;
+  font-weight: 900;
+}
+
+/* 5. 偏旁探秘大图腾舞台 */
+.radical-explore-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #f0fdfa 0%, #ccfbf1 100%);
+  border: 3px solid #5eead4;
+  border-radius: 24px;
+  padding: 14px 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.explore-totem-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 6px 0;
+}
+
+.explore-totem-icon {
+  font-size: 52px;
+  animation: bounceItem 2.5s infinite ease-in-out;
+}
+
+.explore-radical-badge {
+  font-size: 48px;
+  font-weight: 900;
+  color: #0f766e;
+  background: #ffffff;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #2dd4bf;
+  box-shadow: 0 4px 0 rgba(15, 118, 110, 0.15);
+}
+
+/* 6. 生活词汇大侦探舞台 */
+.detective-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #fff1f2 0%, #ffe4e6 100%);
+  border: 3px solid #fda4af;
+  border-radius: 24px;
+  padding: 14px 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.detective-word-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 10px 24px;
+  border: 3px solid #f43f5e;
+  box-shadow: 0 4px 10px rgba(225, 29, 72, 0.12);
+  margin: 6px 0;
+}
+
+.detective-text {
+  font-size: 44px;
+  font-weight: 900;
+  color: #be123c;
+  letter-spacing: 6px;
+}
+
+.detective-glass {
+  font-size: 32px;
+  margin-right: 8px;
+}
+
 
 </style>
 </head>
@@ -2534,6 +2901,43 @@ body {
 
         <div id="repWarningList" class="warning-tasks-list">
           <!-- 动态注入预警题目卡片 -->
+        </div>
+
+        <!-- 5岁幼儿拼音与偏旁部首生活化伴学指南 -->
+        <div class="sync-card" style="background:#fefce8; border:2px solid #fef08a; margin-top:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="color:#854d0e; margin:0; font-size:15px; font-weight:900;">💡 5岁拼音与偏旁：生活化伴学指南 (3分钟微互动)</h4>
+            <span style="font-size:12px; font-weight:800; color:#ca8a04; background:#fef9c3; padding:2px 8px; border-radius:8px;">具象不枯燥</span>
+          </div>
+          <p style="font-size:12px; color:#a16207; line-height:1.5; margin-bottom:10px;">
+            5岁孩子处于具象形象思维期，严禁死记硬背！将抽象符号融入日常生活3大微场景：
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div style="background:#ffffff; padding:10px; border-radius:12px; border:1px solid #fef08a;">
+              <div style="font-size:13px; font-weight:900; color:#0369a1; margin-bottom:4px;">🚿 洗手/洗澡/喝水找【氵】</div>
+              <div style="font-size:12px; color:#475569; line-height:1.4;">
+                洗澡或喝水时指着水流问：“水花飞溅出三滴水，变成了哪个偏旁？氵三点水！”
+              </div>
+            </div>
+            <div style="background:#ffffff; padding:10px; border-radius:12px; border:1px solid #fef08a;">
+              <div style="font-size:13px; font-weight:900; color:#c2410c; margin-bottom:4px;">🖐️ 拍球/拔萝卜找【扌】</div>
+              <div style="font-size:12px; color:#475569; line-height:1.4;">
+                拍皮球或拿玩具时拍拍小手：“凡是用手做动作，汉字前面都要带上一只小手【扌提手旁】！”
+              </div>
+            </div>
+            <div style="background:#ffffff; padding:10px; border-radius:12px; border:1px solid #fef08a;">
+              <div style="font-size:13px; font-weight:900; color:#1d4ed8; margin-bottom:4px;">🚗 乘车/走坡玩【声调车】</div>
+              <div style="font-size:12px; color:#475569; line-height:1.4;">
+                平路开“一声 mā 平稳”，爬斜坡开“二声 yá 突突”，拐弯开“三声 mǎ 摇篮”，下坡“四声 dà 呼哧”。
+              </div>
+            </div>
+            <div style="background:#ffffff; padding:10px; border-radius:12px; border:1px solid #fef08a;">
+              <div style="font-size:13px; font-weight:900; color:#7e22ce; margin-bottom:4px;">👍 竖大拇指分【b 与 d】</div>
+              <div style="font-size:12px; color:#475569; line-height:1.4;">
+                左手竖起大拇指像 b（天线在左）；右手竖起大拇指像 d（天线在右）。左右手一比秒懂！
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -3221,73 +3625,194 @@ const DefaultLevels = {
     }
   ],
 
-  // ================= 3. 汉语拼音城堡 =================
+  // ================= 3. 汉语拼音城堡 (三阶进阶体系) =================
   pinyin: [
+    // --- 基础阶：四声调小汽车坡道与单韵母图腾 ---
     {
-      id: 'pin_1',
+      id: 'pin_tone_1',
       tier: 'basic',
-      stage: '基础阶：单韵母 a o e',
-      title: '第1关：公鸡打鸣找字母',
+      stage: '基础阶：声调小汽车与坡道感知',
+      title: '第1关：小汽车走平路 (一声平)',
+      questionText: '嘀嘀！声调小汽车在平坦的大马路上飞奔，平平稳稳！这是第几声？',
+      speechPrompt: '小汽车开在大马路上，平平整整。一声平平，mā——！选出对应的一声声调符号吧！',
+      displayType: 'tone_car',
+      tone: 1,
+      toneMark: 'ˉ',
+      syllable: 'mā',
+      subText: '一声平平走平路：汽车在平地飞奔，发音高高平又平！',
+      hintPrompt: '伸出小食指平平画一条横线：一声平平高又平，就像小车走平路！选上面有一横的 mā！',
+      options: [
+        { icon: 'mā', text: '一声 mā (平平稳稳 ˉ)', isCorrect: true, cheer: '太棒啦！一声平平走平路，mā 妈妈的妈！' },
+        { icon: 'má', text: '二声 má (向上爬坡 ˊ)', isCorrect: false },
+        { icon: 'mà', text: '四声 mà (向下冲坡 ˋ)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'pin_tone_2',
+      tier: 'basic',
+      stage: '基础阶：声调小汽车与坡道感知',
+      title: '第2关：小汽车爬陡坡 (二声扬)',
+      questionText: '小汽车开始加足马力爬陡坡啦！从山脚往山顶冲！这是第几声？',
+      speechPrompt: '小汽车要爬山啦！加油门，突突突由下往上冲！二声就像爬陡坡，选出二声符号吧！',
+      displayType: 'tone_car',
+      tone: 2,
+      toneMark: 'ˊ',
+      syllable: 'yá',
+      subText: '二声向上爬陡坡：由低到高往上扬，像小车上斜坡！',
+      hintPrompt: '小手指由左下向右上划一条斜线：二声向上扬，白白牙齿的 yá！',
+      options: [
+        { icon: 'yá', text: '二声 yá (向上爬坡 ˊ)', isCorrect: true, cheer: '好厉害！加足马力爬上山坡，二声向上扬，小牙齿的牙！' },
+        { icon: 'yā', text: '一声 yā (平平大路 ˉ)', isCorrect: false },
+        { icon: 'yà', text: '四声 yà (向下冲坡 ˋ)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'pin_tone_3',
+      tier: 'basic',
+      stage: '基础阶：声调小汽车与坡道感知',
+      title: '第3关：下坡又上坡 (三声拐个弯)',
+      questionText: '小汽车冲进低低的山谷，又拐个弯开上小山丘！下坡又上坡，这是第几声？',
+      speechPrompt: '看小汽车，先下坡、又拐个弯向上开！像个小山谷摇篮，选出三声拐弯符号吧！',
+      displayType: 'tone_car',
+      tone: 3,
+      toneMark: 'ˇ',
+      syllable: 'mǎ',
+      subText: '三声下坡又上坡：先降后升拐个弯，像个小山谷！',
+      hintPrompt: '点点头再仰起头：下坡又上坡拐个弯，选小山谷形状的三声 mǎ（小马奔跑）！',
+      options: [
+        { icon: 'mǎ', text: '三声 mǎ (拐弯山谷 ˇ)', isCorrect: true, cheer: '聪明极了！三声拐弯像个小山谷，奔跑的小马 mǎ！' },
+        { icon: 'mā', text: '一声 mā (平平大路 ˉ)', isCorrect: false },
+        { icon: 'mà', text: '四声 mà (向下俯冲 ˋ)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'pin_tone_4',
+      tier: 'basic',
+      stage: '基础阶：声调小汽车与坡道感知',
+      title: '第4关：俯冲下山坡 (四声降)',
+      questionText: '小汽车从山顶呼啸冲下来，速度飞快像滑滑梯！这是第几声？',
+      speechPrompt: '从小山顶嗖的一下冲到底！四声从最高处往下降，选出四声冲坡符号！',
+      displayType: 'tone_car',
+      tone: 4,
+      toneMark: 'ˋ',
+      syllable: 'dà',
+      subText: '四声俯冲下山坡：短促有力降下来，像从滑梯冲到底！',
+      hintPrompt: '小手从高处用力往下一滑：四声从上往下滑，大象的大 dà！',
+      options: [
+        { icon: 'dà', text: '四声 dà (俯冲下坡 ˋ)', isCorrect: true, cheer: '答对啦！小汽车飞快冲下坡，四声从高往下降，高大的大 dà！' },
+        { icon: 'dā', text: '一声 dā (平平大路 ˉ)', isCorrect: false },
+        { icon: 'dá', text: '二声 dá (向上爬坡 ˊ)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'pin_vowel_1',
+      tier: 'basic',
+      stage: '基础阶：单韵母口型图腾',
+      title: '第5关：大公鸡啼叫与圆圆嘴',
       questionText: '大公鸡清早啼叫，喔喔喔！嘴巴拢圆发什么音？',
-      speechPrompt: '太阳公公出来啦，公鸡喔喔喔叫。嘴巴圆圆，对应哪个拼音字母呢？',
+      speechPrompt: '太阳公公出来啦，公鸡喔喔喔啼叫。嘴巴圆圆，对应哪个拼音字母呢？',
       displayType: 'hint_image',
       icon: '🐓',
       subText: '大公鸡打鸣：嘴巴拢圆 喔 喔 喔！',
       hintPrompt: '大公鸡早晨啼叫：喔喔喔，嘴巴拢得圆圆的，选字母 o 吧！',
       options: [
-        { icon: 'a', text: '大嘴巴 a', isCorrect: false },
         { icon: 'o', text: '圆圆嘴 o', isCorrect: true, cheer: '真棒！圆圆嘴巴 o o o，公鸡打鸣喔喔啼！' },
+        { icon: 'a', text: '大嘴巴 a', isCorrect: false },
         { icon: 'e', text: '扁扁嘴 e', isCorrect: false }
       ]
     },
+    // --- 进阶阶：b/d/p/q 魔法道具与空间镜像辨析 ---
     {
-      id: 'pin_2',
-      tier: 'basic',
-      stage: '基础阶：单韵母 a o e',
-      title: '第2关：清清池塘白鹅游',
-      questionText: '水中小白鹅，倒影清又清！扁扁嘴巴对应哪个字母？',
-      speechPrompt: '清清池塘一只鹅，水中倒影真美丽。嘴巴扁扁，选出它对应的拼音字母吧！',
-      displayType: 'hint_image',
-      icon: '🦢',
-      subText: '清清池塘白鹅游，扁扁嘴巴 e e e！',
-      hintPrompt: '白鹅白鹅水中游，嘴巴咧开扁又平，发音是 e 哦！',
-      options: [
-        { icon: 'e', text: '扁扁嘴 e', isCorrect: true, cheer: '答对了！扁扁嘴巴 e e e，白鹅倒影清又清！' },
-        { icon: 'u', text: '小火车 u', isCorrect: false },
-        { icon: 'a', text: '大嘴巴 a', isCorrect: false }
-      ]
-    },
-    {
-      id: 'pin_3',
+      id: 'pin_bd_1',
       tier: 'advance',
-      stage: '进阶阶：声母形近字辨析 (防混淆)',
-      title: '第3关：收音机与小红旗 (b 与 d)',
-      questionText: '像个收音机，右下半圆是什么字母？（右下半圆 b b b，左下半圆 d d d）',
-      speechPrompt: '听广播，右下半圆，是小喇叭字母 b 还是字母 d 呢？',
-      displayType: 'hint_image',
-      icon: '📻',
-      subText: '仔细看收音机：一竖加右下半圆是 b！',
-      hintPrompt: '像一台小收音机拉出天线，半圆在右边下方，是听广播的 b 哦！',
+      stage: '进阶阶：b与d空间镜像辨析 (魔法道具法)',
+      title: '第6关：收音机与小马蹄 (b 与 d)',
+      questionText: '一台小收音机，天线立在左边，大肚子圆圆在右下方！这是哪个字母？',
+      speechPrompt: '听广播，右下半圆，天线一竖在左边。伸出左手竖起大拇指，这就是字母 b 哦！',
+      displayType: 'bd_contrast',
+      target: 'b',
+      contrastPair: 'b_vs_d',
+      subText: '📻 收音机天线在左，右下半圆 b b b！伸出左手竖大拇指 👍',
+      hintPrompt: '像一台小收音机拉出天线在左边，圆肚子在右边下方，是听广播的 b！',
       options: [
-        { icon: 'b', text: '右下半圆 b', isCorrect: true, cheer: '眼睛真准！右下半圆 b b b，再也不会和 d 搞混啦！' },
-        { icon: 'd', text: '左下半圆 d', isCorrect: false },
-        { icon: 'p', text: '右上半圆 p', isCorrect: false }
+        { icon: 'b', text: '右下半圆 b (收音机)', isCorrect: true, cheer: '眼睛真亮！收音机天线在左，右下半圆 b b b，再也不会和 d 搞混啦！' },
+        { icon: 'd', text: '左下半圆 d (小马蹄)', isCorrect: false },
+        { icon: 'p', text: '右上半圆 p (小红旗)', isCorrect: false }
       ]
     },
     {
-      id: 'pin_4',
-      tier: 'expert',
-      stage: '高阶阶：两拼音节快速直呼',
-      title: '第4关：拼读大西瓜 (g-u-ā)',
-      questionText: '大西瓜圆又甜！声母 g 和韵母 u-ā 碰在一起怎么读？',
-      speechPrompt: '夏天吃大西瓜！声母哥，碰到哇，快速拼在一起怎么读？',
-      displayType: 'spell',
-      formula: 'g + uā ➔ 🍉 ？',
-      hintPrompt: '哥碰上哇：g-u-ā 快速连读，碰出夏天甘甜的大西瓜！',
+      id: 'pin_bd_2',
+      tier: 'advance',
+      stage: '进阶阶：b与d空间镜像辨析 (魔法道具法)',
+      title: '第7关：小马奔跑踏踏响 (字母 d)',
+      questionText: '小马飞快奔跑，马蹄印圆圆在左下，马腿立柱在右边！这是哪个字母？',
+      speechPrompt: '哒哒哒！小马蹄印在左边下方，立柱在右边。伸出右手竖起大拇指，这就是字母 d 哦！',
+      displayType: 'bd_contrast',
+      target: 'd',
+      contrastPair: 'b_vs_d',
+      subText: '🐎 小马蹄印在左，一竖在右：左下半圆 d d d！伸出右手竖大拇指 👍',
+      hintPrompt: '马蹄踏踏响，半圆在左下边，右手竖大拇指就是 d！',
       options: [
-        { icon: '🍉', text: 'guā (大西瓜)', isCorrect: true, cheer: '哇！你已经掌握三拼音节连读啦！大西瓜的瓜！' },
-        { icon: '🌸', text: 'huā (小红花)', isCorrect: false },
-        { icon: '💳', text: 'kǎ (小卡片)', isCorrect: false }
+        { icon: 'd', text: '左下半圆 d (小马蹄)', isCorrect: true, cheer: '太棒啦！左下半圆 d d d，小马奔跑哒哒哒！' },
+        { icon: 'b', text: '右下半圆 b (收音机)', isCorrect: false },
+        { icon: 'q', text: '左上半圆 q (彩气球)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'pin_pq_1',
+      tier: 'advance',
+      stage: '进阶阶：p与q上下镜像辨析',
+      title: '第8关：山顶小红旗与飘天气球 (p 与 q)',
+      questionText: '爬到山顶插上一面小红旗！旗杆一竖在左，红旗半圆在右上！哪一个是 p？',
+      speechPrompt: '看小红旗迎风飘展，右上半圆 p p p！找一找哪一个是小红旗字母 p 呢？',
+      displayType: 'bd_contrast',
+      target: 'p',
+      contrastPair: 'p_vs_q',
+      subText: '🚩 爬上山顶插红旗：右上半圆 p p p！',
+      hintPrompt: '旗杆竖在左边，红旗飘在右上边，右上半圆 p p p！',
+      options: [
+        { icon: 'p', text: '右上半圆 p (小红旗)', isCorrect: true, cheer: '真棒！右上半圆 p p p，山顶红旗飘呀飘！' },
+        { icon: 'q', text: '左上半圆 q (彩气球)', isCorrect: false },
+        { icon: 'b', text: '右下半圆 b (收音机)', isCorrect: false }
+      ]
+    },
+    // --- 高阶阶：两拼连读滑滑梯与直呼直拼 ---
+    {
+      id: 'pin_slide_1',
+      tier: 'expert',
+      stage: '高阶阶：滑滑梯两拼连读',
+      title: '第9关：小熊滑滑梯 (b - ǎ ➔ bǎ)',
+      questionText: '声母小熊 b 坐在滑梯顶，韵母小鸭 ǎ 站在滑梯底，呼哧滑下来碰在一起怎么读？',
+      speechPrompt: '前音轻短后音重，两音相碰猛一碰！声母波碰到啊，快速拼读出来怎么念？',
+      displayType: 'spell_slide',
+      shengmu: 'b',
+      yunmu: 'ǎ',
+      resultText: 'bǎ',
+      subText: '前音轻短后音重，两音相碰猛一碰：b - ǎ ➔ bǎ！',
+      hintPrompt: '波碰上啊，小兔子拔萝卜的拔！b-ǎ ➔ bǎ！',
+      options: [
+        { icon: '🥕', text: 'bǎ (拔萝卜)', isCorrect: true, cheer: '太厉害啦！声母波和韵母啊碰在一起，就是拔萝卜的 bǎ！' },
+        { icon: '🐎', text: 'mǎ (小骏马)', isCorrect: false },
+        { icon: '🦆', text: 'dá (小鸭子)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'pin_slide_2',
+      tier: 'expert',
+      stage: '高阶阶：滑滑梯两拼连读',
+      title: '第10关：大象走过来 (d - à ➔ dà)',
+      questionText: '声母得 d 碰到四声 à，快速连读直呼，变出了什么词？',
+      speechPrompt: '声母 d 碰到韵母 à，从滑滑梯上滑下来相碰，直呼出来读什么？',
+      displayType: 'spell_slide',
+      shengmu: 'd',
+      yunmu: 'à',
+      resultText: 'dà',
+      subText: 'd 和 à 猛一碰：d - à ➔ dà！',
+      hintPrompt: '得碰上啊，四声向下冲，高高大大、大象的 dà！',
+      options: [
+        { icon: '🐘', text: 'dà (高大的大)', isCorrect: true, cheer: '直呼拼读成功！d-à-dà，大象的大！拼音城堡通关啦！' },
+        { icon: '🍉', text: 'guā (大西瓜)', isCorrect: false },
+        { icon: '🏠', text: 'bà (爸爸的爸)', isCorrect: false }
       ]
     }
   ],
@@ -3380,40 +3905,242 @@ const DefaultLevels = {
     }
   ],
 
-  // ================= 5. 识字乐园 =================
+  // ================= 5. 识字乐园 (偏旁部首合体乐高与汉字起源) =================
   literacy: [
+    // --- 基础阶：五大金牌偏旁图腾与字义家族 ---
     {
-      id: 'lit_1',
+      id: 'lit_rad_water',
       tier: 'basic',
-      stage: '基础阶：自然象形探秘',
-      title: '第1关：红红的太阳',
-      questionText: '古人画了一个圆圈中间一点代表天上的太阳，这个字后来变成了什么？',
-      speechPrompt: '看一看古时候的象形画，圆圆的太阳，现在演变成了哪一个汉字？',
-      displayType: 'hint_image',
-      icon: '☀️',
-      subText: '天上的大太阳，圆圆的发光体演变为“日”！',
-      hintPrompt: '圆圆的太阳就是“日”，日光、日出都是太阳的意思哦！',
+      stage: '基础阶：五大金牌偏旁家族',
+      title: '第1关：三点水家族 (氵代表水)',
+      questionText: '天上下雨溅起三滴小水珠！这个偏旁叫“三点水 氵”，它通常和什么有关？',
+      speechPrompt: '仔细看图，三滴晶莹的小水珠变成了偏旁“三点水”。带三点水的汉字，大多和什么有关系呢？',
+      displayType: 'radical_explore',
+      radical: '氵',
+      radicalName: '三点水',
+      icon: '💧💧💧',
+      subText: '三滴水珠飞溅成“氵”：河、海、洋、湖、洗澡都带它！',
+      hintPrompt: '小水滴、大海、池塘、洗手洗澡都有水，所以三点水大多和“水与液体”有关系哦！',
       options: [
-        { icon: '☀️', text: '日 (太阳)', isCorrect: true, cheer: '聪明！日就是太阳的意思！' },
-        { icon: '🌙', text: '月 (月亮)', isCorrect: false },
-        { icon: '👀', text: '目 (眼睛)', isCorrect: false }
+        { icon: '🌊', text: '和水、液体有关 (洗澡、河流)', isCorrect: true, cheer: '回答完全正确！三点水代表水，江、河、湖、海、洗澡都有它！' },
+        { icon: '🔥', text: '和火焰、燃烧有关', isCorrect: false },
+        { icon: '🪨', text: '和坚硬石头有关', isCorrect: false }
       ]
     },
     {
-      id: 'lit_2',
-      tier: 'advance',
-      stage: '进阶阶：生活反义词与高频字',
-      title: '第2关：大象与小老鼠',
-      questionText: '大象身材特别大，老鼠小。下面哪一个是“大”字？',
-      speechPrompt: '大象身材特别大，一个人张开手脚就是大字。指出哪一个是“大”吧！',
-      displayType: 'hint_image',
-      icon: '🐘 VS 🐭',
-      subText: '一个人张开双臂和大腿，就是“大”字！',
-      hintPrompt: '伸开双臂和双腿站得大大的，就是“大”字，大象的大！',
+      id: 'lit_rad_hand',
+      tier: 'basic',
+      stage: '基础阶：五大金牌偏旁家族',
+      title: '第2关：提手旁家族 (扌代表小手)',
+      questionText: '伸出我们灵活的小手！一竖勾加一提变成了“提手旁 扌”。它通常代表什么？',
+      speechPrompt: '伸出小手拍皮球！提手旁是由小手演变来的，带提手旁的字，大多代表什么呢？',
+      displayType: 'radical_explore',
+      radical: '扌',
+      radicalName: '提手旁',
+      icon: '🖐️',
+      subText: '灵巧小手变“扌”：拍、打、提、拔、捉迷藏！',
+      hintPrompt: '拍手、打球、提东西、拔萝卜，都是小手做出的动作，所以提手旁代表手部动作！',
       options: [
-        { icon: '🐘', text: '大 (高大)', isCorrect: true, cheer: '选对啦！大象、大树都是这个“大”！' },
-        { icon: '🐭', text: '小 (小巧)', isCorrect: false },
-        { icon: '☁️', text: '天 (天空)', isCorrect: false }
+        { icon: '✋', text: '和小手、动作有关 (拍球、拔萝卜)', isCorrect: true, cheer: '太聪明啦！小手拍拍、提手旁扌，所有用手的动作都要靠它！' },
+        { icon: '🦶', text: '和小脚丫走路有关', isCorrect: false },
+        { icon: '👂', text: '和耳朵听声音有关', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_rad_tree',
+      tier: 'basic',
+      stage: '基础阶：五大金牌偏旁家族',
+      title: '第3关：木字旁家族 (木代表大树)',
+      questionText: '一棵参天大树，有树干也有两旁舒展的枝丫！“木”字旁通常代表什么？',
+      speechPrompt: '看大自然里的大树，有树根、树干和树枝，变成了木字旁。带木字旁的汉字和什么有关？',
+      displayType: 'radical_explore',
+      radical: '木',
+      radicalName: '木字旁',
+      icon: '🌳',
+      subText: '大树枝丫演变为“木”：森林、桌椅、桃树、桥梁！',
+      hintPrompt: '大树、小树、木头做的桌子椅子，都离不开木头，所以木字旁代表树木与木材！',
+      options: [
+        { icon: '🌲', text: '和树木、木头制品有关 (大树、森林)', isCorrect: true, cheer: '真棒！大树挺立就是木，森林、果树、木桥都带木字旁！' },
+        { icon: '🚗', text: '和马路上的汽车有关', isCorrect: false },
+        { icon: '☀️', text: '和天上的太阳有关', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_rad_mouth',
+      tier: 'basic',
+      stage: '基础阶：五大金牌偏旁家族',
+      title: '第4关：口字旁家族 (口代表嘴巴)',
+      questionText: '圆圆小嘴巴张开，演变成了方方正正的“口”字！口字旁通常和什么有关？',
+      speechPrompt: '小朋友用嘴巴唱歌、吃香甜的水果。口字旁和身体的哪个器官有关呢？',
+      displayType: 'radical_explore',
+      radical: '口',
+      radicalName: '口字旁',
+      icon: '👄',
+      subText: '张开嘴巴就是“口”：吃、喝、唱、叫、吹泡泡！',
+      hintPrompt: '吃苹果、喝牛奶、大声唱歌，都要用嘴巴（口），所以口字旁代表嘴巴和说话声音！',
+      options: [
+        { icon: '👄', text: '和嘴巴、吃喝声音有关 (吃、喝、唱)', isCorrect: true, cheer: '对啦！口字旁四四方方像嘴巴，吃东西、唱歌都有它！' },
+        { icon: '👀', text: '和眼睛看东西有关', isCorrect: false },
+        { icon: '👃', text: '和鼻子闻花香有关', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_rad_grass',
+      tier: 'basic',
+      stage: '基础阶：五大金牌偏旁家族',
+      title: '第5关：草字头家族 (艹代表花草嫩芽)',
+      questionText: '春天泥土里冒出两株绿绿的小嫩芽！它演变成了“草字头 艹”，代表什么？',
+      speechPrompt: '春天到，大地冒出绿油油的小草。草字头像两棵并排的小嫩芽，带草字头的汉字和什么有关？',
+      displayType: 'radical_explore',
+      radical: '艹',
+      radicalName: '草字头',
+      icon: '🌱🌱',
+      subText: '泥土嫩草变“艹”：鲜花、绿草、茶叶、青菜！',
+      hintPrompt: '小草、小花、胡萝卜的叶子、餐桌上的青菜，都是植物花草，所以带草字头！',
+      options: [
+        { icon: '🌸', text: '和花草、植物有关 (鲜花、青草)', isCorrect: true, cheer: '太棒啦！草字头像两根绿嫩芽，鲜花的花、青草的草都戴着它！' },
+        { icon: '✈️', text: '和天上的飞机有关', isCorrect: false },
+        { icon: '⚡', text: '和下雨打雷有关', isCorrect: false }
+      ]
+    },
+    // --- 进阶阶：汉字乐高积木合体 (拼装大变身) ---
+    {
+      id: 'lit_lego_1',
+      tier: 'advance',
+      stage: '进阶阶：汉字乐高积木合体',
+      title: '第6关：水滴积木合体 (氵+ 也)',
+      questionText: '把三点水 氵 水滴积木，和“也”字积木咔嗒拼在一起，会变出哪一个神奇汉字？',
+      speechPrompt: '汉字就像积木一样神奇！左边拼上三点水，右边拼上一个也，合体变出了水池的什么字？',
+      displayType: 'radical_combine',
+      leftPart: '氵',
+      leftLabel: '三点水 (水滴积木)',
+      rightPart: '也',
+      rightLabel: '也 (也字积木)',
+      resultChar: '池',
+      subText: '氵水滴积木 ➕ 也字积木 ➔ 水池的【池】',
+      hintPrompt: '三点水氵代表水，水池里装满了水，氵加上也，就是池塘水池的“池”！',
+      options: [
+        { icon: '池', text: '池 (池塘、水池)', isCorrect: true, cheer: '拼装成功！三点水加上也，变成了清清池塘的池！' },
+        { icon: '地', text: '地 (大地的地)', isCorrect: false },
+        { icon: '他', text: '他 (男他的他)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_lego_2',
+      tier: 'advance',
+      stage: '进阶阶：汉字乐高积木合体',
+      title: '第7关：小手积木合体 (扌+ 丁)',
+      questionText: '用提手旁 扌 小手积木，加上“丁”字积木拼在一起，变成了拍打的什么字？',
+      speechPrompt: '小手积木出动！扌加上一个丁，咔嗒拼装合体，变出了打球、拍打的哪个字？',
+      displayType: 'radical_combine',
+      leftPart: '扌',
+      leftLabel: '提手旁 (小手积木)',
+      rightPart: '丁',
+      rightLabel: '丁 (丁字积木)',
+      resultChar: '打',
+      subText: '扌小手积木 ➕ 丁字积木 ➔ 拍打的【打】',
+      hintPrompt: '左边有一只小手扌，右边是小丁丁，合在一起就是打球、拍打的“打”！',
+      options: [
+        { icon: '打', text: '打 (打球、拍打)', isCorrect: true, cheer: '合体成功！提手旁扌加上丁，就是打羽毛球的打！' },
+        { icon: '灯', text: '灯 (台灯)', isCorrect: false },
+        { icon: '叮', text: '叮 (叮咚)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_lego_3',
+      tier: 'advance',
+      stage: '进阶阶：汉字乐高积木合体',
+      title: '第8关：双胞胎大树合体 (木 + 木)',
+      questionText: '一棵大树是“木”，两棵大树手拉手并排站在一起（木 + 木），变成了什么字？',
+      speechPrompt: '独木不成林！一棵大树旁边又种了一棵大树，两棵木拼装在一起，变成了什么字？',
+      displayType: 'radical_combine',
+      leftPart: '木',
+      leftLabel: '木 (左树木)',
+      rightPart: '木',
+      rightLabel: '木 (右树木)',
+      resultChar: '林',
+      subText: '木字积木 ➕ 木字积木 ➔ 树林的【林】',
+      hintPrompt: '两棵大树手拉手，就是一大片小树林，双木并排就是树林的“林”！',
+      options: [
+        { icon: '林', text: '林 (树林、双木林)', isCorrect: true, cheer: '太棒啦！两棵大树并排站，木加木变成树林的林！' },
+        { icon: '森', text: '森 (三棵树的森林)', isCorrect: false },
+        { icon: '休', text: '休 (人靠着树休息)', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_lego_4',
+      tier: 'advance',
+      stage: '进阶阶：汉字乐高积木合体',
+      title: '第9关：绿嫩草帽子合体 (艹 + 化)',
+      questionText: '在“化”字的头顶上戴上一顶草字头 艹 绿色小帽子，拼成了盛开的什么字？',
+      speechPrompt: '看化字头上戴小花帽！草字头在上面，化字在下面，拼装变出了什么字？',
+      displayType: 'radical_combine',
+      leftPart: '艹',
+      leftLabel: '草字头 (嫩草小帽)',
+      rightPart: '化',
+      rightLabel: '化 (化字积木)',
+      resultChar: '花',
+      subText: '艹嫩草积木 ➕ 化字积木 ➔ 鲜花的【花】',
+      hintPrompt: '上面是两根小草艹，下面是化，合体就是公园里美丽盛开的花朵的花！',
+      options: [
+        { icon: '花', text: '花 (鲜花、花朵)', isCorrect: true, cheer: '拼装成功！草字头加上化，变成了香香美丽的花朵！' },
+        { icon: '草', text: '草 (绿草)', isCorrect: false },
+        { icon: '华', text: '华 (中华)', isCorrect: false }
+      ]
+    },
+    // --- 高阶阶：生活词汇大侦探 (偏旁字义溯源) ---
+    {
+      id: 'lit_det_1',
+      tier: 'expert',
+      stage: '高阶阶：生活词汇大侦探',
+      title: '第10关：夏天去【游泳】藏着什么偏旁？',
+      questionText: '夏天小朋友去水上乐园【游泳】。仔细看“游”和“泳”，它们的左边都藏着什么偏旁？',
+      speechPrompt: '火眼金睛大侦探！游泳两个字都是在清凉的水里进行，仔细看它们左边藏着哪个偏旁？',
+      displayType: 'detective',
+      wordText: '游泳',
+      highlightRadical: '氵',
+      subText: '🏊‍♂️ 观察词汇：【游】和【泳】的左半边，都藏着什么小图腾？',
+      hintPrompt: '游泳要跳进清清凉凉的水里，看它们左边都有三滴小水珠，是三点水 氵 哦！',
+      options: [
+        { icon: '氵', text: '三点水 氵 (都在水里游)', isCorrect: true, cheer: '大侦探破案啦！游泳都在水里，所以游和泳都带着三点水 氵！' },
+        { icon: '扌', text: '提手旁 扌', isCorrect: false },
+        { icon: '口', text: '口字旁 口', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_det_2',
+      tier: 'expert',
+      stage: '高阶阶：生活词汇大侦探',
+      title: '第11关：小兔用力【拔】萝卜藏着什么偏旁？',
+      questionText: '小兔子用两只小手紧紧抓住大萝卜，用力【拔】！“拔”字左边藏着哪个偏旁？',
+      speechPrompt: '拔萝卜，拔萝卜，哎哟哎哟拔不动！拔萝卜要用小手用力，拔字藏着哪个偏旁？',
+      displayType: 'detective',
+      wordText: '拔萝卜',
+      highlightRadical: '扌',
+      subText: '🐰🥕 观察词汇：【拔】萝卜要用小手用力气，左边是什么偏旁？',
+      hintPrompt: '拔胡萝卜必须用两只小手握紧使劲提，所以拔字有提手旁 扌！',
+      options: [
+        { icon: '扌', text: '提手旁 扌 (小手用力拔)', isCorrect: true, cheer: '太棒了！用小手拔萝卜、拍皮球，都有提手旁 扌！' },
+        { icon: '氵', text: '三点水 氵', isCorrect: false },
+        { icon: '木', text: '木字旁 木', isCorrect: false }
+      ]
+    },
+    {
+      id: 'lit_det_3',
+      tier: 'expert',
+      stage: '高阶阶：生活词汇大侦探',
+      title: '第12关：走进大森林的参天大【树】',
+      questionText: '森林里有很多高耸入云的参天大【树】！“树”字的左半边藏着什么偏旁？',
+      speechPrompt: '绿树成荫，大树上有茂密的树叶。观察“树”字的最左边，藏着哪个偏旁？',
+      displayType: 'detective',
+      wordText: '大树',
+      highlightRadical: '木',
+      subText: '🌳🌲 观察词汇：【树】木有树干和枝叶，左边是什么偏旁？',
+      hintPrompt: '大树本身就是木头植物，看树字左边正好是一个木字，是木字旁！',
+      options: [
+        { icon: '木', text: '木字旁 木 (大树木材)', isCorrect: true, cheer: '大功告成！大树、杨树、桃树都是木字旁，识字乐园全部大通关！' },
+        { icon: '艹', text: '草字头 艹', isCorrect: false },
+        { icon: '口', text: '口字旁 口', isCorrect: false }
       ]
     }
   ],
@@ -4842,7 +5569,203 @@ class App {
         </div>
       `;
     }
-    // 11. 拼音情境 / 象形字 / 空间方位 (hint_image 及杜绝孤独黄星的安全备用)
+    // 11. 声调小汽车走坡道 (5岁拼音声调具象认知)
+    else if (task.displayType === 'tone_car') {
+      const tone = task.tone || 1;
+      let pathD = '';
+      let carTransform = '';
+      let trackHint = '';
+
+      if (tone === 1) {
+        pathD = 'M 30 55 L 350 55';
+        carTransform = 'transform="translate(160, 26)"';
+        trackHint = '一声平平大马路 🚗 平平稳稳！';
+      } else if (tone === 2) {
+        pathD = 'M 30 80 L 350 25';
+        carTransform = 'transform="translate(160, 22) rotate(-10)"';
+        trackHint = '二声加足马力爬陡坡 🚗 突突突向上！';
+      } else if (tone === 3) {
+        pathD = 'M 30 35 Q 190 88 350 35';
+        carTransform = 'transform="translate(165, 42)"';
+        trackHint = '三声先下坡又上坡 🚗 拐个小山谷！';
+      } else if (tone === 4) {
+        pathD = 'M 30 25 L 350 80';
+        carTransform = 'transform="translate(160, 22) rotate(10)"';
+        trackHint = '四声呼啸冲下山坡 🚗 速度飞快！';
+      }
+
+      this.visualContainer.innerHTML = `
+        <div class="tone-car-stage">
+          <div class="tone-hero-syllable">
+            <span class="tone-syllable-pinyin">${task.syllable || 'mā'}</span>
+            <span class="tone-mark-tag">声调符号：${task.toneMark || 'ˉ'}</span>
+          </div>
+
+          <div class="tone-car-track-box">
+            <svg viewBox="0 0 380 90" class="tone-car-svg">
+              <!-- 跑道路基 -->
+              <path d="${pathD}" stroke="#93c5fd" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.4"/>
+              <!-- 主跑道 -->
+              <path d="${pathD}" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-dasharray="10 6" fill="none"/>
+              <!-- 跑道起终点小红旗 -->
+              <text x="14" y="58" font-size="18">🏁</text>
+              <text x="352" y="58" font-size="18">🚩</text>
+              <!-- 动态声调小汽车 -->
+              <g id="interactiveToneCar" ${carTransform} style="cursor:pointer;">
+                <text x="0" y="24" font-size="36" filter="drop-shadow(0 3px 6px rgba(0,0,0,0.2))">🚗</text>
+              </g>
+            </svg>
+          </div>
+
+          <div style="font-size:13px; font-weight:800; color:#1d4ed8; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #bfdbfe;">
+            ${trackHint}
+          </div>
+          ${task.subText ? `<div style="font-size:12px; font-weight:800; color:#b45309; margin-top:6px;">${task.subText}</div>` : ''}
+        </div>
+      `;
+
+      // 绑定轻触小汽车互动音效
+      const carEl = this.visualContainer.querySelector('#interactiveToneCar');
+      if (carEl) {
+        carEl.addEventListener('click', () => {
+          window.soundEngine.playClick();
+          window.soundEngine.speak(task.syllable || '嘀嘀');
+        });
+      }
+    }
+    // 12. 汉字乐高积木合体 (5岁偏旁部首合体拼装)
+    else if (task.displayType === 'radical_combine') {
+      this.visualContainer.innerHTML = `
+        <div class="radical-lego-stage">
+          <div style="font-size:14px; font-weight:900; color:#b45309; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #fde047; margin-bottom:4px;">
+            🧱 汉字乐高拼装台：把积木合体变出新字！
+          </div>
+
+          <div class="lego-blocks-row">
+            <!-- 左侧偏旁积木 -->
+            <div class="lego-brick lego-left" title="点击听偏旁">
+              <span class="brick-char">${task.leftPart}</span>
+              <span class="brick-label">${task.leftLabel || '偏旁积木'}</span>
+            </div>
+
+            <span class="lego-connector">➕</span>
+
+            <!-- 右侧字根积木 -->
+            <div class="lego-brick lego-right" title="点击听字根">
+              <span class="brick-char">${task.rightPart}</span>
+              <span class="brick-label">${task.rightLabel || '字根积木'}</span>
+            </div>
+
+            <span class="lego-connector">➔</span>
+
+            <!-- 合体插槽卡槽 -->
+            <div class="lego-brick lego-result-slot">
+              <span class="brick-char" style="font-size:30px;">❓</span>
+              <span class="brick-label" style="color:#9333ea;">合体新字？</span>
+            </div>
+          </div>
+
+          ${task.subText ? `<div style="font-size:13px; font-weight:800; color:#92400e; background:#fffbeb; padding:4px 14px; border-radius:12px; border:1px solid #fde68a;">${task.subText}</div>` : ''}
+        </div>
+      `;
+
+      // 绑定积木点击音效
+      this.visualContainer.querySelectorAll('.lego-brick').forEach(b => {
+        b.addEventListener('click', () => {
+          window.soundEngine.playClick();
+        });
+      });
+    }
+    // 13. b/d/p/q 魔法道具空间镜像对比 (防混淆)
+    else if (task.displayType === 'bd_contrast') {
+      const isBD = task.contrastPair === 'b_vs_d';
+      this.visualContainer.innerHTML = `
+        <div class="bd-contrast-stage">
+          <div style="font-size:13px; font-weight:900; color:#334155; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #cbd5e1; margin-bottom:6px;">
+            🔍 魔法道具辨析镜：看清立柱与圆圈方向！
+          </div>
+
+          <div class="bd-cards-row">
+            <!-- 左卡片 -->
+            <div class="bd-contrast-card bd-card-b">
+              <div class="bd-tool-icon">${isBD ? '📻' : '🚩'}</div>
+              <div class="bd-char-display">${isBD ? 'b' : 'p'}</div>
+              <div class="bd-chant-tip">${isBD ? '右下半圆 b b b<br>👍 左手竖大拇指' : '右上半圆 p p p<br>🚩 山顶小红旗'}</div>
+            </div>
+
+            <div class="bd-versus-badge">VS</div>
+
+            <!-- 右卡片 -->
+            <div class="bd-contrast-card bd-card-d">
+              <div class="bd-tool-icon">${isBD ? '🐎' : '🎈'}</div>
+              <div class="bd-char-display">${isBD ? 'd' : 'q'}</div>
+              <div class="bd-chant-tip">${isBD ? '左下半圆 d d d<br>👍 右手竖大拇指' : '左上半圆 q q q<br>🎈 气球飘上天'}</div>
+            </div>
+          </div>
+
+          ${task.subText ? `<div style="font-size:13px; font-weight:800; color:#1e293b; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #e2e8f0; margin-top:4px;">${task.subText}</div>` : ''}
+        </div>
+      `;
+    }
+    // 14. 两拼音节滑滑梯连读
+    else if (task.displayType === 'spell_slide') {
+      this.visualContainer.innerHTML = `
+        <div class="slide-spell-stage">
+          <div style="font-size:14px; font-weight:900; color:#7c3aed; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #ddd6fe; margin-bottom:6px;">
+            🛝 拼音滑滑梯：两音相碰猛一碰！
+          </div>
+
+          <div class="slide-track-box">
+            <div class="slide-char-ball slide-shengmu" title="声母">${task.shengmu}</div>
+            <span class="slide-arrow-symbol">➕</span>
+            <div class="slide-char-ball slide-yunmu" title="韵母">${task.yunmu}</div>
+            <span class="slide-arrow-symbol">➔</span>
+            <div class="slide-char-ball slide-result-ball" title="合体直呼">❓</div>
+          </div>
+
+          ${task.subText ? `<div style="font-size:13px; font-weight:800; color:#6d28d9; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #ede9fe; margin-top:8px;">${task.subText}</div>` : ''}
+        </div>
+      `;
+    }
+    // 15. 偏旁探秘大图腾 (象形源流)
+    else if (task.displayType === 'radical_explore') {
+      this.visualContainer.innerHTML = `
+        <div class="radical-explore-stage">
+          <div style="font-size:14px; font-weight:900; color:#0f766e; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #99f6e4; margin-bottom:6px;">
+            🌟 偏旁家族自然图腾探秘
+          </div>
+
+          <div class="explore-totem-wrap">
+            <span class="explore-totem-icon">${task.icon || '💧'}</span>
+            <span style="font-size:24px; color:#14b8a6; font-weight:900;">➔ 演变</span>
+            <span class="explore-radical-badge">${task.radical}</span>
+          </div>
+
+          <div style="font-size:15px; font-weight:900; color:#115e59; background:#ffffff; padding:4px 16px; border-radius:12px; border:1px solid #99f6e4; margin-top:6px;">
+            部首名称：【${task.radicalName}】
+          </div>
+          ${task.subText ? `<div style="font-size:13px; font-weight:800; color:#0d9488; margin-top:6px;">${task.subText}</div>` : ''}
+        </div>
+      `;
+    }
+    // 16. 生活词汇大侦探
+    else if (task.displayType === 'detective') {
+      this.visualContainer.innerHTML = `
+        <div class="detective-stage">
+          <div style="font-size:14px; font-weight:900; color:#e11d48; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #fecdd3; margin-bottom:6px;">
+            🕵️ 生活词汇大侦探：找出藏在里面的偏旁！
+          </div>
+
+          <div class="detective-word-card">
+            <span class="detective-glass">🔍</span>
+            <span class="detective-text">${task.wordText}</span>
+          </div>
+
+          ${task.subText ? `<div style="font-size:13px; font-weight:800; color:#9f1239; background:#ffffff; padding:4px 14px; border-radius:12px; border:1px solid #ffe4e6; margin-top:6px;">${task.subText}</div>` : ''}
+        </div>
+      `;
+    }
+    // 17. 拼音情境 / 象形字 / 空间方位 (hint_image 及杜绝孤独黄星的安全备用)
     else {
       let icon = task.icon;
       if (!icon) {

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>启蒙星萌岛 - 家长A4实体练习纸与教案打印中心</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 15mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      padding-bottom: 50px;
+    }
+
+    /* 顶部控制栏 (屏幕展示，打印时隐藏) */
+    .print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .btn-print {
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-print:hover {
+      background: #15803d;
+      transform: scale(1.05);
+    }
+
+    .sheet-nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sheet-btn {
+      padding: 8px 14px;
+      background: #e2e8f0;
+      border: none;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .sheet-btn.active {
+      background: #4f46e5;
+      color: #ffffff;
+    }
+
+    /* A4 纸张模拟容器 */
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      margin: 0 auto 30px;
+      padding: 18mm 20mm;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      position: relative;
+      display: none;
+    }
+
+    .a4-page.active-page {
+      display: block;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .page-meta {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* 拼音四线三格排版 */
+    .pinyin-grid-row {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .pinyin-label {
+      font-size: 26px;
+      font-weight: 800;
+      width: 50px;
+      text-align: center;
+      color: #4f46e5;
+    }
+
+    .four-line-box {
+      flex: 1;
+      height: 48px;
+      border-top: 1px solid #94a3b8;
+      border-bottom: 1px solid #94a3b8;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .four-line-box::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 16px;
+      height: 1px;
+      background: #cbd5e1;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+
+    .four-line-box::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 32px;
+      height: 1px;
+      background: #cbd5e1;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+
+    .pinyin-trace-char {
+      font-size: 32px;
+      font-family: Arial, "PingFang SC", sans-serif;
+      margin-left: 20px;
+      color: #cbd5e1; /* 浅灰色供描红 */
+      letter-spacing: 30px;
+      position: relative;
+      top: 4px;
+    }
+
+    /* 数字数物配对网格 */
+    .math-match-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .math-card {
+      border: 2px dashed #94a3b8;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+    }
+
+    .math-items-row {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .math-write-box {
+      align-self: flex-end;
+      width: 50px;
+      height: 50px;
+      border: 2px solid #0f172a;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #94a3b8;
+    }
+
+    /* 5的分解剪贴卡片区 */
+    .cut-guide {
+      border: 2px dashed #dc2626;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .cut-badge {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      background: #ffffff;
+      padding: 2px 10px;
+      color: #dc2626;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .cut-pieces-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .cut-piece {
+      border: 1px dashed #64748b;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 22px;
+      font-weight: 700;
+      background: #f8fafc;
+    }
+
+    /* 打印专用配置：彻底隐藏控制条，精准单页分页 */
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .a4-page {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: auto;
+        page-break-after: always;
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 网页预览顶栏 -->
+  <div class="print-bar">
+    <div style="font-weight:800; font-size:16px; color:#4f46e5;">
+      启蒙星萌岛 · A4 纸面练习册
+    </div>
+    <div class="sheet-nav">
+      <button class="sheet-btn active" onclick="switchSheet('sheet_math')">🔢 数学点数控笔</button>
+      <button class="sheet-btn" onclick="switchSheet('sheet_pinyin')">🔤 拼音四线三格</button>
+      <button class="sheet-btn" onclick="switchSheet('sheet_cut')">✂️ 5的分解剪贴纸</button>
+      <button class="sheet-btn" onclick="switchSheet('sheet_lego_radicals')">🧱 汉字乐高偏旁剪贴卡</button>
+      <button class="sheet-btn" onclick="switchSheet('sheet_tone_car_bd')">🚗 声调小汽车与b/d迷宫</button>
+    </div>
+    <button class="btn-print" onclick="window.print()">
+      🖨️ 打印本练习册 (A4)
+    </button>
+  </div>
+
+  <!-- ================= 表格 1：数学数感点数与控笔描红 (A4 页面 1) ================= -->
+  <div id="sheet_math" class="a4-page active-page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">🔢 幼儿数感启蒙 · 点数对应与控笔</div>
+        <div style="font-size:13px; color:#64748b; margin-top:4px;">适用：5岁中班 / 幼小衔接 · 第1阶</div>
+      </div>
+      <div class="page-meta">
+        小朋友姓名：__________ 日期：__________
+      </div>
+    </div>
+
+    <p style="font-size:14px; font-weight:700; margin-bottom:12px; color:#334155;">
+      任务说明：请小朋友仔细数一数方框里有几个小动物或水果，并在右下角方框中写下正确的数字：
+    </p>
+
+    <div class="math-match-grid">
+      <div class="math-card">
+        <div class="math-items-row">🦆 🦆 🦆</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:13px; color:#64748b;">数一数可爱的小鸭子：</span>
+          <div class="math-write-box">3</div>
+        </div>
+      </div>
+
+      <div class="math-card">
+        <div class="math-items-row">🍓 🍓 🍓 🍓 🍓</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:13px; color:#64748b;">数一数红彤彤的草莓：</span>
+          <div class="math-write-box"></div>
+        </div>
+      </div>
+
+      <div class="math-card">
+        <div class="math-items-row">🥕 🥕 🥕 🥕</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:13px; color:#64748b;">数一数小兔子的胡萝卜：</span>
+          <div class="math-write-box"></div>
+        </div>
+      </div>
+
+      <div class="math-card">
+        <div class="math-items-row">🍎 🍎</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:13px; color:#64748b;">数一数大苹果：</span>
+          <div class="math-write-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:25px; border-top:2px dashed #cbd5e1; padding-top:16px;">
+      <div style="font-weight:800; font-size:15px; margin-bottom:10px;">✏️ 控笔虚线数字描红：</div>
+      <div style="font-size:32px; letter-spacing:25px; color:#cbd5e1; font-family:Arial; line-height:1.6;">
+        1 1 1 1 1<br>
+        2 2 2 2 2<br>
+        3 3 3 3 3<br>
+        4 4 4 4 4<br>
+        5 5 5 5 5
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 表格 2：汉语拼音单韵母四线三格 (A4 页面 2) ================= -->
+  <div id="sheet_pinyin" class="a4-page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">🔤 拼音城堡 · 单韵母四线三格规范描红</div>
+        <div style="font-size:13px; color:#64748b; margin-top:4px;">口诀：张大嘴巴 a a a · 圆圆嘴巴 o o o · 扁扁嘴巴 e e e</div>
+      </div>
+      <div class="page-meta">
+        小朋友姓名：__________ 评星：⭐⭐⭐
+      </div>
+    </div>
+
+    <!-- 字母 a -->
+    <div class="pinyin-grid-row">
+      <div class="pinyin-label">a</div>
+      <div class="four-line-box">
+        <div class="pinyin-trace-char">a a a a a a</div>
+      </div>
+    </div>
+
+    <!-- 字母 o -->
+    <div class="pinyin-grid-row">
+      <div class="pinyin-label">o</div>
+      <div class="four-line-box">
+        <div class="pinyin-trace-char">o o o o o o</div>
+      </div>
+    </div>
+
+    <!-- 字母 e -->
+    <div class="pinyin-grid-row">
+      <div class="pinyin-label">e</div>
+      <div class="four-line-box">
+        <div class="pinyin-trace-char">e e e e e e</div>
+      </div>
+    </div>
+
+    <!-- 字母 i -->
+    <div class="pinyin-grid-row">
+      <div class="pinyin-label">i</div>
+      <div class="four-line-box">
+        <div class="pinyin-trace-char">i i i i i i</div>
+      </div>
+    </div>
+
+    <!-- 字母 u -->
+    <div class="pinyin-grid-row">
+      <div class="pinyin-label">u</div>
+      <div class="four-line-box">
+        <div class="pinyin-trace-char">u u u u u u</div>
+      </div>
+    </div>
+
+    <!-- 字母 ü -->
+    <div class="pinyin-grid-row">
+      <div class="pinyin-label">ü</div>
+      <div class="four-line-box">
+        <div class="pinyin-trace-char">ü ü ü ü ü ü</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:12px;">
+      <strong style="color:#0f172a; font-size:14px;">👨‍👩‍👧 亲子伴读引导提示：</strong>
+      <p style="font-size:13px; color:#475569; margin-top:4px;">
+        1. 字母 a 占中格，先写左半圆，再写坚右弯。<br>
+        2. 拼音字母要求圆润饱满，中格要顶满线，不向上也不向下越格。
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= 表格 3：5的分与合动手剪贴纸 (A4 页面 3) ================= -->
+  <div id="sheet_cut" class="a4-page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">✂️ 亲子动手卡 · 5的分解与加法启蒙</div>
+        <div style="font-size:13px; color:#64748b; margin-top:4px;">通过剪刀与胶水，直观感受“数的组成”</div>
+      </div>
+      <div class="page-meta">
+        小朋友姓名：__________
+      </div>
+    </div>
+
+    <p style="font-size:14px; font-weight:700; margin-bottom:12px; color:#334155;">
+      任务 1：请家长协助小朋友沿下方红色虚线剪下圆点卡片，分别贴在左边盘子和右边盘子里，凑成 5 个：
+    </p>
+
+    <!-- 粘贴工作台 -->
+    <div style="border:2px solid #0f172a; border-radius:12px; padding:18px; text-align:center;">
+      <div style="font-size:18px; font-weight:800; color:#b45309; margin-bottom:12px;">
+        🍎 总数：5个气球
+      </div>
+      <div style="display:flex; justify-content:space-around; align-items:center;">
+        <div style="border:2px dashed #4f46e5; border-radius:12px; width:160px; height:100px; display:flex; align-items:center; justify-content:center; color:#6366f1; font-weight:700;">
+          【左边盘子 贴这里】
+        </div>
+        <div style="font-size:30px; font-weight:900;">➕</div>
+        <div style="border:2px dashed #4f46e5; border-radius:12px; width:160px; height:100px; display:flex; align-items:center; justify-content:center; color:#6366f1; font-weight:700;">
+          【右边盘子 贴这里】
+        </div>
+      </div>
+    </div>
+
+    <!-- 剪切卡片区 -->
+    <div class="cut-guide">
+      <div class="cut-badge">✂️ 沿虚线剪下以下卡片</div>
+      <div class="cut-pieces-grid">
+        <div class="cut-piece">🎈 1个气球</div>
+        <div class="cut-piece">🎈🎈 2个气球</div>
+        <div class="cut-piece">🎈🎈🎈 3个气球</div>
+        <div class="cut-piece">🎈🎈🎈🎈 4个气球</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 表格 4：汉字乐高偏旁部首剪贴卡 (A4 页面 4) ================= -->
+  <div id="sheet_lego_radicals" class="a4-page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">🧱 汉字乐高工坊 · 偏旁部首合体拼装卡</div>
+        <div style="font-size:13px; color:#64748b; margin-top:4px;">
+          口诀：三点水滴变池塘 · 灵巧小手提手旁 · 大树双木变成林 · 嫩草小帽开鲜花
+        </div>
+      </div>
+      <div class="page-meta">
+        小朋友姓名：__________ 评价：⭐⭐⭐
+      </div>
+    </div>
+
+    <p style="font-size:14px; font-weight:700; margin-bottom:12px; color:#334155;">
+      任务：请家长协助小朋友沿下方虚线剪下偏旁积木，粘贴到对应卡槽中，拼出合体新汉字：
+    </p>
+
+    <!-- 4大拼装卡槽 -->
+    <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:20px;">
+      <!-- 组合 1: 氵 + 也 ➔ 池 -->
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#f0fdf4; border:2px solid #86efac; border-radius:14px; padding:12px 18px;">
+        <div style="border:2px dashed #0284c7; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; align-items:center; justify-content:center; color:#0284c7; font-weight:800; font-size:13px; text-align:center;">
+          【氵贴这里】
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➕</span>
+        <div style="border:2px solid #fed7aa; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:26px; font-weight:900; color:#ea580c;">也</span>
+          <span style="font-size:11px; color:#9a3412;">也字积木</span>
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➔</span>
+        <div style="border:2px solid #86efac; background:#ffffff; border-radius:10px; width:120px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:28px; font-weight:900; color:#15803d;">池</span>
+          <span style="font-size:11px; color:#166534;">水池、池塘</span>
+        </div>
+      </div>
+
+      <!-- 组合 2: 扌 + 丁 ➔ 打 -->
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#fff7ed; border:2px solid #fdba74; border-radius:14px; padding:12px 18px;">
+        <div style="border:2px dashed #ea580c; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; align-items:center; justify-content:center; color:#ea580c; font-weight:800; font-size:13px; text-align:center;">
+          【扌贴这里】
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➕</span>
+        <div style="border:2px solid #fde047; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:26px; font-weight:900; color:#ca8a04;">丁</span>
+          <span style="font-size:11px; color:#854d0e;">丁字积木</span>
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➔</span>
+        <div style="border:2px solid #fdba74; background:#ffffff; border-radius:10px; width:120px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:28px; font-weight:900; color:#c2410c;">打</span>
+          <span style="font-size:11px; color:#9a3412;">拍打、打球</span>
+        </div>
+      </div>
+
+      <!-- 组合 3: 木 + 木 ➔ 林 -->
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#f0fdf4; border:2px solid #a7f3d0; border-radius:14px; padding:12px 18px;">
+        <div style="border:2px dashed #059669; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; align-items:center; justify-content:center; color:#059669; font-weight:800; font-size:13px; text-align:center;">
+          【木贴这里】
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➕</span>
+        <div style="border:2px solid #a7f3d0; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:26px; font-weight:900; color:#059669;">木</span>
+          <span style="font-size:11px; color:#065f46;">大树积木</span>
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➔</span>
+        <div style="border:2px solid #a7f3d0; background:#ffffff; border-radius:10px; width:120px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:28px; font-weight:900; color:#047857;">林</span>
+          <span style="font-size:11px; color:#065f46;">树林、双木林</span>
+        </div>
+      </div>
+
+      <!-- 组合 4: 艹 + 化 ➔ 花 -->
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#fdf4ff; border:2px solid #f5d0fe; border-radius:14px; padding:12px 18px;">
+        <div style="border:2px dashed #c026d3; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; align-items:center; justify-content:center; color:#c026d3; font-weight:800; font-size:13px; text-align:center;">
+          【艹贴这里】
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➕</span>
+        <div style="border:2px solid #f5d0fe; background:#ffffff; border-radius:10px; width:90px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:26px; font-weight:900; color:#a21caf;">化</span>
+          <span style="font-size:11px; color:#701a75;">变化积木</span>
+        </div>
+        <span style="font-size:24px; font-weight:900; color:#ca8a04;">➔</span>
+        <div style="border:2px solid #f5d0fe; background:#ffffff; border-radius:10px; width:120px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:28px; font-weight:900; color:#86198f;">花</span>
+          <span style="font-size:11px; color:#701a75;">花朵、鲜花</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 剪切卡片区 -->
+    <div class="cut-guide" style="margin-top:10px;">
+      <div class="cut-badge">✂️ 沿虚线剪下以下偏旁积木</div>
+      <div class="cut-pieces-grid" style="grid-template-columns:repeat(4, 1fr); gap:12px;">
+        <div class="cut-piece" style="padding:10px 4px; font-size:28px; font-weight:900; color:#0284c7;">
+          氵<br><span style="font-size:12px; font-weight:700;">三点水</span>
+        </div>
+        <div class="cut-piece" style="padding:10px 4px; font-size:28px; font-weight:900; color:#ea580c;">
+          扌<br><span style="font-size:12px; font-weight:700;">提手旁</span>
+        </div>
+        <div class="cut-piece" style="padding:10px 4px; font-size:28px; font-weight:900; color:#059669;">
+          木<br><span style="font-size:12px; font-weight:700;">木字旁</span>
+        </div>
+        <div class="cut-piece" style="padding:10px 4px; font-size:28px; font-weight:900; color:#c026d3;">
+          艹<br><span style="font-size:12px; font-weight:700;">草字头</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 表格 5：声调小汽车跑道与 b/d 魔法涂色迷宫 (A4 页面 5) ================= -->
+  <div id="sheet_tone_car_bd" class="a4-page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">🚗 声调小汽车坡道与 b/d 魔法涂色迷宫</div>
+        <div style="font-size:13px; color:#64748b; margin-top:4px;">
+          具象口诀：一声平路 · 二声爬坡 · 三声拐弯 · 四声冲坡 ｜ 右下半圆 b · 左下半圆 d
+        </div>
+      </div>
+      <div class="page-meta">
+        小朋友姓名：__________ 评价：⭐⭐⭐
+      </div>
+    </div>
+
+    <!-- 任务 1：声调小汽车跑道描红控笔 -->
+    <div style="margin-bottom:18px;">
+      <p style="font-size:14px; font-weight:800; color:#1e293b; margin-bottom:8px;">
+        🎯 任务 1：用彩笔开着小汽车，沿着虚线跑道画一画，并大声念出声调：
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="border:2px dashed #93c5fd; border-radius:12px; padding:8px 12px; background:#eff6ff;">
+          <div style="font-size:13px; font-weight:800; color:#1d4ed8;">🚗 一声平平走平路 (ˉ)</div>
+          <div style="font-size:22px; font-family:monospace; margin:8px 0; color:#2563eb; letter-spacing:4px;">
+            mā  ─── 🚗 ───
+          </div>
+          <div style="font-size:11px; color:#64748b;">描红指引：食指平平从左往右画</div>
+        </div>
+
+        <div style="border:2px dashed #86efac; border-radius:12px; padding:8px 12px; background:#f0fdf4;">
+          <div style="font-size:13px; font-weight:800; color:#15803d;">🚗 二声加力爬陡坡 (ˊ)</div>
+          <div style="font-size:22px; font-family:monospace; margin:8px 0; color:#16a34a; letter-spacing:4px;">
+            yá   ／ 🚗 ／
+          </div>
+          <div style="font-size:11px; color:#64748b;">描红指引：从左下往右上爬坡</div>
+        </div>
+
+        <div style="border:2px dashed #fde047; border-radius:12px; padding:8px 12px; background:#fefce8;">
+          <div style="font-size:13px; font-weight:800; color:#a16207;">🚗 三声下坡又上坡 (ˇ)</div>
+          <div style="font-size:22px; font-family:monospace; margin:8px 0; color:#ca8a04; letter-spacing:4px;">
+            mǎ  ＼＿🚗＿／
+          </div>
+          <div style="font-size:11px; color:#64748b;">描红指引：先下滑再扬起来拐个弯</div>
+        </div>
+
+        <div style="border:2px dashed #fca5a5; border-radius:12px; padding:8px 12px; background:#fef2f2;">
+          <div style="font-size:13px; font-weight:800; color:#b91c1c;">🚗 四声俯冲下山坡 (ˋ)</div>
+          <div style="font-size:22px; font-family:monospace; margin:8px 0; color:#dc2626; letter-spacing:4px;">
+            dà   ＼ 🚗 ＼
+          </div>
+          <div style="font-size:11px; color:#64748b;">描红指引：从高处用力往下滑</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 任务 2：b 与 d 魔法道具涂色走迷宫 -->
+    <div style="border-top:2px dashed #cbd5e1; padding-top:14px;">
+      <p style="font-size:14px; font-weight:800; color:#1e293b; margin-bottom:6px;">
+        🎯 任务 2：火眼金睛涂色迷宫（分清收音机 b 与小马蹄 d）
+      </p>
+      <div style="display:flex; gap:12px; margin-bottom:10px;">
+        <span style="font-size:12px; font-weight:800; background:#dbeafe; color:#1e40af; padding:4px 10px; border-radius:8px;">
+          📻 凡是【b】（右下半圆/左手拇指）➔ 涂成【蓝色】
+        </span>
+        <span style="font-size:12px; font-weight:800; background:#fce7f3; color:#9d174d; padding:4px 10px; border-radius:8px;">
+          🐎 凡是【d】（左下半圆/右手拇指）➔ 涂成【粉色】
+        </span>
+      </div>
+
+      <!-- 气泡迷宫网格 -->
+      <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:10px; text-align:center;">
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">b</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">d</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">b</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">d</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">b</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">b</div>
+
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">d</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">b</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">d</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">b</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">d</div>
+        <div style="border:2px solid #cbd5e1; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; margin:0 auto;">d</div>
+      </div>
+
+      <div style="margin-top:14px; font-size:12px; color:#475569; background:#f8fafc; padding:8px 12px; border-radius:8px;">
+        💡 家长提示：当孩子犹豫时，让孩子两只手同时竖起大拇指 👍，左手是 b、右手是 d，看着自己的小拳头秒辨析！
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchSheet(sheetId) {
+      document.querySelectorAll('.a4-page').forEach(p => p.classList.remove('active-page'));
+      document.querySelectorAll('.sheet-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(sheetId).classList.add('active-page');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
