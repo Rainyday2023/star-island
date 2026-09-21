@@ -1802,6 +1802,459 @@ body {
   }
 }
 
+/* ================== 家长学情检查中心、答题防猜与现场抽测样式 ================== */
+.cooling-tip-bar {
+  background: #fef9c3;
+  border: 2px solid #facc15;
+  border-radius: 16px;
+  padding: 8px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #854d0e;
+  animation: popIn 0.2s ease;
+}
+
+.option-btn.opt-disabled {
+  opacity: 0.45 !important;
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.option-btn.opt-disabled .opt-text-label {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.opt-tag-eliminated {
+  display: inline-block;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.anti-guess-alert {
+  background: #fff1f2;
+  border: 2px solid #f87171;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #991b1b;
+  line-height: 1.4;
+}
+
+.parent-subtabs {
+  display: flex;
+  border-bottom: 2px solid #f1f5f9;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+
+.subtab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 4px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.subtab-btn.active {
+  color: #16a34a;
+}
+
+.subtab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10%;
+  right: 10%;
+  height: 4px;
+  background: #16a34a;
+  border-radius: 4px;
+}
+
+.report-overview-card {
+  display: flex;
+  justify-content: space-around;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+  border: 2px solid #bbf7d0;
+  border-radius: 20px;
+  padding: 16px 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.06);
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.overview-item .val-num {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+.overview-item .val-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.overview-item.highlight-green .val-num {
+  color: #16a34a;
+}
+
+.overview-item.highlight-warn .val-num {
+  color: #dc2626;
+}
+
+.overview-item.highlight-warn .val-lbl {
+  color: #dc2626;
+  font-weight: 800;
+}
+
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sec-headline {
+  font-size: 14px;
+  font-weight: 800;
+  color: #334155;
+}
+
+.sec-hint {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.warning-task-card {
+  background: #ffffff;
+  border: 2px solid #fed7aa;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 10px rgba(251, 146, 60, 0.08);
+}
+
+.warn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.warn-level-pill {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.pill-guess {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.pill-review {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.warn-question-text {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.warn-path-box {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+
+.path-title {
+  color: #64748b;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.path-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.wrong-node {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+.arrow {
+  color: #cbd5e1;
+}
+
+.correct-node {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+.warn-actions-row {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-action-sm {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s;
+}
+
+.btn-action-sm:active {
+  transform: scale(0.97);
+}
+
+.btn-exam-sm {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.btn-guide-sm {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.review-intro-bar {
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #6d28d9;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.all-good-box, .empty-box {
+  text-align: center;
+  padding: 36px 16px;
+}
+
+.all-good-icon, .empty-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.all-good-text {
+  font-size: 15px;
+  font-weight: 800;
+  color: #15803d;
+}
+
+.empty-text {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* 现场抽测弹窗样式 */
+.exam-instruction {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.inst-tag {
+  background: #16a34a;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.inst-text {
+  font-size: 12px;
+  color: #166534;
+}
+
+.exam-question-box {
+  margin-bottom: 14px;
+}
+
+.exam-badge {
+  display: inline-block;
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+.exam-qtext {
+  font-size: 17px;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+.exam-visual-box {
+  background: #fdfbf7;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 32px;
+}
+
+.exam-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exam-opt-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.exam-opt-card.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #15803d !important;
+}
+
+.exam-opt-card.wrong {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #b91c1c !important;
+}
+
+.exam-feedback {
+  margin-top: 14px;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.exam-feedback.correct {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #15803d;
+  font-weight: 800;
+}
+
+.exam-feedback.wrong {
+  background: #fff1f2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  font-weight: 800;
+}
+
+/* 亲子锦囊弹窗样式 */
+.guide-section {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.g-sec-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.g-sec-content {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.highlight-guide {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+}
+
+.highlight-guide .g-sec-title {
+  color: #b45309;
+}
+
+.g-sec-prompt {
+  font-size: 14px;
+  font-weight: 800;
+  color: #92400e;
+  line-height: 1.5;
+}
+
+
 </style>
 </head>
 <body>
@@ -1962,6 +2415,12 @@ body {
         <!-- 动态注入 -->
       </div>
 
+      <!-- 冷却与启发引导提示条 -->
+      <div id="arenaCoolingTip" class="cooling-tip-bar" style="display:none;">
+        <span class="tip-icon">💡</span>
+        <span id="arenaCoolingText" class="tip-text">再看一看，想一想为什么不对哦～</span>
+      </div>
+
       <!-- 聪聪小猫温柔引导气泡 (答错时启发，不气馁) -->
       <div id="gentleHintBox" class="gentle-hint-box">
         <span class="hint-avatar">🐱</span>
@@ -1980,6 +2439,12 @@ body {
       <!-- 超大触控选项区 (大图卡片为主，文字辅助) -->
       <div id="arenaOptionsGrid" class="arena-options-grid">
         <!-- 动态生成选项按钮 -->
+      </div>
+
+      <!-- 防偷鸡最后选项警告条 -->
+      <div id="arenaAntiGuessAlert" class="anti-guess-alert" style="display:none;">
+        <span class="alert-icon">⚡</span>
+        <span class="alert-msg">已排除其他答案！认真想一想为什么是它，听完提示后再选哦！</span>
       </div>
 
       <!-- 答对超级欢呼庆祝弹层 (单萌宠欢跃跳出 + 礼花从天而降 + 半透浮空童趣卡) -->
@@ -2023,76 +2488,194 @@ body {
     </div>
   </div>
 
-  <!-- ================= 家长中心 & 换机无网同步 & 重置 Modal ================= -->
+  <!-- ================= 家长学情检查与监督中心 Modal ================= -->
   <div id="parentModal" class="modal-overlay" style="display:none;">
-    <div class="modal-box">
+    <div class="modal-box" style="max-width:620px;">
       <div class="modal-header">
-        <h3 style="font-size:20px; font-weight:900; color:var(--brown-main);">⚙️ 家长控制与无网同步中心</h3>
+        <div>
+          <h3 style="font-size:20px; font-weight:900; color:var(--brown-main); margin:0;">👨‍👧 家长学情与监督中心</h3>
+          <p style="font-size:12px; color:var(--brown-muted); margin:4px 0 0 0;">真实掌握度 · 试错排查监控 · 亲子辅导</p>
+        </div>
         <button id="btnCloseParentModal" class="btn-close-arena">✕</button>
       </div>
 
-      <!-- 功能 0：一键重置学习进度 -->
-      <div class="sync-card" style="background:#fff1f2; border-color:#fecdd3;">
-        <h4 style="color:#9f1239;">🔄 一键重置学习进度（给小朋友全新开始）</h4>
-        <p style="font-size:13px; color:#be123c; line-height:1.5; margin-bottom:10px;">
-          刚才家长测试做过的题目和星星将被清空为 0，宝箱重新上锁，恢复为首日未打卡状态，让孩子拥有完整的初次通关成就感：
-        </p>
-        <button id="btnResetProgress" class="btn-danger">
-          🧹 清空当前测试记录，给孩子重新开始
-        </button>
+      <!-- 三级 Tab 切换导航 -->
+      <div class="parent-subtabs">
+        <button id="tabBtnReport" class="subtab-btn active" data-subtab="report">📊 今日学情检查</button>
+        <button id="tabBtnReview" class="subtab-btn" data-subtab="review">📚 待巩固错题本 (<span id="parentReviewCount">0</span>)</button>
+        <button id="tabBtnSettings" class="subtab-btn" data-subtab="settings">⚙️ 换机同步与工具</button>
       </div>
 
-      <!-- 功能 1：换机无网同步 -->
-      <div class="sync-card">
-        <h4>📲 换机无网同步（手机 ➔ 平板 / 反向同步）</h4>
-        <p style="font-size:13px; color:var(--brown-muted); line-height:1.5;">
-          无需Wi-Fi，两台设备开飞行模式也能互传！用另一台手机/平板对准下方二维码扫描，即可同步当前所有星星和打卡记录：
-        </p>
-
-        <div class="qr-preview-box">
-          <canvas id="syncQrCanvas" width="180" height="180"></canvas>
+      <!-- Tab 1: 今日学情检查 -->
+      <div id="parentSubViewReport" class="parent-subview">
+        <div class="report-overview-card">
+          <div class="overview-item">
+            <span id="repTotalCount" class="val-num">0</span>
+            <span class="val-lbl">今日作答(道)</span>
+          </div>
+          <div class="overview-item highlight-green">
+            <span id="repFirstTryRate" class="val-num">0%</span>
+            <span class="val-lbl">🌟 独立掌握率</span>
+          </div>
+          <div id="repGuessBox" class="overview-item">
+            <span id="repGuessCount" class="val-num">0</span>
+            <span class="val-lbl">⚠️ 疑似蒙对</span>
+          </div>
+          <div class="overview-item">
+            <span id="repAvgDuration" class="val-num">0s</span>
+            <span class="val-lbl">平均思考</span>
+          </div>
         </div>
 
-        <div style="display:flex; gap:10px; margin-top:10px;">
-          <button id="btnCopyToken" class="btn-outline" style="flex:1;">
-            📋 复制进度口令
+        <div class="section-title-row">
+          <span class="sec-headline">⚠️ 需重点关注题目 (多次试错/疑似蒙对)</span>
+          <span id="repWarningHint" class="sec-hint">共 0 道</span>
+        </div>
+
+        <div id="repWarningList" class="warning-tasks-list">
+          <!-- 动态注入预警题目卡片 -->
+        </div>
+      </div>
+
+      <!-- Tab 2: 待巩固错题本 -->
+      <div id="parentSubViewReview" class="parent-subview" style="display:none;">
+        <div class="review-intro-bar">
+          凡是尝试多次才蒙对或选错的题目，系统会自动沉淀于此，直到孩子当面答对或复习首答正确才消除。
+        </div>
+        <div id="parentReviewList" class="review-tasks-list">
+          <!-- 动态注入错题卡片 -->
+        </div>
+      </div>
+
+      <!-- Tab 3: 换机同步与工具 -->
+      <div id="parentSubViewSettings" class="parent-subview" style="display:none;">
+        <!-- 功能 0：一键重置学习进度 -->
+        <div class="sync-card" style="background:#fff1f2; border-color:#fecdd3;">
+          <h4 style="color:#9f1239;">🔄 一键重置学习进度（给小朋友全新开始）</h4>
+          <p style="font-size:13px; color:#be123c; line-height:1.5; margin-bottom:10px;">
+            清空当前所有做题流水、学情记录与金星，让孩子拥有完整的初次通关成就感：
+          </p>
+          <button id="btnResetProgress" class="btn-danger">
+            🧹 清空当前测试记录，给孩子重新开始
           </button>
         </div>
 
-        <div style="margin-top:14px; border-top:1px dashed var(--border-soft); padding-top:12px;">
-          <label style="font-size:13px; font-weight:700; color:var(--brown-main);">在此设备导入进度口令：</label>
-          <div style="display:flex; gap:8px; margin-top:6px;">
-            <input id="inputSyncToken" type="text" class="input-box" style="margin-top:0;" placeholder="粘贴另一台设备的进度口令...">
-            <button id="btnApplyToken" class="btn-primary" style="white-space:nowrap;">确认合并</button>
+        <!-- 功能 1：换机无网同步 -->
+        <div class="sync-card">
+          <h4>📲 换机无网同步（手机 ➔ 平板 / 反向同步）</h4>
+          <p style="font-size:13px; color:var(--brown-muted); line-height:1.5;">
+            无需Wi-Fi，两台设备开飞行模式也能互传！用另一台手机/平板对准下方二维码扫描，即可同步当前所有星星和打卡记录：
+          </p>
+
+          <div class="qr-preview-box">
+            <canvas id="syncQrCanvas" width="180" height="180"></canvas>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <button id="btnCopyToken" class="btn-outline" style="flex:1;">
+              📋 复制进度口令
+            </button>
+          </div>
+
+          <div style="margin-top:14px; border-top:1px dashed var(--border-soft); padding-top:12px;">
+            <label style="font-size:13px; font-weight:700; color:var(--brown-main);">在此设备导入进度口令：</label>
+            <div style="display:flex; gap:8px; margin-top:6px;">
+              <input id="inputSyncToken" type="text" class="input-box" style="margin-top:0;" placeholder="粘贴另一台设备的进度口令...">
+              <button id="btnApplyToken" class="btn-primary" style="white-space:nowrap;">确认合并</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 功能 2：A4实体纸面打印中心 -->
-      <div class="sync-card" style="background:#f0fdf4; border-color:#86efac;">
-        <h4 style="color:#166534;">🖨️ A4 实体纸面打印中心</h4>
-        <p style="font-size:13px; color:#15803d; line-height:1.5; margin-bottom:10px;">
-          保护孩子视力，提供标准 A4 尺寸的拼音四线三格描红、数字控笔虚线纸、5的分解剪贴卡：
-        </p>
-        <a href="worksheets.html" target="_blank" class="btn-primary" style="background:#16a34a; text-decoration:none; display:inline-block;">
-          👉 打开 A4 打印中心
-        </a>
-      </div>
+        <!-- 功能 2：A4实体纸面打印中心 -->
+        <div class="sync-card" style="background:#f0fdf4; border-color:#86efac;">
+          <h4 style="color:#166534;">🖨️ A4 实体纸面打印中心</h4>
+          <p style="font-size:13px; color:#15803d; line-height:1.5; margin-bottom:10px;">
+            保护孩子视力，提供标准 A4 尺寸的拼音四线三格描红、数字控笔虚线纸、5的分解剪贴卡：
+          </p>
+          <a href="worksheets.html" target="_blank" class="btn-primary" style="background:#16a34a; text-decoration:none; display:inline-block;">
+            👉 打开 A4 打印中心
+          </a>
+        </div>
 
-      <!-- 功能 3：WorkBuddy 自动化扩关 -->
-      <div class="sync-card">
-        <h4>🤖 WorkBuddy 专属关卡扩充包导入</h4>
-        <p style="font-size:13px; color:var(--brown-muted); line-height:1.5;">
-          将由 WorkBuddy 自动生成的新关卡 JSON 数组粘贴到下方，一键扩充新学科或高阶关卡：
-        </p>
-        <textarea id="inputCustomLevels" class="input-box" rows="3" placeholder='[{"id":"math_custom_1", "category":"math", ...}]'></textarea>
-        <button id="btnImportLevels" class="btn-outline" style="margin-top:8px; width:100%;">
-          ➕ 一键加载扩充关卡
-        </button>
+        <!-- 功能 3：WorkBuddy 自动化扩关 -->
+        <div class="sync-card">
+          <h4>🤖 WorkBuddy 专属关卡扩充包导入</h4>
+          <p style="font-size:13px; color:var(--brown-muted); line-height:1.5;">
+            将由 WorkBuddy 自动生成的新关卡 JSON 数组粘贴到下方，一键扩充新学科或高阶关卡：
+          </p>
+          <textarea id="inputCustomLevels" class="input-box" rows="3" placeholder='[{"id":"math_custom_1", "category":"math", ...}]'></textarea>
+          <button id="btnImportLevels" class="btn-outline" style="margin-top:8px; width:100%;">
+            ➕ 一键加载扩充关卡
+          </button>
+        </div>
       </div>
 
     </div>
   </div>
+
+  <!-- ================= 家长现场当面抽测 Modal ================= -->
+  <div id="examModal" class="modal-overlay" style="display:none; z-index:1100;">
+    <div class="modal-box" style="max-width:520px;">
+      <div class="modal-header">
+        <h3 style="font-size:19px; font-weight:900; color:#166534; margin:0;">👨‍👧 家长现场当面抽测</h3>
+        <button id="btnCloseExamModal" class="btn-close-arena">✕</button>
+      </div>
+
+      <div class="exam-instruction">
+        <span class="inst-tag">当面互动</span>
+        <span class="inst-text">让宝宝看着题目，口述思考过程并在下方选出答案：</span>
+      </div>
+
+      <div class="exam-question-box">
+        <span id="examBadge" class="exam-badge">启蒙知识点</span>
+        <div id="examQuestionText" class="exam-qtext">题目加载中...</div>
+      </div>
+
+      <div id="examVisualBox" class="exam-visual-box"></div>
+
+      <div id="examOptionsList" class="exam-options-list"></div>
+
+      <div id="examFeedbackBox" class="exam-feedback" style="display:none;"></div>
+
+      <div style="margin-top:20px;">
+        <button id="btnExamDone" class="btn-primary" style="width:100%; background:#16a34a;">完成本次抽测</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 亲子伴学启发锦囊 Modal ================= -->
+  <div id="guideModal" class="modal-overlay" style="display:none; z-index:1100;">
+    <div class="modal-box" style="max-width:520px;">
+      <div class="modal-header">
+        <h3 style="font-size:19px; font-weight:900; color:#b45309; margin:0;">💡 亲子伴学启发锦囊</h3>
+        <button id="btnCloseGuideModal" class="btn-close-arena">✕</button>
+      </div>
+
+      <div class="guide-body" style="padding-top:10px;">
+        <div class="guide-section">
+          <div class="g-sec-title">🎯 考察知识点与认知目标</div>
+          <div id="guideBadgeAndQ" class="g-sec-content"></div>
+        </div>
+
+        <div class="guide-section">
+          <div class="g-sec-title">🔍 为什么孩子可能靠蒙/试错？</div>
+          <div class="g-sec-content">
+            3-6 岁幼儿处于具体形象思维阶段。当遇到实物数量较多、抽象拼音或交替规律时，若未形成“一一对应点数”或“口型联想”，容易急躁地通过连续点击寻找即时正向反馈。
+          </div>
+        </div>
+
+        <div class="guide-section highlight-guide">
+          <div class="g-sec-title">🗣️ 家长正面启发话术（切勿批评乱点）：</div>
+          <div id="guidePrompt" class="g-sec-prompt"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;">
+        <button id="btnGuideConfirm" class="btn-primary" style="width:100%; background:#d97706;">我学会了，去引导孩子</button>
+      </div>
+    </div>
+  </div>
+
 
   <!-- 脚本加载顺序 (纯原生零依赖) -->
   
@@ -3191,7 +3774,7 @@ class SyncManager {
 
   getDefaultData() {
     return {
-      version: '1.0',
+      version: '2.0',
       totalStars: 0,
       streakDays: 1,
       lastCheckInDate: null,
@@ -3205,7 +3788,9 @@ class SyncManager {
         adventure: ['adv_1']
       },
       badges: ['badge_starter'],
-      customLevels: [] // 由 WorkBuddy 生成并导入的额外关卡
+      customLevels: [], // 由 WorkBuddy 生成并导入的额外关卡
+      quizHistory: [],  // 答题过程全轨迹记录（按时间倒序存储最近300条）
+      reviewQueue: []   // 错题/疑似逐个排查蒙对待复习池
     };
   }
 
@@ -3214,7 +3799,11 @@ class SyncManager {
       const raw = localStorage.getItem(this.STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        return Object.assign(this.getDefaultData(), parsed);
+        const defaultObj = this.getDefaultData();
+        const merged = Object.assign(defaultObj, parsed);
+        if (!Array.isArray(merged.quizHistory)) merged.quizHistory = [];
+        if (!Array.isArray(merged.reviewQueue)) merged.reviewQueue = [];
+        return merged;
       }
     } catch (e) {
       console.error('加载本地存档失败:', e);
@@ -3239,6 +3828,8 @@ class SyncManager {
     if (isFirstTime) {
       this.data.completedLevels[category].push(levelId);
       this.data.totalStars += earnedStars;
+    } else if (earnedStars > 0) {
+      this.data.totalStars += earnedStars;
     }
     this.saveData();
     return isFirstTime;
@@ -3248,7 +3839,6 @@ class SyncManager {
   recordDailyCheckIn(todayStr) {
     if (!this.data.checkInHistory.includes(todayStr)) {
       this.data.checkInHistory.push(todayStr);
-      // 计算连续天数
       this.data.streakDays = (this.data.streakDays || 0) + 1;
       this.data.lastCheckInDate = todayStr;
       this.data.totalStars += 3; // 每日打卡大宝箱额外送3颗星
@@ -3258,6 +3848,135 @@ class SyncManager {
     return false;
   }
 
+  /**
+   * 记录一次答题的完整轨迹与掌握度
+   */
+  recordQuizAttempt(category, task, details) {
+    const today = new Date().toISOString().slice(0, 10);
+    const attemptsCount = details.attemptsCount || 1;
+    const firstAttemptCorrect = !!details.firstAttemptCorrect;
+    const totalOptionsCount = (task.options && task.options.length) || 3;
+
+    // 掌握度三级评定
+    let masteryLevel = 'mastered';
+    if (firstAttemptCorrect) {
+      masteryLevel = 'mastered'; // 🌟 独立掌握
+    } else if (attemptsCount < totalOptionsCount) {
+      masteryLevel = 'reviewing'; // 💡 动脑纠错
+    } else {
+      masteryLevel = 'guess'; // ⚠️ 疑似逐个排查蒙对
+    }
+
+    const record = {
+      id: `record_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      taskId: task.id,
+      category,
+      badge: task.badge || '💡 启蒙知识点',
+      questionText: task.questionText || '',
+      speechPrompt: task.speechPrompt || '',
+      hintPrompt: task.hintPrompt || '引导孩子仔细观察画面中的数量或规律。',
+      dateStr: today,
+      timestamp: Date.now(),
+      firstAttemptCorrect,
+      attemptsCount,
+      wrongChoices: details.wrongChoices || [],
+      correctText: (task.options && task.options.find(o => o.isCorrect)) ? task.options.find(o => o.isCorrect).text : '',
+      durationSec: details.durationSec || 0,
+      masteryLevel,
+      starsEarned: details.starsEarned || (firstAttemptCorrect ? 3 : (masteryLevel === 'reviewing' ? 2 : 1)),
+      rawTask: task
+    };
+
+    // 1. 存入历史流水
+    if (!Array.isArray(this.data.quizHistory)) this.data.quizHistory = [];
+    this.data.quizHistory.unshift(record);
+    if (this.data.quizHistory.length > 300) {
+      this.data.quizHistory = this.data.quizHistory.slice(0, 300);
+    }
+
+    // 2. 维护待复习错题本
+    if (!Array.isArray(this.data.reviewQueue)) this.data.reviewQueue = [];
+    const existingIndex = this.data.reviewQueue.findIndex(item => item.taskId === task.id);
+    if (record.masteryLevel === 'guess' || !record.firstAttemptCorrect) {
+      const reviewItem = {
+        taskId: task.id,
+        category,
+        badge: record.badge,
+        questionText: record.questionText,
+        correctText: record.correctText,
+        lastAttemptDate: today,
+        lastAttemptsCount: record.attemptsCount,
+        lastWrongChoices: record.wrongChoices,
+        masteryLevel: record.masteryLevel,
+        hintPrompt: record.hintPrompt,
+        rawTask: task,
+        addCount: (existingIndex >= 0 ? (this.data.reviewQueue[existingIndex].addCount || 1) + 1 : 1)
+      };
+
+      if (existingIndex >= 0) {
+        this.data.reviewQueue[existingIndex] = reviewItem;
+      } else {
+        this.data.reviewQueue.unshift(reviewItem);
+      }
+    } else if (record.masteryLevel === 'mastered' && existingIndex >= 0) {
+      this.data.reviewQueue.splice(existingIndex, 1);
+    }
+
+    this.saveData();
+    return record;
+  }
+
+  /** 获取指定日期的家长学情报告 */
+  getDailyLearningReport(targetDateStr) {
+    const today = targetDateStr || new Date().toISOString().slice(0, 10);
+    const history = this.data.quizHistory || [];
+    const todayRecords = history.filter(r => r.dateStr === today);
+
+    const totalCount = todayRecords.length;
+    let firstTryCorrectCount = 0;
+    let guessCount = 0;
+    let reviewingCount = 0;
+    let totalDuration = 0;
+
+    todayRecords.forEach(r => {
+      if (r.firstAttemptCorrect) firstTryCorrectCount += 1;
+      if (r.masteryLevel === 'guess') guessCount += 1;
+      else if (r.masteryLevel === 'reviewing') reviewingCount += 1;
+      totalDuration += (r.durationSec || 0);
+    });
+
+    const firstTryRate = totalCount > 0 ? Math.round((firstTryCorrectCount / totalCount) * 100) : 0;
+    const avgDurationSec = totalCount > 0 ? Math.round(totalDuration / totalCount) : 0;
+    const warningTasks = todayRecords.filter(r => !r.firstAttemptCorrect || r.masteryLevel === 'guess');
+
+    return {
+      dateStr: today,
+      totalCount,
+      firstTryCorrectCount,
+      firstTryRate,
+      guessCount,
+      reviewingCount,
+      avgDurationSec,
+      warningTasks,
+      todayRecords,
+      reviewQueueCount: (this.data.reviewQueue && this.data.reviewQueue.length) || 0
+    };
+  }
+
+  /** 获取待复习错题列表 */
+  getReviewQueue() {
+    return this.data.reviewQueue || [];
+  }
+
+  /** 家长抽考通过后移出错题本 */
+  resolveReviewTask(taskId) {
+    if (this.data.reviewQueue) {
+      this.data.reviewQueue = this.data.reviewQueue.filter(item => item.taskId !== taskId);
+      this.saveData();
+    }
+    return this.data.reviewQueue || [];
+  }
+
   /** 导出进度口令 (Base64 轻量压缩字符串) */
   exportProgressCode() {
     const payload = {
@@ -3265,10 +3984,11 @@ class SyncManager {
       streak: this.data.streakDays,
       history: this.data.checkInHistory,
       completed: this.data.completedLevels,
+      quizHistory: (this.data.quizHistory || []).slice(0, 60),
+      reviewQueue: this.data.reviewQueue || [],
       ts: Date.now()
     };
     const jsonStr = JSON.stringify(payload);
-    // 简易编码：STAR# + Base64
     return 'STAR#' + btoa(encodeURIComponent(jsonStr));
   }
 
@@ -3286,11 +4006,9 @@ class SyncManager {
         return { success: false, msg: '进度代码格式不正确！' };
       }
 
-      // 双向智能合并：星星取最大值，关卡取并集，打卡历史取并集
       this.data.totalStars = Math.max(this.data.totalStars, incoming.stars);
       this.data.streakDays = Math.max(this.data.streakDays, incoming.streak || 1);
 
-      // 合并打卡历史
       if (Array.isArray(incoming.history)) {
         incoming.history.forEach(d => {
           if (!this.data.checkInHistory.includes(d)) {
@@ -3299,7 +4017,6 @@ class SyncManager {
         });
       }
 
-      // 合并完成关卡
       if (incoming.completed) {
         for (const cat in incoming.completed) {
           if (!this.data.completedLevels[cat]) {
@@ -3311,6 +4028,22 @@ class SyncManager {
             }
           });
         }
+      }
+
+      // 合并学情与错题池
+      if (Array.isArray(incoming.quizHistory)) {
+        incoming.quizHistory.forEach(item => {
+          if (!this.data.quizHistory.some(h => h.id === item.id)) {
+            this.data.quizHistory.push(item);
+          }
+        });
+      }
+      if (Array.isArray(incoming.reviewQueue)) {
+        incoming.reviewQueue.forEach(item => {
+          if (!this.data.reviewQueue.some(r => r.taskId === item.taskId)) {
+            this.data.reviewQueue.push(item);
+          }
+        });
       }
 
       this.saveData();
@@ -3355,10 +4088,9 @@ class SyncManager {
     }
   }
 
-  /** 一键重置所有学习进度（供家长测试后重置给孩子全新开始） */
+  /** 一键重置所有学习进度 */
   resetProgress() {
     this.data = this.getDefaultData();
-    // 强制重置打卡历史与星星
     this.data.totalStars = 0;
     this.data.streakDays = 1;
     this.data.checkInHistory = [];
@@ -3368,11 +4100,12 @@ class SyncManager {
       pinyin: [],
       literacy: [],
       logic: [],
-      brain: [],
       adventure: []
     };
+    this.data.quizHistory = [];
+    this.data.reviewQueue = [];
     this.saveData();
-    return { success: true, msg: '所有学习记录已清空重置，小朋友可以全新开始闯关啦！' };
+    return { success: true, msg: '所有学习记录与学情档案已清空重置，小朋友可以全新开始闯关啦！' };
   }
 }
 
@@ -3442,9 +4175,32 @@ class App {
     this.cheerTitle = document.getElementById('cheerTitle');
     this.cheerDesc = document.getElementById('cheerDesc');
 
-    // 家长中心 Modal
+    // 答题防盲点冷却与警报元素
+    this.arenaCoolingTip = document.getElementById('arenaCoolingTip');
+    this.arenaCoolingText = document.getElementById('arenaCoolingText');
+    this.arenaAntiGuessAlert = document.getElementById('arenaAntiGuessAlert');
+
+    // 家长中心 Modal & 学情看板
     this.parentModal = document.getElementById('parentModal');
     this.btnCloseParentModal = document.getElementById('btnCloseParentModal');
+    this.tabBtnReport = document.getElementById('tabBtnReport');
+    this.tabBtnReview = document.getElementById('tabBtnReview');
+    this.tabBtnSettings = document.getElementById('tabBtnSettings');
+    this.parentSubViewReport = document.getElementById('parentSubViewReport');
+    this.parentSubViewReview = document.getElementById('parentSubViewReview');
+    this.parentSubViewSettings = document.getElementById('parentSubViewSettings');
+
+    this.repTotalCount = document.getElementById('repTotalCount');
+    this.repFirstTryRate = document.getElementById('repFirstTryRate');
+    this.repGuessBox = document.getElementById('repGuessBox');
+    this.repGuessCount = document.getElementById('repGuessCount');
+    this.repAvgDuration = document.getElementById('repAvgDuration');
+    this.repWarningHint = document.getElementById('repWarningHint');
+    this.repWarningList = document.getElementById('repWarningList');
+    this.parentReviewCount = document.getElementById('parentReviewCount');
+    this.parentReviewList = document.getElementById('parentReviewList');
+
+    // 换机同步与工具元素
     this.syncQrCanvas = document.getElementById('syncQrCanvas');
     this.btnCopyToken = document.getElementById('btnCopyToken');
     this.inputSyncToken = document.getElementById('inputSyncToken');
@@ -3452,6 +4208,30 @@ class App {
     this.inputCustomLevels = document.getElementById('inputCustomLevels');
     this.btnImportLevels = document.getElementById('btnImportLevels');
     this.btnResetProgress = document.getElementById('btnResetProgress');
+
+    // 现场当面抽测 Modal
+    this.examModal = document.getElementById('examModal');
+    this.btnCloseExamModal = document.getElementById('btnCloseExamModal');
+    this.examBadge = document.getElementById('examBadge');
+    this.examQuestionText = document.getElementById('examQuestionText');
+    this.examVisualBox = document.getElementById('examVisualBox');
+    this.examOptionsList = document.getElementById('examOptionsList');
+    this.examFeedbackBox = document.getElementById('examFeedbackBox');
+    this.btnExamDone = document.getElementById('btnExamDone');
+
+    // 亲子伴学启发锦囊 Modal
+    this.guideModal = document.getElementById('guideModal');
+    this.btnCloseGuideModal = document.getElementById('btnCloseGuideModal');
+    this.guideBadgeAndQ = document.getElementById('guideBadgeAndQ');
+    this.guidePrompt = document.getElementById('guidePrompt');
+    this.btnGuideConfirm = document.getElementById('btnGuideConfirm');
+
+    // 答题防猜追踪状态
+    this.arenaStartTime = 0;
+    this.currentAttemptCount = 0;
+    this.wrongChoices = [];
+    this.isClickLocked = false;
+    this.mustListenPrompt = false;
   }
 
   bindEvents() {
@@ -3497,9 +4277,40 @@ class App {
       this.parentModal.style.display = 'none';
     });
 
+    // 家长中心三级 Tab 切换
+    if (this.tabBtnReport) {
+      this.tabBtnReport.addEventListener('click', () => this.switchParentSubTab('report'));
+    }
+    if (this.tabBtnReview) {
+      this.tabBtnReview.addEventListener('click', () => this.switchParentSubTab('review'));
+    }
+    if (this.tabBtnSettings) {
+      this.tabBtnSettings.addEventListener('click', () => this.switchParentSubTab('settings'));
+    }
+
+    // 现场当面抽测弹窗事件
+    if (this.btnCloseExamModal) {
+      this.btnCloseExamModal.addEventListener('click', () => { this.examModal.style.display = 'none'; });
+    }
+    if (this.btnExamDone) {
+      this.btnExamDone.addEventListener('click', () => {
+        this.examModal.style.display = 'none';
+        this.renderParentReport();
+        this.renderParentReview();
+      });
+    }
+
+    // 亲子启发锦囊事件
+    if (this.btnCloseGuideModal) {
+      this.btnCloseGuideModal.addEventListener('click', () => { this.guideModal.style.display = 'none'; });
+    }
+    if (this.btnGuideConfirm) {
+      this.btnGuideConfirm.addEventListener('click', () => { this.guideModal.style.display = 'none'; });
+    }
+
     // 一键重置测试进度 (供家长测试后清空给小孩全新开始)
     this.btnResetProgress.addEventListener('click', () => {
-      const ok = confirm('确定要清空当前所有测试记录吗？\n所有星星将重置为0，宝箱重新上锁，让小朋友拥有完整的第一天全新闯关体验！');
+      const ok = confirm('确定要清空当前所有测试记录吗？\n所有星星将重置为0，宝箱重新上锁，恢复为首日未打卡状态，让孩子拥有完整的初次通关成就感！');
       if (ok) {
         window.soundEngine.playStar();
         const res = window.syncManager.resetProgress();
@@ -3734,9 +4545,18 @@ class App {
     this.activeTask = task;
     this.activeCategory = category;
 
+    // 重置答题过程数据与防猜状态
+    this.arenaStartTime = Date.now();
+    this.currentAttemptCount = 0;
+    this.wrongChoices = [];
+    this.isClickLocked = false;
+    this.mustListenPrompt = false;
+
     // 清理之前的引导气泡与欢呼状态
     if (this.gentleHintBox) this.gentleHintBox.style.display = 'none';
     if (this.superCheerOverlay) this.superCheerOverlay.style.display = 'none';
+    if (this.arenaCoolingTip) this.arenaCoolingTip.style.display = 'none';
+    if (this.arenaAntiGuessAlert) this.arenaAntiGuessAlert.style.display = 'none';
     const instantCheer = document.getElementById('arenaInstantCheer');
     if (instantCheer) instantCheer.style.display = 'none';
 
@@ -4088,13 +4908,51 @@ class App {
   }
 
   handleOptionClick(btn, opt, task) {
+    if (this.isClickLocked) return;
+    if (btn.classList.contains('opt-disabled')) return;
+
+    this.currentAttemptCount++;
+
     if (opt.isCorrect) {
       btn.classList.add('correct-burst');
       window.soundEngine.playCorrect();
       window.soundEngine.playStar();
 
-      // 隐藏答错引导气泡
+      // 隐藏答错引导与冷却条
       if (this.gentleHintBox) this.gentleHintBox.style.display = 'none';
+      if (this.arenaCoolingTip) this.arenaCoolingTip.style.display = 'none';
+      if (this.arenaAntiGuessAlert) this.arenaAntiGuessAlert.style.display = 'none';
+
+      // 计算耗时与星级掌握度
+      const durationSec = Math.max(1, Math.round((Date.now() - this.arenaStartTime) / 1000));
+      const firstAttemptCorrect = (this.currentAttemptCount === 1);
+      const totalOptionsCount = (task.options && task.options.length) || 3;
+
+      let earnedStars = 1;
+      let cheerPrefix = '';
+      if (firstAttemptCorrect) {
+        earnedStars = 3;
+        cheerPrefix = '🌟 独立掌握！太神啦！金星+3！';
+      } else if (this.currentAttemptCount < totalOptionsCount) {
+        earnedStars = 2;
+        cheerPrefix = '💡 动脑纠错！真棒！金星+2！';
+      } else {
+        earnedStars = 1;
+        cheerPrefix = '找到了答案！下次争取一次做对哦！⭐+1！';
+      }
+
+      // 保存学情全轨迹记录
+      window.syncManager.recordQuizAttempt(this.activeCategory, task, {
+        firstAttemptCorrect,
+        attemptsCount: this.currentAttemptCount,
+        wrongChoices: this.wrongChoices,
+        durationSec,
+        starsEarned: earnedStars
+      });
+
+      // 关卡完成结算
+      window.syncManager.completeLevel(this.activeCategory, task.id, earnedStars);
+      this.updateNavStats();
 
       // 1. 答题界面上直接弹出即时鼓励条 (答题界面原位展示)
       const instantCheer = document.getElementById('arenaInstantCheer');
@@ -4103,7 +4961,7 @@ class App {
 
       // 2. 弹出答对超级多感官欢呼层 (单萌宠跳出 + 礼花从天而降 + 对话气泡)
       if (this.superCheerOverlay) {
-        if (this.cheerTitle) this.cheerTitle.textContent = '🎉 太棒啦！答对啦！';
+        if (this.cheerTitle) this.cheerTitle.textContent = '🎉 ' + cheerPrefix;
         const mascotInfo = this.playMascotCheer(opt.cheer);
         if (instantCheer && instantText) {
           instantIcon.textContent = mascotInfo.icon;
@@ -4112,9 +4970,6 @@ class App {
         }
         this.superCheerOverlay.style.display = 'flex';
       }
-
-      window.syncManager.completeLevel(this.activeCategory, task.id, 1);
-      this.updateNavStats();
 
       setTimeout(() => {
         if (this.superCheerOverlay) this.superCheerOverlay.style.display = 'none';
@@ -4126,19 +4981,51 @@ class App {
       }, 2800);
     } else {
       btn.classList.add('wrong-shake');
+      btn.classList.add('opt-disabled');
       window.soundEngine.playWrong();
 
-      // 温柔安抚与针对性启发引导 (绝不批评否定，给予温和提示)
-      const defaultHint = '仔细看一看上面的大图，再试一试别的卡片吧！';
-      const hint = task.hintPrompt || defaultHint;
-
-      if (this.gentleHintBox && this.hintText) {
-        this.hintText.textContent = hint;
-        this.gentleHintBox.style.display = 'flex';
+      // 追加“已排除 ✕”角标
+      let tag = btn.querySelector('.opt-tag-eliminated');
+      if (!tag) {
+        tag = document.createElement('div');
+        tag.className = 'opt-tag-eliminated';
+        tag.textContent = '已排除 ✕';
+        btn.appendChild(tag);
       }
 
-      // 播放温暖鼓励语音与启发
-      window.soundEngine.speak('没关系，差一点点就对啦！' + hint);
+      this.wrongChoices.push(opt.text);
+
+      const remainingCount = task.options.length - this.optionsGrid.querySelectorAll('.opt-disabled').length;
+
+      if (remainingCount === 1) {
+        // 【方案三：防偷鸡最后选项】连续选错只剩最后1项时，禁止直接戳，强制冷却并播报启发
+        this.mustListenPrompt = true;
+        this.isClickLocked = true;
+        if (this.arenaAntiGuessAlert) this.arenaAntiGuessAlert.style.display = 'flex';
+        if (this.arenaCoolingTip) this.arenaCoolingTip.style.display = 'none';
+
+        const hint = task.hintPrompt || task.speechPrompt || task.questionText;
+        window.soundEngine.speak(hint);
+
+        setTimeout(() => {
+          this.isClickLocked = false;
+        }, 2200);
+      } else {
+        // 【方案一：冷静冷却与启发机制】
+        this.isClickLocked = true;
+        const hint = task.hintPrompt || '仔细观察上面的图案，再试一试别的答案哦！';
+        if (this.arenaCoolingTip) {
+          this.arenaCoolingText.textContent = '再看一看，想一想为什么不对哦～';
+          this.arenaCoolingTip.style.display = 'flex';
+        }
+
+        window.soundEngine.speak('没关系，差一点点就对啦！' + hint);
+
+        setTimeout(() => {
+          this.isClickLocked = false;
+          if (this.arenaCoolingTip) this.arenaCoolingTip.style.display = 'none';
+        }, 1200);
+      }
 
       setTimeout(() => {
         btn.classList.remove('wrong-shake');
@@ -4182,14 +5069,13 @@ class App {
     }
   }
 
-  /** 答对萌宠跳出舞台与欢呼对话 (严格一次只出现一个萌宠，绝不同台！) */
+  /** 答对萌宠跳出舞台与欢呼对话 */
   playMascotCheer(optCheer) {
     const catActor = document.getElementById('cheerCatActor');
     const robotActor = document.getElementById('cheerRobotActor');
     const speakerEl = document.getElementById('cheerSpeakerName');
     const descEl = document.getElementById('cheerDesc');
 
-    // 严格 50/50 独立出现一个角色：要么小猫，要么机器人！
     const isCat = Math.random() < 0.5;
 
     let speakerText = '';
@@ -4225,10 +5111,7 @@ class App {
     if (speakerEl) speakerEl.textContent = speakerText;
     if (descEl) descEl.textContent = speechQuote;
 
-    // 播放温暖元气的朗读语音
     window.soundEngine.speak(speechQuote.replace(/[“”"']/g, ''));
-
-    // 触发礼花从天而降
     this.launchConfetti();
 
     return {
@@ -4237,10 +5120,211 @@ class App {
     };
   }
 
-  // ================== 5. 家长中心与离线同步 ==================
+  // ================== 5. 家长学情与监督中心 ==================
+  switchParentSubTab(subtab) {
+    if (this.tabBtnReport) this.tabBtnReport.classList.toggle('active', subtab === 'report');
+    if (this.tabBtnReview) this.tabBtnReview.classList.toggle('active', subtab === 'review');
+    if (this.tabBtnSettings) this.tabBtnSettings.classList.toggle('active', subtab === 'settings');
+
+    if (this.parentSubViewReport) this.parentSubViewReport.style.display = subtab === 'report' ? 'block' : 'none';
+    if (this.parentSubViewReview) this.parentSubViewReview.style.display = subtab === 'review' ? 'block' : 'none';
+    if (this.parentSubViewSettings) this.parentSubViewSettings.style.display = subtab === 'settings' ? 'block' : 'none';
+
+    if (subtab === 'report') this.renderParentReport();
+    if (subtab === 'review') this.renderParentReview();
+    if (subtab === 'settings') this.refreshQRCode();
+  }
+
   openParentHub() {
-    this.refreshQRCode();
+    this.switchParentSubTab('report');
     this.parentModal.style.display = 'flex';
+  }
+
+  renderParentReport() {
+    const report = window.syncManager.getDailyLearningReport(this.todayStr);
+    const reviewQueue = window.syncManager.getReviewQueue();
+
+    if (this.repTotalCount) this.repTotalCount.textContent = report.totalCount;
+    if (this.repFirstTryRate) this.repFirstTryRate.textContent = `${report.firstTryRate}%`;
+    if (this.repGuessCount) this.repGuessCount.textContent = report.guessCount;
+    if (this.repAvgDuration) this.repAvgDuration.textContent = `${report.avgDurationSec}s`;
+    if (this.parentReviewCount) this.parentReviewCount.textContent = reviewQueue.length;
+
+    if (this.repGuessBox) {
+      this.repGuessBox.classList.toggle('highlight-warn', report.guessCount > 0);
+    }
+
+    if (this.repWarningHint) {
+      this.repWarningHint.textContent = `共 ${report.warningTasks.length} 道`;
+    }
+
+    if (!this.repWarningList) return;
+    this.repWarningList.innerHTML = '';
+
+    if (report.warningTasks.length > 0) {
+      report.warningTasks.forEach(task => {
+        const card = document.createElement('div');
+        card.className = 'warning-task-card';
+
+        const isGuess = task.masteryLevel === 'guess';
+        const pillClass = isGuess ? 'pill-guess' : 'pill-review';
+        const pillText = isGuess 
+          ? `⚠️ 疑似逐个排查蒙对 (尝试 ${task.attemptsCount} 次)`
+          : `💡 思考后纠错 (尝试 ${task.attemptsCount} 次)`;
+
+        const trackHtml = (task.wrongChoices || []).map(w => `
+          <span class="wrong-node">点选 [${w}] ✕</span>
+          <span class="arrow">➔</span>
+        `).join('');
+
+        card.innerHTML = `
+          <div class="warn-header">
+            <span class="task-badge">${task.badge}</span>
+            <span class="warn-level-pill ${pillClass}">${pillText}</span>
+          </div>
+          <div class="warn-question-text">${task.questionText}</div>
+          <div class="warn-path-box">
+            <span class="path-title">作答轨迹还原：</span>
+            <div class="path-track">
+              ${trackHtml}
+              <span class="correct-node">选出 [${task.correctText}] ✓</span>
+            </div>
+          </div>
+          <div class="warn-actions-row">
+            <button class="btn-action-sm btn-exam-sm">👨‍👧 现场当面考考</button>
+            <button class="btn-action-sm btn-guide-sm">💡 亲子伴学话术</button>
+          </div>
+        `;
+
+        card.querySelector('.btn-exam-sm').addEventListener('click', () => {
+          this.startParentExam(task.rawTask || task);
+        });
+        card.querySelector('.btn-guide-sm').addEventListener('click', () => {
+          this.openGuideModal(task);
+        });
+
+        this.repWarningList.appendChild(card);
+      });
+    } else if (report.totalCount > 0) {
+      this.repWarningList.innerHTML = `
+        <div class="all-good-box">
+          <span class="all-good-icon">🎉</span>
+          <div class="all-good-text">表现超棒！今日全部题目均为独立做对，无盲目试错现象！</div>
+        </div>
+      `;
+    } else {
+      this.repWarningList.innerHTML = `
+        <div class="empty-box">
+          <span class="empty-icon">📝</span>
+          <div class="empty-text">今天宝宝还没有开始做题哦，先去挑战每日微任务吧！</div>
+        </div>
+      `;
+    }
+  }
+
+  renderParentReview() {
+    const list = window.syncManager.getReviewQueue();
+    if (this.parentReviewCount) this.parentReviewCount.textContent = list.length;
+    if (!this.parentReviewList) return;
+
+    this.parentReviewList.innerHTML = '';
+    if (list.length > 0) {
+      list.forEach(task => {
+        const card = document.createElement('div');
+        card.className = 'warning-task-card';
+        card.innerHTML = `
+          <div class="warn-header">
+            <span class="task-badge">${task.badge}</span>
+            <span style="font-size:12px; color:#94a3b8;">${task.lastAttemptDate} 加入</span>
+          </div>
+          <div class="warn-question-text">${task.questionText}</div>
+          <div style="font-size:13px; margin-bottom:12px;">
+            <span style="color:#64748b;">正确答案：</span>
+            <span style="color:#16a34a; font-weight:800;">${task.correctText}</span>
+          </div>
+          <div class="warn-actions-row">
+            <button class="btn-action-sm btn-exam-sm">👨‍👧 现场抽测验证</button>
+            <button class="btn-action-sm btn-guide-sm">💡 伴学锦囊</button>
+          </div>
+        `;
+
+        card.querySelector('.btn-exam-sm').addEventListener('click', () => {
+          this.startParentExam(task.rawTask || task);
+        });
+        card.querySelector('.btn-guide-sm').addEventListener('click', () => {
+          this.openGuideModal(task);
+        });
+
+        this.parentReviewList.appendChild(card);
+      });
+    } else {
+      this.parentReviewList.innerHTML = `
+        <div class="empty-box">
+          <span class="empty-icon">🏆</span>
+          <div class="empty-text">错题本干干净净！宝宝掌握得非常扎实！</div>
+        </div>
+      `;
+    }
+  }
+
+  startParentExam(task) {
+    if (!task) return;
+    this.examBadge.textContent = task.badge || '挑战抽测';
+    this.examQuestionText.textContent = task.questionText || '';
+
+    // 渲染视觉图
+    this.examVisualBox.innerHTML = '';
+    if (task.items && Array.isArray(task.items)) {
+      this.examVisualBox.innerHTML = task.items.join(' ');
+      this.examVisualBox.style.display = 'flex';
+    } else {
+      this.examVisualBox.style.display = 'none';
+    }
+
+    if (this.examFeedbackBox) this.examFeedbackBox.style.display = 'none';
+
+    // 渲染无干扰纯净选项
+    this.examOptionsList.innerHTML = '';
+    (task.options || []).forEach(opt => {
+      const card = document.createElement('div');
+      card.className = 'exam-opt-card';
+      card.innerHTML = `<span>${opt.text}</span>`;
+
+      card.addEventListener('click', () => {
+        if (opt.isCorrect) {
+          card.classList.add('correct');
+          window.soundEngine.playCorrect();
+          window.syncManager.resolveReviewTask(task.id || task.taskId);
+          window.syncManager.completeLevel('daily', task.id || task.taskId, 2);
+          this.updateNavStats();
+
+          if (this.examFeedbackBox) {
+            this.examFeedbackBox.className = 'exam-feedback correct';
+            this.examFeedbackBox.innerHTML = '🎉 太棒啦！宝宝当面考核通过！已从错题池移出，奖励 2 颗金星！';
+            this.examFeedbackBox.style.display = 'block';
+          }
+        } else {
+          card.classList.add('wrong');
+          window.soundEngine.playWrong();
+          if (this.examFeedbackBox) {
+            this.examFeedbackBox.className = 'exam-feedback wrong';
+            this.examFeedbackBox.innerHTML = '💡 还没完全掌握哦！请参考伴学话术，带宝宝一起观察～';
+            this.examFeedbackBox.style.display = 'block';
+          }
+        }
+      });
+
+      this.examOptionsList.appendChild(card);
+    });
+
+    this.examModal.style.display = 'flex';
+  }
+
+  openGuideModal(task) {
+    if (!task) return;
+    this.guideBadgeAndQ.textContent = `${task.badge || ''} - ${task.questionText || ''}`;
+    this.guidePrompt.textContent = task.hintPrompt || '宝贝，伸出你的小食指，我们一颗一颗点一点，嘴里一起数一数！';
+    this.guideModal.style.display = 'flex';
   }
 
   refreshQRCode() {
