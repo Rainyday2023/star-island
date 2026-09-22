@@ -2621,6 +2621,585 @@ body {
   margin-right: 8px;
 }
 
+/* ============================================================
+   7. 漂浮群岛大探险地图 (Islands Adventure Map)
+   ============================================================ */
+.islands-banner-card {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  border-radius: 24px;
+  padding: 16px 20px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
+}
+
+.islands-scroll-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.island-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 20px;
+  border: 4px solid var(--border-soft);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.island-card.active-island {
+  border-color: #38bdf8;
+  box-shadow: 0 12px 32px rgba(56, 189, 248, 0.25);
+  transform: translateY(-2px);
+}
+
+.island-card.locked-island {
+  opacity: 0.72;
+  filter: grayscale(40%);
+  background: #f8fafc;
+}
+
+.island-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.island-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.island-avatar-box {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.island-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--brown-main);
+}
+
+.island-desc {
+  font-size: 12px;
+  color: var(--brown-muted);
+  margin-top: 2px;
+}
+
+.island-status-tag {
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tag-exploring {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.tag-cleared {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.tag-locked {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+/* 岛内关卡石板路小径 */
+.island-path-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 14px 10px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.island-node-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  border-radius: 18px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 60px;
+  box-shadow: 0 4px 0 #94a3b8;
+}
+
+.island-node-btn:hover {
+  transform: translateY(-3px);
+}
+
+.island-node-btn.node-passed {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  box-shadow: 0 4px 0 #16a34a;
+}
+
+.island-node-btn.node-active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 4px 0 #2563eb;
+  animation: pulseSlot 1.8s infinite;
+}
+
+.node-icon {
+  font-size: 24px;
+}
+
+.node-title {
+  font-size: 11px;
+  font-weight: 900;
+  margin-top: 4px;
+  color: #334155;
+}
+
+/* ➕ 探索/增加新岛屿大卡片 */
+.island-add-trigger-card {
+  border: 3px dashed #38bdf8;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.island-add-trigger-card:hover {
+  transform: translateY(-4px);
+  background: #bae6fd;
+  border-color: #0284c7;
+}
+
+.add-card-icon {
+  font-size: 40px;
+  animation: bounceItem 2s infinite ease-in-out;
+}
+
+.add-card-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0369a1;
+}
+
+.add-card-desc {
+  font-size: 13px;
+  color: #0284c7;
+}
+
+/* ➕ 增加新岛屿弹窗样式 */
+.add-island-quick-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quick-island-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 10px 14px;
+}
+
+.qi-emoji {
+  font-size: 32px;
+  margin-right: 12px;
+}
+
+.qi-info {
+  flex: 1;
+}
+
+.qi-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+.qi-desc {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.btn-quick-add {
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.custom-island-form {
+  background: #f0fdf4;
+  border: 2px dashed #86efac;
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+/* ============================================================
+   8. 萌宠营地 & 5 阶进化系统 (Pet Camp & 5-Tier Evolution)
+   ============================================================ */
+.camp-stage-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbf0 100%);
+  border: 4px solid var(--border-soft);
+  border-radius: 30px;
+  padding: 24px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.camp-pet-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 20px 0 10px;
+}
+
+.pet-avatar-halo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fef08a 0%, rgba(254, 240, 138, 0) 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: pulseSlot 2.5s infinite;
+}
+
+.pet-avatar-large {
+  font-size: 80px;
+  line-height: 1;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  animation: bouncePet 2s infinite ease-in-out;
+}
+
+.pet-tier-title-pill {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 50px;
+  margin-top: 6px;
+  box-shadow: 0 3px 8px rgba(217, 119, 6, 0.25);
+}
+
+.pet-camp-name {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--brown-main);
+  margin-top: 6px;
+}
+
+/* 5 阶进化成长刻度 */
+.camp-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fffbeb;
+  border: 2px solid #fde68a;
+  border-radius: 20px;
+  padding: 10px 14px;
+  margin: 16px 0;
+}
+
+.stepper-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.45;
+  transition: all 0.3s ease;
+}
+
+.stepper-node.active-step {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+.stepper-node.passed-step {
+  opacity: 0.9;
+}
+
+.step-icon {
+  font-size: 22px;
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #78350f;
+  margin-top: 2px;
+}
+
+.step-line {
+  font-size: 12px;
+  color: #d97706;
+  font-weight: 900;
+}
+
+/* 饱食度 / 成长能量条 */
+.pet-exp-wrap {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.exp-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--brown-main);
+  margin-bottom: 6px;
+}
+
+.exp-track {
+  width: 100%;
+  height: 16px;
+  background: #e2e8f0;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%);
+  border-radius: 50px;
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 食物投喂餐盘区 */
+.food-plate-section {
+  background: #fefce8;
+  border: 2px dashed #fef08a;
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.food-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.food-btn {
+  background: #ffffff;
+  border: 2px solid #fde68a;
+  border-radius: 16px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #fcd34d;
+}
+
+.food-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #fcd34d;
+}
+
+.food-emoji {
+  font-size: 28px;
+}
+
+.food-name {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brown-main);
+  margin-top: 4px;
+}
+
+.food-count-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 50px;
+  border: 1px solid #ffffff;
+}
+
+.super-food-btn {
+  border-color: #f43f5e;
+  background: #fff1f2;
+  box-shadow: 0 4px 0 #fda4af;
+}
+
+.super-badge {
+  background: #e11d48;
+}
+
+/* 萌宠图鉴卡片列表 */
+.pets-roster-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 6px 2px;
+}
+
+.roster-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  min-width: 68px;
+  transition: all 0.2s ease;
+}
+
+.roster-card.active-pet-card {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  transform: scale(1.05);
+}
+
+.roster-emoji {
+  font-size: 28px;
+}
+
+.roster-name {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brown-main);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   9. 庄园保卫战复习对战专区 (Farm Battle Anti-forgetting)
+   ============================================================ */
+.battle-stage-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fef2f2 100%);
+  border: 4px solid #fecaca;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(185, 28, 28, 0.08);
+}
+
+.battle-header-banner {
+  margin-bottom: 16px;
+}
+
+.battle-title-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.battle-arena-box {
+  background: #ffffff;
+  border: 3px solid #fee2e2;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.monster-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 12px 18px;
+}
+
+.monster-emoji {
+  font-size: 54px;
+  animation: monsterWiggle 2s infinite ease-in-out;
+}
+
+@keyframes monsterWiggle {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-4px) rotate(-6deg); }
+  75% { transform: translateY(4px) rotate(6deg); }
+}
+
+.monster-info {
+  flex: 1;
+}
+
+.monster-hp-track {
+  width: 100%;
+  height: 14px;
+  background: #cbd5e1;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+
+.monster-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ef4444 0%, #b91c1c 100%);
+  border-radius: 50px;
+  transition: width 0.35s ease;
+}
+
+.battle-reward-tip {
+  background: #f0fdf4;
+  border: 2px dashed #86efac;
+  border-radius: 16px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #166534;
+  text-align: center;
+  margin-top: 16px;
+}
+
+
 
 </style>
 </head>
@@ -2639,6 +3218,13 @@ body {
         <span>🔥</span>
         <span id="streakDaysCount">1 天</span>
       </div>
+      <button id="btnTopPetCamp" class="quick-pill quick-pill-btn" style="background:#fef9c3; border-color:#fde047; color:#854d0e;">
+        <span id="topPetAvatar">🐱</span>
+        <span id="topPetLabel">萌宠营地 Lv.1</span>
+      </button>
+      <button id="btnTopBattle" class="quick-pill quick-pill-btn" style="background:#fee2e2; border-color:#fca5a5; color:#991b1b;">
+        <span>🛡️ 庄园保卫战</span>
+      </button>
       <button id="btnParentHub" class="quick-pill quick-pill-btn">
         <span>⚙️ 家长中心</span>
       </button>
@@ -2683,11 +3269,17 @@ body {
       <button class="tab-btn active" data-view="daily">
         <span>📅 每日微任务打卡</span>
       </button>
-      <button class="tab-btn" data-view="subjects">
-        <span>🏰 学科专区与高阶左右脑</span>
+      <button class="tab-btn" data-view="islands">
+        <span>🏝️ 漂浮群岛大探险</span>
       </button>
-      <button class="tab-btn" data-view="adventure">
-        <span>🗺️ 主题周生活探险</span>
+      <button class="tab-btn" data-view="camp">
+        <span>🏡 萌宠营地 & 5阶进化</span>
+      </button>
+      <button class="tab-btn" data-view="battle">
+        <span>🛡️ 庄园保卫战</span>
+      </button>
+      <button class="tab-btn" data-view="subjects">
+        <span>🏰 学科专区全览</span>
       </button>
     </nav>
 
@@ -2711,7 +3303,167 @@ body {
       </div>
     </section>
 
-    <!-- 视图 2：学科专区与高阶左右脑思维 -->
+    <!-- 视图 2：漂浮群岛大探险 (核心闯关大地图) -->
+    <section id="view_islands" class="view-section">
+      <div class="island-intro-header">
+        <div class="island-title-row">
+          <span class="island-hero-icon">🏝️</span>
+          <div>
+            <h3 style="font-size:22px; font-weight:900; color:var(--brown-main); margin:0;">漂浮群岛奇幻大探险</h3>
+            <p style="font-size:13px; font-weight:700; color:var(--brown-muted); margin:4px 0 0 0;">
+              破除牢笼解救被困萌宠，闯关赢取专属食物，把萌宠养大戴上皇冠！
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 群岛卡片流 (由 js/app.js 动态渲染) -->
+      <div id="islandsListContainer" class="islands-list-container">
+        <!-- 动态生成：猫猫水波岛、萌兔乐高岛、小熊森林岛、恐龙化石岛及【➕ 探索新岛屿】大卡片 -->
+      </div>
+    </section>
+
+    <!-- 视图 3：萌宠成长营地 & 5阶进化 -->
+    <section id="view_camp" class="view-section">
+      <div class="pet-camp-stage">
+        <!-- 顶部萌宠头衔与状态 -->
+        <div class="camp-header-card">
+          <div class="camp-pet-status">
+            <span id="campPetAvatar" class="camp-big-avatar">🐱</span>
+            <div class="camp-pet-info">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <h3 id="campPetName" class="camp-pet-title">水灵猫咪</h3>
+                <span id="campStageBadge" class="pet-stage-pill">阶1: 破壳彩蛋期</span>
+              </div>
+              <p id="campStageDesc" class="camp-stage-desc">神秘彩蛋微微摇晃，探出毛茸茸的小耳朵～</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5阶成长刻度指示条 -->
+        <div class="stage-stepper-bar">
+          <div class="stepper-node active" data-step="1">
+            <span class="step-icon">🥚</span>
+            <span class="step-label">破壳蛋</span>
+          </div>
+          <span class="step-line">➔</span>
+          <div class="stepper-node" data-step="2">
+            <span class="step-icon">🍼</span>
+            <span class="step-label">软萌婴儿</span>
+          </div>
+          <span class="step-line">➔</span>
+          <div class="stepper-node" data-step="3">
+            <span class="step-icon">🎒</span>
+            <span class="step-label">书包幼童</span>
+          </div>
+          <span class="step-line">➔</span>
+          <div class="stepper-node" data-step="4">
+            <span class="step-icon">🧭</span>
+            <span class="step-label">披风探险</span>
+          </div>
+          <span class="step-line">➔</span>
+          <div class="stepper-node" data-step="5">
+            <span class="step-icon">👑</span>
+            <span class="step-label">皇冠守护神</span>
+          </div>
+        </div>
+
+        <!-- 饱食度成长能量条 -->
+        <div class="pet-exp-wrap">
+          <div class="exp-label-row">
+            <span>❤️ 饱食度 / 成长经验值</span>
+            <span id="campExpText" style="font-weight:900; color:#ea580c;">0 / 100</span>
+          </div>
+          <div class="exp-track">
+            <div id="campExpBar" class="exp-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- 食物投喂餐盘区 -->
+        <div class="food-plate-section">
+          <h4 style="font-size:15px; font-weight:900; color:var(--brown-main); margin-bottom:10px;">
+            🥣 点击食物投喂萌宠（答题闯关或参与庄园保卫战获取）：
+          </h4>
+          <div class="food-cards-grid">
+            <button class="food-btn" data-food="fish">
+              <span class="food-emoji">🐟</span>
+              <span class="food-name">黄金鱼干</span>
+              <span id="foodCountFish" class="food-count-badge">x0</span>
+            </button>
+            <button class="food-btn" data-food="carrot">
+              <span class="food-emoji">🥕</span>
+              <span class="food-name">香脆胡萝卜</span>
+              <span id="foodCountCarrot" class="food-count-badge">x0</span>
+            </button>
+            <button class="food-btn" data-food="honey">
+              <span class="food-emoji">🍯</span>
+              <span class="food-name">蜜糖罐</span>
+              <span id="foodCountHoney" class="food-count-badge">x0</span>
+            </button>
+            <button class="food-btn super-food-btn" data-food="superMeal">
+              <span class="food-emoji">🍰</span>
+              <span class="food-name">特级进化大餐</span>
+              <span id="foodCountSuper" class="food-count-badge super-badge">x0</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 萌宠图鉴 (已解救伙伴) -->
+        <div class="camp-roster-section">
+          <h4 style="font-size:14px; font-weight:900; color:var(--brown-muted); margin-bottom:8px;">
+            🐾 探险伙伴图鉴 (点击切换出战伙伴)：
+          </h4>
+          <div id="campPetsRoster" class="pets-roster-row">
+            <!-- 动态生成宠物小头像卡片 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 视图 4：庄园保卫战 (温故知新复习专区) -->
+    <section id="view_battle" class="view-section">
+      <div class="battle-stage-card">
+        <div class="battle-header-banner">
+          <div class="battle-title-box">
+            <span style="font-size:32px;">🛡️</span>
+            <div>
+              <h3 style="font-size:20px; font-weight:900; color:#991b1b; margin:0;">萌宠庄园保卫战</h3>
+              <p style="font-size:12px; color:#b91c1c; margin:2px 0 0 0;">温故知新：答对以前学过的旧知识点，发射魔法光波击退怪兽！</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 战场动态舞台 -->
+        <div class="battle-arena-box">
+          <div class="monster-card">
+            <div id="monsterAvatar" class="monster-emoji">👾</div>
+            <div class="monster-info">
+              <div style="font-weight:900; color:#475569; font-size:14px;">偷吃储备粮的大嘴怪</div>
+              <div class="monster-hp-track">
+                <div id="monsterHpBar" class="monster-hp-fill" style="width:100%;"></div>
+              </div>
+              <span id="monsterHpText" style="font-size:11px; font-weight:800; color:#64748b;">生命值: 3 / 3</span>
+            </div>
+          </div>
+
+          <div style="text-align:center; margin:16px 0;">
+            <p id="battleDescText" style="font-size:14px; font-weight:800; color:#1e293b;">
+              大嘴怪想偷吃小动物们的胡萝卜！快回答抗遗忘题目，发射魔法光波击退它！
+            </p>
+            <button id="btnStartBattle" class="btn-primary" style="background:#dc2626; font-size:16px; padding:12px 32px; border-radius:50px; box-shadow:0 4px 12px rgba(220,38,38,0.3);">
+              ⚔️ 立即迎战！(开始温故知新 3 题挑战)
+            </button>
+          </div>
+
+          <!-- 战利品展示 -->
+          <div class="battle-reward-tip">
+            <span>🏆 战斗胜利奖励：掉落稀有 <strong>🍰 特级七彩进化大餐</strong>（喂养直接增长大量成长值）！</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 视图 5：学科专区全览 -->
     <section id="view_subjects" class="view-section">
       <!-- 学科标签切换 -->
       <div class="subject-chips">
@@ -2732,17 +3484,6 @@ body {
 
       <!-- 关卡地图节点 -->
       <div id="levelsMapContainer" class="levels-map">
-        <!-- 由 js/app.js 动态生成 -->
-      </div>
-    </section>
-
-    <!-- 视图 3：主题冒险周计划 -->
-    <section id="view_adventure" class="view-section">
-      <div style="margin-bottom:18px;">
-        <h3 style="font-size:22px; font-weight:900; color:var(--brown-main);">🌟 生活情境综合实战周计划</h3>
-        <p style="font-size:14px; font-weight:700; color:var(--brown-muted); margin-top:4px;">综合运用学到的数字、拼音、常识与左右脑观察，解决生活实际问题</p>
-      </div>
-      <div id="adventureContainer">
         <!-- 由 js/app.js 动态生成 -->
       </div>
     </section>
@@ -3081,7 +3822,65 @@ body {
   </div>
 
 
+  <!-- ================= ➕ 探索/增加新岛屿 Modal ================= -->
+  <div id="addIslandModal" class="modal-overlay" style="display:none; z-index:1100;">
+    <div class="modal-box" style="max-width:500px;">
+      <div class="modal-header">
+        <h3 style="font-size:19px; font-weight:900; color:#0284c7; margin:0;">🏝️ 发现新探险岛屿</h3>
+        <button id="btnCloseAddIslandModal" class="btn-close-arena">✕</button>
+      </div>
+
+      <div style="padding:12px 0;">
+        <p style="font-size:13px; color:var(--brown-muted); line-height:1.5; margin-bottom:14px;">
+          当前已开放 3 座主题岛。随着宝宝知识库与认知的成长，可以一键扩充新岛屿，或自定义新世界！
+        </p>
+
+        <!-- 选项 1: 一键激活预置未知岛屿 -->
+        <div class="add-island-quick-grid">
+          <div class="quick-island-card" data-preset="island_dino">
+            <div class="qi-emoji">🦕</div>
+            <div class="qi-info">
+              <div class="qi-title">远古恐龙岛</div>
+              <div class="qi-desc">守护神: 暴龙宝宝 (探秘自然与几何)</div>
+            </div>
+            <button class="btn-quick-add" data-island-id="island_dino">一键开启</button>
+          </div>
+
+          <div class="quick-island-card" data-preset="island_space">
+            <div class="qi-emoji">🚀</div>
+            <div class="qi-info">
+              <div class="qi-title">星际太空岛</div>
+              <div class="qi-desc">守护神: 狐狸舰长 (专注力与双脑风暴)</div>
+            </div>
+            <button class="btn-quick-add" data-island-id="island_space">一键开启</button>
+          </div>
+        </div>
+
+        <!-- 选项 2: 亲子自定义新岛屿 -->
+        <div class="custom-island-form">
+          <h4 style="font-size:14px; font-weight:800; color:var(--brown-main); margin-bottom:8px;">
+            🎨 亲子共创自定义岛屿：
+          </h4>
+          <input id="inputCustomIslandName" type="text" class="input-box" placeholder="例如：海底亚特兰蒂斯 / 糖果甜甜岛..." style="margin-top:0; margin-bottom:8px;">
+          <div style="display:flex; gap:8px;">
+            <select id="selectCustomIslandEmoji" class="input-box" style="margin-top:0; flex:1;">
+              <option value="🐬">🐬 海豚湾</option>
+              <option value="🦄">🦄 独角兽森</option>
+              <option value="🦁">🦁 狮子国王</option>
+              <option value="🐼">🐼 熊猫竹海</option>
+              <option value="🛸">🛸 飞碟基地</option>
+            </select>
+            <button id="btnCreateCustomIsland" class="btn-primary" style="background:#0284c7; white-space:nowrap;">
+              ✨ 建造岛屿
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 脚本加载顺序 (纯原生零依赖) -->
+  
   
   
   
@@ -3426,6 +4225,93 @@ window.soundEngine = new SoundEngine();
  */
 
 const DefaultLevels = {
+  // ================= 0. 漂浮群岛探险世界 (支持点击按钮动态增加岛屿) =================
+  islands: [
+    {
+      id: 'island_1',
+      name: '灵动猫猫·水波云岛',
+      themeEmoji: '🌊',
+      bgGradient: 'linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)',
+      borderColor: '#38bdf8',
+      petId: 'cat',
+      petName: '水灵猫咪',
+      petAvatar: '🐱',
+      rescueTarget: '被困水牢小奶猫',
+      foodType: 'fish',
+      foodEmoji: '🐟',
+      foodName: '小鱼干',
+      desc: '探索水波与声调，攻克三点水与声调小汽车！',
+      levelIds: ['pin_tone_1', 'pin_tone_2', 'pin_tone_3', 'pin_tone_4', 'lit_rad_water', 'math_1', 'math_2']
+    },
+    {
+      id: 'island_2',
+      name: '机灵萌兔·蔬果乐高岛',
+      themeEmoji: '🥕',
+      bgGradient: 'linear-gradient(135deg, #fefce8 0%, #fed7aa 100%)',
+      borderColor: '#fb923c',
+      petId: 'rabbit',
+      petName: '机灵萌兔',
+      petAvatar: '🐰',
+      rescueTarget: '萝卜地牢萌兔幼崽',
+      foodType: 'carrot',
+      foodEmoji: '🥕',
+      foodName: '香脆胡萝卜',
+      desc: '汉字乐高拼装与b/d镜像魔法，突破空间混淆！',
+      levelIds: ['lit_rad_hand', 'lit_rad_grass', 'lit_lego_1', 'lit_lego_2', 'lit_lego_4', 'pin_bd_1', 'pin_bd_2', 'pin_pq_1', 'math_3', 'math_4']
+    },
+    {
+      id: 'island_3',
+      name: '聪聪小熊·魔法森林岛',
+      themeEmoji: '🌳',
+      bgGradient: 'linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%)',
+      borderColor: '#4ade80',
+      petId: 'bear',
+      petName: '聪聪小熊',
+      petAvatar: '🐻',
+      rescueTarget: '树屋被困小棕熊',
+      foodType: 'honey',
+      foodEmoji: '🍯',
+      foodName: '七彩蜜糖罐',
+      desc: '两拼滑梯直呼、生活词汇大侦探与10的分解思维！',
+      levelIds: ['lit_rad_tree', 'lit_rad_mouth', 'lit_lego_3', 'lit_det_1', 'lit_det_2', 'lit_det_3', 'pin_slide_1', 'pin_slide_2', 'math_7', 'math_8', 'brain_1']
+    },
+    // 以下为进阶扩展岛（可通过【➕ 探索新岛屿】按钮一键激活解锁）
+    {
+      id: 'island_4',
+      name: '憨憨小龙·远古化石岛',
+      isExtended: true,
+      themeEmoji: '🦖',
+      bgGradient: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+      borderColor: '#f59e0b',
+      petId: 'dino',
+      petName: '憨憨小龙',
+      petAvatar: '🦖',
+      rescueTarget: '琥珀封印翼手龙幼崽',
+      foodType: 'meat',
+      foodEmoji: '🍖',
+      foodName: '远古香肉骨',
+      desc: '三拼音节连读直呼、古生物等量代换与左右脑空间！',
+      levelIds: ['brain_2', 'brain_3', 'brain_4', 'brain_5', 'math_5', 'math_6', 'adv_1']
+    },
+    {
+      id: 'island_5',
+      name: '星际小狐·太空城堡岛',
+      isExtended: true,
+      themeEmoji: '🚀',
+      bgGradient: 'linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%)',
+      borderColor: '#c084fc',
+      petId: 'fox',
+      petName: '星际小狐',
+      petAvatar: '🦊',
+      rescueTarget: '星云胶囊狐狸宝宝',
+      foodType: 'starFruit',
+      foodEmoji: '⭐',
+      foodName: '闪亮星空果',
+      desc: '幼小衔接终极大冲刺，培养小学学霸自驱力！',
+      levelIds: ['math_8', 'brain_5', 'lit_det_1', 'pin_slide_2', 'daily_logic_1']
+    }
+  ],
+
   // ================= 1. 每日闯关微任务库 =================
   dailyMissions: [
     {
@@ -4232,6 +5118,267 @@ if (typeof module !== 'undefined' && module.exports) {
 </script>
 <script>
 /**
+ * 启蒙星萌岛 - 模板化无限变式出题引擎 (Procedural Level Engine)
+ * 解决儿童高频练习（每晚/隔天/周末）导致固定题目被背熟答案的痛点
+ * 遵循儿童认知发展，每次进入关卡自动随机实物、数字、偏旁词汇与干扰项
+ */
+
+const LevelEngine = {
+  // 实物水果与萌宠池 (20+ 种具象物品)
+  itemPool: [
+    { emoji: '🍓', name: '香甜草莓' },
+    { emoji: '🍎', name: '红红苹果' },
+    { emoji: '🍌', name: '金黄香蕉' },
+    { emoji: '🦆', name: '可爱小鸭' },
+    { emoji: '🐰', name: '机灵小兔' },
+    { emoji: '🥕', name: '脆嫩胡萝卜' },
+    { emoji: '🍇', name: '紫晶葡萄' },
+    { emoji: '🍭', name: '七彩棒棒糖' },
+    { emoji: '🎈', name: '彩色气球' },
+    { emoji: '⭐', name: '闪烁金星' },
+    { emoji: '🐟', name: '活泼小鱼' },
+    { emoji: '🍞', name: '香喷喷面包' },
+    { emoji: '🍒', name: '红樱桃' },
+    { emoji: '🍉', name: '大西瓜' },
+    { emoji: '🍄', name: '花朵小蘑菇' }
+  ],
+
+  // 偏旁部首庞大字库矩阵 (轮换抽检，杜绝死记硬背选项)
+  radicalMatrix: {
+    '氵': {
+      name: '三点水',
+      meaning: '水与液体',
+      icon: '💧💧💧',
+      charCombines: [
+        { right: '也', word: '池', pinyin: 'chí', desc: '水池的池' },
+        { right: '工', word: '江', pinyin: 'jiāng', desc: '江河的江' },
+        { right: '可', word: '河', pinyin: 'hé', desc: '河流的河' },
+        { right: '每', word: '海', pinyin: 'hǎi', desc: '大海的海' },
+        { right: '皮', word: '波', pinyin: 'bō', desc: '水波的波' },
+        { right: '水', word: '淼', pinyin: 'miǎo', desc: '水大的淼' }
+      ],
+      detectiveWords: ['游泳', '洗澡', '河流', '江湖', '海洋', '冰清玉洁']
+    },
+    '扌': {
+      name: '提手旁',
+      meaning: '小手与手部动作',
+      icon: '🖐️',
+      charCombines: [
+        { right: '丁', word: '打', pinyin: 'dǎ', desc: '打球的打' },
+        { right: '白', word: '拍', pinyin: 'pāi', desc: '拍手的拍' },
+        { right: '友', word: '拔', pinyin: 'bá', desc: '拔萝卜的拔' },
+        { right: '是', word: '提', pinyin: 'tí', desc: '提水桶的提' },
+        { right: '立', word: '拉', pinyin: 'lā', desc: '拉小手的拉' },
+        { right: '隹', word: '推', pinyin: 'tuī', desc: '推小车的推' }
+      ],
+      detectiveWords: ['拔萝卜', '拍皮球', '打羽毛球', '捉迷藏', '提水桶', '挥挥手']
+    },
+    '木': {
+      name: '木字旁',
+      meaning: '树木与木材制品',
+      icon: '🌳',
+      charCombines: [
+        { right: '木', word: '林', pinyin: 'lín', desc: '树林的林' },
+        { right: '兆', word: '桃', pinyin: 'táo', desc: '桃树的桃' },
+        { right: '乔', word: '桥', pinyin: 'qiáo', desc: '木桥的桥' },
+        { right: '寸', word: '村', pinyin: 'cūn', desc: '山村的村' },
+        { right: '子', word: '李', pinyin: 'lǐ', desc: '李子树的李' }
+      ],
+      detectiveWords: ['大树', '森林', '木桌', '小木桥', '桃树', '柳树']
+    },
+    '艹': {
+      name: '草字头',
+      meaning: '花草与植物',
+      icon: '🌱🌱',
+      charCombines: [
+        { right: '化', word: '花', pinyin: 'huā', desc: '鲜花的花' },
+        { right: '早', word: '草', pinyin: 'cǎo', desc: '青草的草' },
+        { right: '采', word: '菜', pinyin: 'cài', desc: '蔬菜的菜' },
+        { right: '田', word: '苗', pinyin: 'miáo', desc: '禾苗的苗' },
+        { right: '余', word: '茶', pinyin: 'chá', desc: '茶叶的茶' }
+      ],
+      detectiveWords: ['红花', '绿草', '蔬菜', '禾苗', '菊花', '茶园']
+    },
+    '口': {
+      name: '口字旁',
+      meaning: '嘴巴与吃喝发声',
+      icon: '👄',
+      charCombines: [
+        { right: '乞', word: '吃', pinyin: 'chī', desc: '吃东西的吃' },
+        { right: '渴', word: '喝', pinyin: 'hē', desc: '喝牛奶的喝' },
+        { right: '昌', word: '唱', pinyin: 'chàng', desc: '唱歌的唱' },
+        { right: '欠', word: '吹', pinyin: 'chuī', desc: '吹泡泡的吹' },
+        { right: '巴', word: '吧', pinyin: 'ba', desc: '好听的吧' }
+      ],
+      detectiveWords: ['唱歌', '吃苹果', '喝牛奶', '吹泡泡', '大声叫', '说说话']
+    }
+  },
+
+  // 声调小汽车音节池
+  toneVowelPool: [
+    { base: 'ma', tones: ['mā', 'má', 'mǎ', 'mà'], names: ['妈妈', '小麻雀', '奔跑小马', '大声斥责'] },
+    { base: 'da', tones: ['dā', 'dá', 'dǎ', 'dà'], names: ['搭积木', '回答答对', '打羽毛球', '高高大大'] },
+    { base: 'ba', tones: ['bā', 'bá', 'bǎ', 'bà'], names: ['八个气球', '拔大萝卜', '一把小伞', '亲爱爸爸'] },
+    { base: 'yi', tones: ['yī', 'yí', 'yǐ', 'yì'], names: ['数字第一', '阿姨好', '一把椅子', '一心一意'] }
+  ],
+
+  // 1. 动态生成【数物对应与点数盘】关卡
+  generateDynamicMathItems(maxNum = 5) {
+    const randomItem = this.itemPool[Math.floor(Math.random() * this.itemPool.length)];
+    const targetCount = Math.floor(Math.random() * maxNum) + 1; // 1 ~ maxNum
+    const items = Array(targetCount).fill(randomItem.emoji);
+
+    // 随机生成 2 个干扰数
+    const candidateNums = [];
+    for (let i = 1; i <= Math.max(maxNum, targetCount + 2); i++) {
+      if (i !== targetCount) candidateNums.push(i);
+    }
+    candidateNums.sort(() => Math.random() - 0.5);
+    const wrong1 = candidateNums[0] || (targetCount + 1);
+    const wrong2 = candidateNums[1] || (targetCount > 1 ? targetCount - 1 : targetCount + 2);
+
+    const options = [
+      {
+        icon: String(targetCount),
+        text: `${targetCount} 个`,
+        dots: '●'.repeat(Math.min(targetCount, 8)),
+        isCorrect: true,
+        cheer: `太聪明啦！认真数一数，正好是 ${targetCount} 个${randomItem.name}！`
+      },
+      {
+        icon: String(wrong1),
+        text: `${wrong1} 个`,
+        dots: '●'.repeat(Math.min(wrong1, 8)),
+        isCorrect: false
+      },
+      {
+        icon: String(wrong2),
+        text: `${wrong2} 个`,
+        dots: '●'.repeat(Math.min(wrong2, 8)),
+        isCorrect: false
+      }
+    ].sort(() => Math.random() - 0.5);
+
+    return {
+      id: `dyn_math_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+      badge: '🔢 数学数感',
+      questionText: `数一数，盘子里一共有几个${randomItem.name}？`,
+      speechPrompt: `伸出小食指点一点，盘子里一共有几个${randomItem.name}呢？点一下数一下，选出正确数字！`,
+      displayType: 'items',
+      items: items,
+      plateLabel: `${randomItem.emoji} ${randomItem.name}欢乐盘 (动手点一点)`,
+      hintPrompt: `伸出小手指按顺序数一数：一个、两个……看看数到几正好数完？`,
+      options: options
+    };
+  },
+
+  // 2. 动态生成【汉字乐高拼装合体】关卡
+  generateDynamicRadicalCombine() {
+    const radicalKeys = Object.keys(this.radicalMatrix);
+    const radKey = radicalKeys[Math.floor(Math.random() * radicalKeys.length)];
+    const radInfo = this.radicalMatrix[radKey];
+    const combo = radInfo.charCombines[Math.floor(Math.random() * radInfo.charCombines.length)];
+
+    // 随机抽取 2 个干扰字
+    const allChars = [];
+    radicalKeys.forEach(k => {
+      this.radicalMatrix[k].charCombines.forEach(c => {
+        if (c.word !== combo.word) allChars.push(c);
+      });
+    });
+    allChars.sort(() => Math.random() - 0.5);
+    const wrongCombo1 = allChars[0] || { word: '木', desc: '木头' };
+    const wrongCombo2 = allChars[1] || { word: '大', desc: '高大' };
+
+    const options = [
+      {
+        icon: combo.word,
+        text: `${combo.word} (${combo.desc})`,
+        isCorrect: true,
+        cheer: `拼装合体成功！${radInfo.name}加一个${combo.right}，变出了${combo.desc}！`
+      },
+      {
+        icon: wrongCombo1.word,
+        text: `${wrongCombo1.word} (${wrongCombo1.desc})`,
+        isCorrect: false
+      },
+      {
+        icon: wrongCombo2.word,
+        text: `${wrongCombo2.word} (${wrongCombo2.desc})`,
+        isCorrect: false
+      }
+    ].sort(() => Math.random() - 0.5);
+
+    return {
+      id: `dyn_rad_combo_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+      badge: '📖 汉字乐高',
+      questionText: `把 ${radKey} 积木，和“${combo.right}”字积木拼在一起，会变成哪个汉字？`,
+      speechPrompt: `汉字就像拼乐高积木一样有趣！左边是${radInfo.name}，右边拼上一个${combo.right}，咔嗒合体变出了什么字？`,
+      displayType: 'radical_combine',
+      leftPart: radKey,
+      leftLabel: `${radInfo.name}积木`,
+      rightPart: combo.right,
+      rightLabel: `${combo.right}字积木`,
+      resultChar: combo.word,
+      subText: `${radKey}积木 ➕ ${combo.right}字积木 ➔ 【${combo.desc}】`,
+      hintPrompt: `${radInfo.name}代表${radInfo.meaning}，右边加上${combo.right}，就是${combo.desc}！`,
+      options: options
+    };
+  },
+
+  // 3. 动态生成【声调小汽车跑道】关卡
+  generateDynamicToneCar() {
+    const vowelObj = this.toneVowelPool[Math.floor(Math.random() * this.toneVowelPool.length)];
+    const targetTone = Math.floor(Math.random() * 4) + 1; // 1, 2, 3, 4
+    const toneMarks = ['ˉ', 'ˊ', 'ˇ', 'ˋ'];
+    const toneDescs = [
+      '一声平平走平路 (ˉ)',
+      '二声加足马力爬陡坡 (ˊ)',
+      '三声下坡又上坡拐个弯 (ˇ)',
+      '四声呼啸冲下山坡 (ˋ)'
+    ];
+
+    const targetSyllable = vowelObj.tones[targetTone - 1];
+    const targetName = vowelObj.names[targetTone - 1];
+
+    const options = [1, 2, 3, 4]
+      .filter(t => t !== targetTone)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2)
+      .concat(targetTone)
+      .sort(() => Math.random() - 0.5)
+      .map(t => ({
+        icon: vowelObj.tones[t - 1],
+        text: `${t}声 ${vowelObj.tones[t - 1]} (${toneMarks[t - 1]})`,
+        isCorrect: t === targetTone,
+        cheer: t === targetTone ? `太棒啦！小汽车按照声调跑道前进，这是${t}声 ${targetSyllable}（${targetName}）！` : ''
+      }));
+
+    return {
+      id: `dyn_tone_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+      badge: '🔤 声调小车',
+      questionText: `小汽车正在开【${toneDescs[targetTone - 1]}】！这是第几声？`,
+      speechPrompt: `滴滴！声调小汽车在坡道上奔跑，看一看路况：${toneDescs[targetTone - 1]}，选出对应的声调符号吧！`,
+      displayType: 'tone_car',
+      tone: targetTone,
+      toneMark: toneMarks[targetTone - 1],
+      syllable: targetSyllable,
+      subText: `小汽车开跑道：${toneDescs[targetTone - 1]} ➔ ${targetName}！`,
+      hintPrompt: `看小汽车的坡道路线：平路是一声、往上爬是二声、拐弯是三声、往下冲是四声哦！`,
+      options: options
+    };
+  }
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = LevelEngine;
+} else if (typeof window !== 'undefined') {
+  window.LevelEngine = LevelEngine;
+}
+
+</script>
+<script>
+/**
  * 启蒙星萌岛 - 离线数据存储与跨设备无网同步中枢
  * 支持 localStorage 持久化、轻量进度口令生成/解析、以及内嵌离线二维码生成器
  * 100% 单机运行，不依赖任何第三方 CDN 或外部服务器
@@ -4501,23 +5648,110 @@ class SyncManager {
 
   getDefaultData() {
     return {
-      version: '2.0',
+      version: '3.0',
       totalStars: 0,
       streakDays: 1,
       lastCheckInDate: null,
       checkInHistory: [], // 记录所有打卡日期 ['2026-09-11', ...]
       completedLevels: {
         daily: [],
-        math: ['math_1'], // 默认已解锁第一关
-        pinyin: ['pin_1'],
-        literacy: ['lit_1'],
+        math: ['math_1'],
+        pinyin: ['pin_tone_1'],
+        literacy: ['lit_rad_water'],
         logic: ['log_1'],
         adventure: ['adv_1']
       },
       badges: ['badge_starter'],
       customLevels: [], // 由 WorkBuddy 生成并导入的额外关卡
       quizHistory: [],  // 答题过程全轨迹记录（按时间倒序存储最近300条）
-      reviewQueue: []   // 错题/疑似逐个排查蒙对待复习池
+      reviewQueue: [],  // 错题/疑似逐个排查蒙对待复习池
+
+      // ========== 萌宠5阶成长与营地系统 ==========
+      activePetId: 'cat',
+      pets: {
+        cat: {
+          id: 'cat',
+          name: '水灵猫咪',
+          islandId: 'island_1',
+          stage: 1,
+          exp: 0,
+          maxExp: 100,
+          isRescued: true,
+          isGraduated: false,
+          foodType: 'fish',
+          foodName: '小鱼干',
+          foodEmoji: '🐟',
+          avatar: '🐱'
+        },
+        rabbit: {
+          id: 'rabbit',
+          name: '机灵萌兔',
+          islandId: 'island_2',
+          stage: 1,
+          exp: 0,
+          maxExp: 100,
+          isRescued: false,
+          isGraduated: false,
+          foodType: 'carrot',
+          foodName: '胡萝卜',
+          foodEmoji: '🥕',
+          avatar: '🐰'
+        },
+        bear: {
+          id: 'bear',
+          name: '聪聪小熊',
+          islandId: 'island_3',
+          stage: 1,
+          exp: 0,
+          maxExp: 100,
+          isRescued: false,
+          isGraduated: false,
+          foodType: 'honey',
+          foodName: '蜜糖罐',
+          foodEmoji: '🍯',
+          avatar: '🐻'
+        },
+        dino: {
+          id: 'dino',
+          name: '憨憨小龙',
+          islandId: 'island_4',
+          stage: 1,
+          exp: 0,
+          maxExp: 100,
+          isRescued: false,
+          isGraduated: false,
+          foodType: 'meat',
+          foodName: '香肉骨',
+          foodEmoji: '🍖',
+          avatar: '🦖'
+        },
+        fox: {
+          id: 'fox',
+          name: '星际小狐',
+          islandId: 'island_5',
+          stage: 1,
+          exp: 0,
+          maxExp: 100,
+          isRescued: false,
+          isGraduated: false,
+          foodType: 'starFruit',
+          foodName: '星星果',
+          foodEmoji: '⭐',
+          avatar: '🦊'
+        }
+      },
+      foodInventory: {
+        fish: 3,       // 初始赠送3份小鱼干体验喂养
+        carrot: 0,
+        honey: 0,
+        meat: 0,
+        starFruit: 0,
+        superMeal: 1   // 初始赠送1份特级七彩大餐
+      },
+
+      // ========== 漂浮群岛系统 (支持动态增加岛屿数量) ==========
+      unlockedIslands: ['island_1'],
+      customIslands: []
     };
   }
 
@@ -4530,12 +5764,116 @@ class SyncManager {
         const merged = Object.assign(defaultObj, parsed);
         if (!Array.isArray(merged.quizHistory)) merged.quizHistory = [];
         if (!Array.isArray(merged.reviewQueue)) merged.reviewQueue = [];
+        if (!merged.foodInventory) merged.foodInventory = defaultObj.foodInventory;
+        if (!merged.pets) merged.pets = defaultObj.pets;
+        if (!Array.isArray(merged.unlockedIslands)) merged.unlockedIslands = ['island_1'];
+        if (!Array.isArray(merged.customIslands)) merged.customIslands = [];
         return merged;
       }
     } catch (e) {
       console.error('加载本地存档失败:', e);
     }
     return this.getDefaultData();
+  }
+
+  /** 奖励某种食物 */
+  awardFood(foodType, count = 1) {
+    if (!this.data.foodInventory) this.data.foodInventory = {};
+    this.data.foodInventory[foodType] = (this.data.foodInventory[foodType] || 0) + count;
+    this.saveData();
+    return this.data.foodInventory[foodType];
+  }
+
+  /** 投喂萌宠（支持5阶成长演化） */
+  feedActivePet(foodType = null) {
+    const petId = this.data.activePetId || 'cat';
+    const pet = this.data.pets[petId];
+    if (!pet) return { success: false, msg: '未找到当前萌宠' };
+
+    const actualFood = foodType || (this.data.foodInventory.superMeal > 0 ? 'superMeal' : pet.foodType);
+    const available = this.data.foodInventory[actualFood] || 0;
+    if (available <= 0) {
+      return { success: false, msg: '该食物库存不足，快去答题闯关或参与庄园保卫战获取吧！' };
+    }
+
+    // 扣减食物
+    this.data.foodInventory[actualFood]--;
+
+    // 增加经验
+    const gainedExp = (actualFood === 'superMeal') ? 35 : 15;
+    const oldStage = pet.stage || 1;
+    pet.exp = Math.min(100, (pet.exp || 0) + gainedExp);
+
+    // 严谨计算 5 阶形态
+    if (pet.exp < 20) pet.stage = 1;      // 阶1: 破壳彩蛋期
+    else if (pet.exp < 40) pet.stage = 2; // 阶2: 软萌婴儿期
+    else if (pet.exp < 60) pet.stage = 3; // 阶3: 书包幼童期
+    else if (pet.exp < 80) pet.stage = 4; // 阶4: 披风探险家
+    else pet.stage = 5;                  // 阶5: 皇冠守护神
+
+    const didLevelUp = pet.stage > oldStage;
+    let didGraduate = false;
+
+    // 满级毕业解锁下一座岛
+    if (pet.exp >= 100 && !pet.isGraduated) {
+      pet.isGraduated = true;
+      didGraduate = true;
+      this.unlockNextIsland(pet.islandId);
+    }
+
+    this.saveData();
+    return {
+      success: true,
+      pet,
+      gainedExp,
+      didLevelUp,
+      didGraduate,
+      currentStage: pet.stage,
+      currentExp: pet.exp
+    };
+  }
+
+  /** 解锁下一座岛屿与新萌宠幼崽 */
+  unlockNextIsland(currentIslandId) {
+    const islandOrder = ['island_1', 'island_2', 'island_3', 'island_4', 'island_5'];
+    const petMap = {
+      island_1: 'cat',
+      island_2: 'rabbit',
+      island_3: 'bear',
+      island_4: 'dino',
+      island_5: 'fox'
+    };
+
+    const idx = islandOrder.indexOf(currentIslandId);
+    if (idx >= 0 && idx < islandOrder.length - 1) {
+      const nextIsland = islandOrder[idx + 1];
+      if (!this.data.unlockedIslands.includes(nextIsland)) {
+        this.data.unlockedIslands.push(nextIsland);
+      }
+      const nextPetId = petMap[nextIsland];
+      if (nextPetId && this.data.pets[nextPetId]) {
+        this.data.pets[nextPetId].isRescued = true;
+        this.data.activePetId = nextPetId;
+      }
+      this.saveData();
+      return nextIsland;
+    }
+    return null;
+  }
+
+  /** 动态增加新岛屿 (支持进阶包与自定义岛屿) */
+  addNewIsland(islandData) {
+    if (!islandData || !islandData.id) return { success: false, msg: '岛屿数据不完整' };
+    if (!this.data.unlockedIslands.includes(islandData.id)) {
+      this.data.unlockedIslands.push(islandData.id);
+    }
+    if (!Array.isArray(this.data.customIslands)) this.data.customIslands = [];
+    const exists = this.data.customIslands.find(i => i.id === islandData.id);
+    if (!exists) {
+      this.data.customIslands.push(islandData);
+    }
+    this.saveData();
+    return { success: true, island: islandData };
   }
 
   saveData() {
@@ -4953,6 +6291,43 @@ class App {
     this.guidePrompt = document.getElementById('guidePrompt');
     this.btnGuideConfirm = document.getElementById('btnGuideConfirm');
 
+    // 顶栏快捷胶囊
+    this.btnTopPetCamp = document.getElementById('btnTopPetCamp');
+    this.btnTopBattle = document.getElementById('btnTopBattle');
+    this.topPetTierName = document.getElementById('topPetTierName');
+    this.topPetAvatar = document.getElementById('topPetAvatar');
+
+    // 漂浮群岛大探险元素
+    this.islandsContainer = document.getElementById('islandsContainer');
+    this.addIslandModal = document.getElementById('addIslandModal');
+    this.btnCloseAddIslandModal = document.getElementById('btnCloseAddIslandModal');
+    this.btnCreateCustomIsland = document.getElementById('btnCreateCustomIsland');
+    this.inputCustomIslandName = document.getElementById('inputCustomIslandName');
+    this.selectCustomIslandEmoji = document.getElementById('selectCustomIslandEmoji');
+
+    // 萌宠营地 & 5 阶进化元素
+    this.campPetAvatar = document.getElementById('campPetAvatar');
+    this.campPetName = document.getElementById('campPetName');
+    this.campTierTitle = document.getElementById('campTierTitle');
+    this.campExpText = document.getElementById('campExpText');
+    this.campExpBar = document.getElementById('campExpBar');
+    this.foodCountFish = document.getElementById('foodCountFish');
+    this.foodCountCarrot = document.getElementById('foodCountCarrot');
+    this.foodCountHoney = document.getElementById('foodCountHoney');
+    this.foodCountSuper = document.getElementById('foodCountSuper');
+    this.campPetsRoster = document.getElementById('campPetsRoster');
+
+    // 庄园保卫战元素
+    this.monsterAvatar = document.getElementById('monsterAvatar');
+    this.monsterHpBar = document.getElementById('monsterHpBar');
+    this.monsterHpText = document.getElementById('monsterHpText');
+    this.btnStartBattle = document.getElementById('btnStartBattle');
+    this.battleDescText = document.getElementById('battleDescText');
+    this.battleHp = 3;
+    this.battleMaxHp = 3;
+    this.battleQueue = [];
+    this.isBattleMode = false;
+
     // 答题防猜追踪状态
     this.arenaStartTime = 0;
     this.currentAttemptCount = 0;
@@ -5090,6 +6465,73 @@ class App {
     this.dailyChestBox.addEventListener('click', () => {
       this.handleChestClick();
     });
+
+    // 顶栏快捷胶囊点击事件
+    if (this.btnTopPetCamp) {
+      this.btnTopPetCamp.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        this.switchView('camp');
+      });
+    }
+    if (this.btnTopBattle) {
+      this.btnTopBattle.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        this.switchView('battle');
+      });
+    }
+
+    // ➕ 探索/增加新岛屿弹窗事件
+    if (this.btnCloseAddIslandModal) {
+      this.btnCloseAddIslandModal.addEventListener('click', () => {
+        this.addIslandModal.style.display = 'none';
+      });
+    }
+
+    // 弹窗内快捷开启预置岛屿
+    document.querySelectorAll('.btn-quick-add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const islandId = btn.dataset.islandId;
+        const res = window.syncManager.unlockNextIsland(islandId);
+        alert(res.msg);
+        if (res.success) {
+          this.addIslandModal.style.display = 'none';
+          this.renderAll();
+        }
+      });
+    });
+
+    // 亲子共创自定义新岛屿
+    if (this.btnCreateCustomIsland) {
+      this.btnCreateCustomIsland.addEventListener('click', () => {
+        const name = this.inputCustomIslandName.value.trim();
+        const emoji = this.selectCustomIslandEmoji.value;
+        if (!name) {
+          alert('请先输入新岛屿的名称哦！');
+          return;
+        }
+        const res = window.syncManager.addNewIsland(name, emoji, 'linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%)');
+        alert(res.msg);
+        this.inputCustomIslandName.value = '';
+        this.addIslandModal.style.display = 'none';
+        this.renderAll();
+      });
+    }
+
+    // 食物投喂餐盘事件
+    document.querySelectorAll('.food-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const foodType = btn.dataset.food;
+        this.feedActivePet(foodType);
+      });
+    });
+
+    // 庄园保卫战启动按钮
+    if (this.btnStartBattle) {
+      this.btnStartBattle.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        this.startFarmBattle();
+      });
+    }
   }
 
   switchView(viewName) {
@@ -5101,6 +6543,9 @@ class App {
       sec.classList.toggle('active', sec.id === `view_${viewName}`);
     });
     if (viewName === 'daily') this.renderDailyView();
+    if (viewName === 'islands') this.renderIslandsView();
+    if (viewName === 'camp') this.renderCampView();
+    if (viewName === 'battle') this.renderBattleView();
     if (viewName === 'subjects') this.renderSubjectLevels();
     if (viewName === 'adventure') this.renderAdventureView();
   }
@@ -5108,6 +6553,9 @@ class App {
   renderAll() {
     this.updateNavStats();
     this.renderDailyView();
+    this.renderIslandsView();
+    this.renderCampView();
+    this.renderBattleView();
     this.renderSubjectLevels();
     this.renderAdventureView();
   }
@@ -5116,6 +6564,13 @@ class App {
     const data = window.syncManager.data;
     this.starCountEl.textContent = data.totalStars;
     this.streakCountEl.textContent = `${data.streakDays} 天`;
+
+    // 顶栏萌宠胶囊同步
+    const activePet = window.syncManager.getActivePet();
+    if (this.topPetAvatar) this.topPetAvatar.textContent = activePet.avatar;
+    if (this.topPetTierName) {
+      this.topPetTierName.textContent = `${activePet.name} · ${activePet.tierTitle}`;
+    }
   }
 
   // ================== 1. 每日闯关打卡逻辑 ==================
@@ -5186,6 +6641,247 @@ class App {
       window.soundEngine.playWrong();
       window.soundEngine.speak('小朋友，把上面的3个小任务都完成，宝箱就会打开哦！');
     }
+  }
+
+  // ================== 1.5 漂浮群岛大探险地图 (消消乐式闯关) ==================
+  renderIslandsView() {
+    if (!this.islandsContainer) return;
+    this.islandsContainer.innerHTML = '';
+
+    const allIslands = window.syncManager.getAllIslands();
+    const unlockedIds = window.syncManager.data.unlockedIslands || ['island_cat'];
+    const compData = window.syncManager.data.completedLevels || {};
+
+    // 渲染群岛卡片流
+    allIslands.forEach((island, idx) => {
+      const isUnlocked = unlockedIds.includes(island.id);
+      const islandCompleted = compData[island.id] || [];
+      const isAllDone = isUnlocked && island.levels.every(lvl => islandCompleted.includes(lvl.id));
+
+      const card = document.createElement('div');
+      card.className = `island-card ${isUnlocked ? 'active-island' : 'locked-island'}`;
+      card.style.background = island.bgTheme || '#ffffff';
+
+      let statusTagHtml = '';
+      if (!isUnlocked) {
+        statusTagHtml = `<span class="island-status-tag tag-locked">🔒 待解锁</span>`;
+      } else if (isAllDone) {
+        statusTagHtml = `<span class="island-status-tag tag-cleared">🏆 完全征服</span>`;
+      } else {
+        statusTagHtml = `<span class="island-status-tag tag-exploring">🧭 正在探险</span>`;
+      }
+
+      // 渲染岛屿内部石板路小径关卡节点
+      const nodesHtml = island.levels.map((lvl, nodeIdx) => {
+        const isPassed = islandCompleted.includes(lvl.id);
+        const isCurrent = isUnlocked && !isPassed && (nodeIdx === 0 || islandCompleted.includes(island.levels[nodeIdx - 1].id));
+        const nodeClass = isPassed ? 'node-passed' : (isCurrent ? 'node-active' : '');
+
+        return `
+          <div class="island-node-btn ${nodeClass}" data-island-id="${island.id}" data-level-id="${lvl.id}" data-unlocked="${isUnlocked}">
+            <span class="node-icon">${isPassed ? '⭐' : (isCurrent ? '🚩' : '⚪')}</span>
+            <span class="node-title">${lvl.themeTitle || lvl.badge || `第${nodeIdx+1}关`}</span>
+          </div>
+        `;
+      }).join('');
+
+      card.innerHTML = `
+        <div class="island-card-header">
+          <div class="island-title-group">
+            <div class="island-avatar-box" style="background:#ffffff;">${island.guardianEmoji || '🏝️'}</div>
+            <div>
+              <div class="island-name">${island.name}</div>
+              <div class="island-desc">${island.desc || '神兽守护的智慧岛屿'}</div>
+            </div>
+          </div>
+          ${statusTagHtml}
+        </div>
+
+        <div class="island-path-nodes">
+          ${nodesHtml}
+        </div>
+      `;
+
+      // 绑定节点点击启动答题
+      card.querySelectorAll('.island-node-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (!isUnlocked) {
+            window.soundEngine.playWrong();
+            alert('请先征服上一座岛屿，萌宠守护神才会带你开启新传送门哦！');
+            return;
+          }
+          const levelId = btn.dataset.levelId;
+          const targetLevel = island.levels.find(l => l.id === levelId);
+          if (targetLevel) {
+            window.soundEngine.playClick();
+            // 如果具备动态变式引擎，动态衍生实物和选项
+            let runLevel = targetLevel;
+            if (window.levelEngine) {
+              if (targetLevel.displayType === 'items') {
+                runLevel = window.levelEngine.generateDynamicMathItems(5);
+                runLevel.id = targetLevel.id;
+              } else if (targetLevel.displayType === 'radical_combine') {
+                runLevel = window.levelEngine.generateDynamicRadicalCombine();
+                runLevel.id = targetLevel.id;
+              } else if (targetLevel.displayType === 'tone_car') {
+                runLevel = window.levelEngine.generateDynamicToneCar();
+                runLevel.id = targetLevel.id;
+              }
+            }
+            this.openArena(runLevel, island.id);
+          }
+        });
+      });
+
+      this.islandsContainer.appendChild(card);
+    });
+
+    // 渲染末尾专属的【➕ 探索新岛屿】大卡片
+    const addCard = document.createElement('div');
+    addCard.className = 'island-add-trigger-card';
+    addCard.innerHTML = `
+      <span class="add-card-icon">➕</span>
+      <div class="add-card-title">探索新岛屿 (扩充知识世界)</div>
+      <div class="add-card-desc">点击一键开启恐龙岛、太空岛，或亲子共创全新岛屿！</div>
+    `;
+    addCard.addEventListener('click', () => {
+      window.soundEngine.playClick();
+      if (this.addIslandModal) {
+        this.addIslandModal.style.display = 'flex';
+      }
+    });
+    this.islandsContainer.appendChild(addCard);
+  }
+
+  // ================== 1.6 萌宠营地 & 5 阶进化系统 ==================
+  renderCampView() {
+    const activePet = window.syncManager.getActivePet();
+    const tierInfo = window.syncManager.getPetTier(activePet.exp);
+
+    // 1. 渲染当前神兽立绘与称号
+    if (this.campPetAvatar) this.campPetAvatar.textContent = tierInfo.avatar;
+    if (this.campPetName) this.campPetName.textContent = activePet.name;
+    if (this.campTierTitle) this.campTierTitle.textContent = `${tierInfo.title} (阶 ${tierInfo.tier}/5)`;
+
+    // 2. 饱食度成长能量条
+    if (this.campExpText) this.campExpText.textContent = `${activePet.exp} / 100 经验值`;
+    if (this.campExpBar) this.campExpBar.style.width = `${Math.min(100, activePet.exp)}%`;
+
+    // 3. 5 阶刻度指示高亮
+    const stepNodes = document.querySelectorAll('.stepper-node');
+    stepNodes.forEach(node => {
+      const stepVal = parseInt(node.dataset.step, 10);
+      node.classList.toggle('active-step', stepVal === tierInfo.tier);
+      node.classList.toggle('passed-step', stepVal < tierInfo.tier);
+    });
+
+    // 4. 食物背包数量
+    const inv = window.syncManager.data.foodInventory || {};
+    if (this.foodCountFish) this.foodCountFish.textContent = `x${inv.fish || 0}`;
+    if (this.foodCountCarrot) this.foodCountCarrot.textContent = `x${inv.carrot || 0}`;
+    if (this.foodCountHoney) this.foodCountHoney.textContent = `x${inv.honey || 0}`;
+    if (this.foodCountSuper) this.foodCountSuper.textContent = `x${inv.superMeal || 0}`;
+
+    // 5. 萌宠图鉴列表
+    if (this.campPetsRoster) {
+      this.campPetsRoster.innerHTML = '';
+      const allPets = window.syncManager.getAllPets();
+      allPets.forEach(pet => {
+        const petTier = window.syncManager.getPetTier(pet.exp);
+        const rCard = document.createElement('div');
+        rCard.className = `roster-card ${pet.id === activePet.id ? 'active-pet-card' : ''}`;
+        rCard.innerHTML = `
+          <span class="roster-emoji">${petTier.avatar}</span>
+          <span class="roster-name">${pet.name}</span>
+          <span style="font-size:10px; color:#f59e0b; font-weight:800;">阶 ${petTier.tier}</span>
+        `;
+        rCard.addEventListener('click', () => {
+          window.soundEngine.playClick();
+          window.syncManager.setActivePet(pet.id);
+          this.renderCampView();
+          this.updateNavStats();
+        });
+        this.campPetsRoster.appendChild(rCard);
+      });
+    }
+  }
+
+  feedActivePet(foodType) {
+    const res = window.syncManager.feedActivePet(foodType);
+    if (!res.success) {
+      window.soundEngine.playWrong();
+      alert(res.msg);
+      return;
+    }
+
+    // 播放进食动效与音效
+    window.soundEngine.playCorrect();
+    if (res.evolved) {
+      window.soundEngine.playVictory();
+      alert(`🎉 哇！神兽升级啦！\n${res.petName} 成功进化为：【${res.newTier.title}】！\n形象变得更加帅气啦！`);
+    }
+
+    this.renderCampView();
+    this.updateNavStats();
+  }
+
+  // ================== 1.7 庄园保卫战复习系统 (抗遗忘对战) ==================
+  renderBattleView() {
+    if (!this.monsterHpBar || !this.monsterHpText) return;
+    const hpPct = Math.round((this.battleHp / this.battleMaxHp) * 100);
+    this.monsterHpBar.style.width = `${hpPct}%`;
+    this.monsterHpText.textContent = `生命值: ${this.battleHp} / ${this.battleMaxHp}`;
+
+    if (this.battleHp <= 0) {
+      this.monsterAvatar.textContent = '💫';
+      this.battleDescText.innerHTML = '🎉 <strong>大嘴怪已被击退！</strong>庄园储备粮安全啦！获得特级七彩进化大餐！';
+    } else {
+      this.monsterAvatar.textContent = '👾';
+    }
+  }
+
+  startFarmBattle() {
+    // 收集历史错题或核心复习题 (3题)
+    let reviewPool = window.syncManager.getReviewQueue().map(item => item.rawTask || item);
+    if (reviewPool.length < 3) {
+      // 从默认关卡中补充温故知新题
+      const mathPool = window.DefaultLevels.math || [];
+      const pinyinPool = window.DefaultLevels.pinyin || [];
+      const literacyPool = window.DefaultLevels.literacy || [];
+      const combined = [...mathPool, ...pinyinPool, ...literacyPool];
+      while (reviewPool.length < 3 && combined.length > 0) {
+        const randItem = combined[Math.floor(Math.random() * combined.length)];
+        if (!reviewPool.find(q => q.id === randItem.id)) {
+          reviewPool.push(randItem);
+        }
+      }
+    }
+
+    this.battleQueue = reviewPool.slice(0, 3);
+    this.battleHp = 3;
+    this.battleMaxHp = 3;
+    this.isBattleMode = true;
+    this.renderBattleView();
+
+    window.soundEngine.speak('庄园保卫战开始！答对3道复习题，发射魔法光波击退大嘴怪！');
+    this.nextBattleQuestion();
+  }
+
+  nextBattleQuestion() {
+    if (this.battleQueue.length === 0) {
+      // 战斗全胜
+      this.isBattleMode = false;
+      this.battleHp = 0;
+      this.renderBattleView();
+      window.soundEngine.playVictory();
+      window.syncManager.awardFood('superMeal', 1);
+      alert('🏆 庄园保卫战胜利！\n大嘴怪灰溜溜地逃跑啦！\n奖励获得稀有【🍰 特级进化大餐 x1】！快去营地投喂升级萌宠吧！');
+      this.renderCampView();
+      return;
+    }
+
+    const nextQ = this.battleQueue.shift();
+    this.openArena(nextQ, 'battle');
   }
 
   // ================== 2. 学科与高阶左右脑专区逻辑 ==================
@@ -5873,8 +7569,30 @@ class App {
         starsEarned: earnedStars
       });
 
-      // 关卡完成结算
+      // 关卡完成结算与食物掉落
       window.syncManager.completeLevel(this.activeCategory, task.id, earnedStars);
+
+      // 食物掉落判定与入库
+      let foodType = 'fish';
+      let foodName = '黄金鱼干';
+      if (this.activeCategory.includes('rabbit') || task.id.includes('pinyin')) {
+        foodType = 'carrot';
+        foodName = '香脆胡萝卜';
+      } else if (this.activeCategory.includes('bear') || task.id.includes('literacy')) {
+        foodType = 'honey';
+        foodName = '香浓蜜糖';
+      } else if (task.id.includes('brain') || task.id.includes('logic')) {
+        foodType = 'starFruit';
+        foodName = '智慧星果';
+      }
+      const foodCount = firstAttemptCorrect ? 2 : 1;
+      window.syncManager.awardFood(foodType, foodCount);
+
+      if (this.isBattleMode) {
+        this.battleHp = Math.max(0, this.battleHp - 1);
+        this.renderBattleView();
+      }
+
       this.updateNavStats();
 
       // 1. 答题界面上直接弹出即时鼓励条 (答题界面原位展示)
@@ -5884,11 +7602,12 @@ class App {
 
       // 2. 弹出答对超级多感官欢呼层 (单萌宠跳出 + 礼花从天而降 + 对话气泡)
       if (this.superCheerOverlay) {
-        if (this.cheerTitle) this.cheerTitle.textContent = '🎉 ' + cheerPrefix;
+        const foodNotice = ` 🎒 获得 ${foodName} x${foodCount}！`;
+        if (this.cheerTitle) this.cheerTitle.textContent = '🎉 ' + cheerPrefix + foodNotice;
         const mascotInfo = this.playMascotCheer(opt.cheer);
         if (instantCheer && instantText) {
           instantIcon.textContent = mascotInfo.icon;
-          instantText.textContent = mascotInfo.quoteText;
+          instantText.textContent = mascotInfo.quoteText + foodNotice;
           instantCheer.style.display = 'flex';
         }
         this.superCheerOverlay.style.display = 'flex';
@@ -5900,8 +7619,13 @@ class App {
         const confettiBox = document.getElementById('confettiRain');
         if (confettiBox) confettiBox.innerHTML = '';
         this.arenaOverlay.style.display = 'none';
-        this.renderAll();
-      }, 2800);
+
+        if (this.isBattleMode) {
+          this.nextBattleQuestion();
+        } else {
+          this.renderAll();
+        }
+      }, 2600);
     } else {
       btn.classList.add('wrong-shake');
       btn.classList.add('opt-disabled');
