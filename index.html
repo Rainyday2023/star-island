@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-09-22 17:40:40">
+  <meta name="build-version" content="2026-09-22 17:52:36">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2734,41 +2734,49 @@ body {
   border: 1px solid #cbd5e1;
 }
 
-/* 岛内关卡石板路小径 - 消消乐巨型立体关卡地图 */
+/* 岛内关卡小径 - 超软萌自然波浪鹅卵石小径 */
 .island-path-nodes {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 2px dashed #cbd5e1;
-  border-radius: 28px;
-  padding: 22px 14px 18px;
+  justify-content: flex-start;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0fdf4 60%, #e2fbe8 100%);
+  border: 3px solid #bbf7d0;
+  border-radius: 36px;
+  padding: 34px 20px 30px;
   position: relative;
   margin-top: 14px;
-  gap: 12px;
+  gap: 6px;
   overflow-x: auto;
+  box-shadow: inset 0 3px 12px rgba(34, 197, 94, 0.08), 0 8px 20px rgba(0, 0, 0, 0.03);
 }
 
-/* 巨型圆形关卡节点 (开心消消乐 / 探险岛风格) */
+/* 巨型圆形关卡节点 (超Q弹果冻糖果风) */
 .island-level-circle {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-decoration: none;
   user-select: none;
-  min-width: 76px;
+  min-width: 82px;
+  z-index: 2;
 }
 
+/* 自然波浪起伏错落（消灭死板直线！） */
+.island-level-circle:nth-child(4n + 1) { transform: translateY(-12px); }
+.island-level-circle:nth-child(4n + 2) { transform: translateY(10px); }
+.island-level-circle:nth-child(4n + 3) { transform: translateY(-6px); }
+.island-level-circle:nth-child(4n + 4) { transform: translateY(12px); }
+
 .island-level-circle:hover {
-  transform: translateY(-5px) scale(1.06);
+  transform: translateY(-8px) scale(1.1) !important;
 }
 
 .level-circle-body {
-  width: 66px;
-  height: 66px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2777,14 +2785,27 @@ body {
   font-weight: 900;
   position: relative;
   transition: all 0.25s ease;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.16), 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* 顶部半月形剔透水晶高光 (Juicy Gloss) */
+.level-circle-body::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  right: 10px;
+  height: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 50% / 60%;
+  pointer-events: none;
 }
 
 /* 关卡头顶的三星皇冠 */
 .level-stars-crown {
   font-size: 13px;
   letter-spacing: 2px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
@@ -2795,6 +2816,7 @@ body {
 
 .level-stars-crown.stars-empty {
   color: #cbd5e1;
+  opacity: 0.8;
 }
 
 /* 节点关卡名小胶囊 */
@@ -2803,20 +2825,20 @@ body {
   font-weight: 900;
   color: #334155;
   background: #ffffff;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 50px;
-  margin-top: 6px;
+  margin-top: 8px;
   white-space: nowrap;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* 1. 已通关节点：翡翠草地绿 + 金星 */
+/* 1. 已通关节点：抹茶/青苹果果冻绿 + 金星 */
 .island-level-circle.level-cleared .level-circle-body {
-  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%);
   color: #ffffff;
   border: 3px solid #86efac;
-  box-shadow: 0 6px 0 #16a34a, 0 10px 18px rgba(34, 197, 94, 0.3);
+  box-shadow: inset 0 -6px 0 #15803d, 0 8px 18px rgba(34, 197, 94, 0.35);
 }
 
 .island-level-circle.level-cleared .level-name-pill {
@@ -2825,13 +2847,13 @@ body {
   background: #f0fdf4;
 }
 
-/* 2. 当前正可挑战节点：宝石果冻蓝 + 呼吸脉冲波 */
+/* 2. 当前可挑战节点：蓝莓海盐Q弹果冻 + 果冻弹跳波 */
 .island-level-circle.level-current .level-circle-body {
-  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
   color: #ffffff;
   border: 3px solid #bae6fd;
-  box-shadow: 0 6px 0 #0369a1, 0 10px 22px rgba(2, 132, 199, 0.4);
-  animation: currentPulse 1.6s infinite ease-in-out;
+  box-shadow: inset 0 -6px 0 #0369a1, 0 10px 24px rgba(2, 132, 199, 0.45);
+  animation: jellyPulse 2.4s infinite ease-in-out;
 }
 
 .island-level-circle.level-current .level-name-pill {
@@ -2841,29 +2863,121 @@ body {
   font-weight: 900;
 }
 
-@keyframes currentPulse {
+@keyframes jellyPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 6px 0 #0369a1, 0 8px 18px rgba(2, 132, 199, 0.35);
+    box-shadow: inset 0 -6px 0 #0369a1, 0 8px 20px rgba(2, 132, 199, 0.35);
+  }
+  25% {
+    transform: scale(1.09, 0.93);
+    box-shadow: inset 0 -6px 0 #0369a1, 0 12px 28px rgba(2, 132, 199, 0.55);
   }
   50% {
-    transform: scale(1.08);
-    box-shadow: 0 6px 0 #0369a1, 0 12px 28px rgba(2, 132, 199, 0.55);
+    transform: scale(0.95, 1.07);
+  }
+  75% {
+    transform: scale(1.04, 0.97);
   }
 }
 
-/* 当前关卡上方的“开始闯关”气泡指引 */
+/* 当前关卡上方的“👉 开始闯关”气泡指引 */
 .current-bubble-tip {
   position: absolute;
-  top: -24px;
-  background: #ef4444;
+  top: -26px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #ffffff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 50px;
   white-space: nowrap;
   animation: bounceItem 1.4s infinite ease-in-out;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+  border: 1px solid #fecaca;
+  z-index: 10;
+}
+
+/* 3. 待解锁节点：马卡龙糖霜石板 + 萌萌小锁头 */
+.island-level-circle.level-locked {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.island-level-circle.level-locked .level-circle-body {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  color: #94a3b8;
+  border: 3px dashed #cbd5e1;
+  box-shadow: inset 0 -4px 0 #cbd5e1, 0 5px 10px rgba(0, 0, 0, 0.05);
+  font-size: 22px;
+}
+
+/* 关卡之间的彩色鹅卵石小路点 (替代死板黑色箭头！) */
+.level-path-stepping {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 4px;
+  user-select: none;
+  opacity: 0.85;
+}
+
+.step-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step-dot.passed {
+  background: #22c55e;
+  box-shadow: 0 2px 0 #15803d;
+}
+
+/* 终点目标：待解救萌宠水晶台 */
+.island-goal-target {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 92px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.goal-cage-box {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fefce8 0%, #fef08a 100%);
+  border: 3px dashed #eab308;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  box-shadow: 0 6px 16px rgba(234, 179, 8, 0.25);
+  position: relative;
+  animation: floatPet 2.5s infinite ease-in-out;
+}
+
+.goal-cage-box.cage-opened {
+  background: linear-gradient(135deg, #dcfce7 0%, #86efac 100%);
+  border-style: solid;
+  border-color: #22c55e;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+}
+
+.goal-badge {
+  font-size: 10px;
+  font-weight: 900;
+  color: #b45309;
+  background: #ffffff;
+  padding: 3px 8px;
+  border-radius: 50px;
+  margin-top: 6px;
+  white-space: nowrap;
+  border: 1px solid #fde047;
+}
   box-shadow: 0 3px 6px rgba(239, 68, 68, 0.35);
 }
 
@@ -3402,7 +3516,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#94a3b8; font-weight:700; margin-left:6px;">v3.1 (17:40)</span>
+            的精彩乐园 <span style="font-size:11px; color:#94a3b8; font-weight:700; margin-left:6px;">v3.1 (17:52)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -7007,8 +7121,15 @@ class App {
           starsStr = '⚪⚪⚪';
         }
 
-        const arrowHtml = (nodeIdx < island.levels.length - 1)
-          ? `<span class="level-path-arrow">➔</span>`
+        // 彩色鹅卵石跳跳石步道 (替代死板黑色单箭头)
+        const steppingHtml = (nodeIdx < island.levels.length - 1)
+          ? `
+            <div class="level-path-stepping">
+              <span class="step-dot ${isPassed ? 'passed' : ''}"></span>
+              <span class="step-dot ${isPassed ? 'passed' : ''}"></span>
+              <span class="step-dot ${isPassed ? 'passed' : ''}"></span>
+            </div>
+          `
           : '';
 
         return `
@@ -7018,14 +7139,31 @@ class App {
             <div class="level-circle-body">${bodyIcon}</div>
             <span class="level-name-pill">${lvl.themeTitle || lvl.badge || `第${nodeIdx+1}关`}</span>
           </div>
-          ${arrowHtml}
+          ${steppingHtml}
         `;
       }).join('');
+
+      // 终点目标：待解救萌宠水晶牢笼
+      const remainingCount = Math.max(0, levelsList.length - islandCompleted.length);
+      const goalHtml = `
+        <div class="level-path-stepping">
+          <span class="step-dot ${isAllDone ? 'passed' : ''}"></span>
+          <span class="step-dot ${isAllDone ? 'passed' : ''}"></span>
+        </div>
+        <div class="island-goal-target" title="${isAllDone ? '已成功解救！' : '解救萌宠！'}">
+          <div class="goal-cage-box ${isAllDone ? 'cage-opened' : ''}">
+            ${isAllDone ? '👑' : (island.guardianEmoji || '🐱')}
+          </div>
+          <span class="goal-badge">
+            ${isAllDone ? '🎉 成功解救！' : `终点: 剩${remainingCount}关`}
+          </span>
+        </div>
+      `;
 
       card.innerHTML = `
         <div class="island-card-header">
           <div class="island-title-group">
-            <div class="island-avatar-box" style="background:#ffffff;">${island.guardianEmoji || '🏝️'}</div>
+            <div class="island-avatar-box" style="background:#ffffff; border:2px solid #bae6fd; box-shadow:0 4px 12px rgba(56,189,248,0.2);">${island.guardianEmoji || '🏝️'}</div>
             <div>
               <div class="island-name">${island.name}</div>
               <div class="island-desc">${island.desc || '神兽守护的智慧岛屿'}</div>
@@ -7036,6 +7174,7 @@ class App {
 
         <div class="island-path-nodes">
           ${nodesHtml}
+          ${goalHtml}
         </div>
       `;
 
