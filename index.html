@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-09-23 08:34:57">
+  <meta name="build-version" content="2026-09-23 08:43:52">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2755,7 +2755,7 @@ body {
 }
 
 /* ============================================================
-   海面金色水上连通浮桥 (Sea Bridge Connector)
+   气势恢宏的跨海海峡与金色浮桥 (Grand Sea Passage & Golden Bridge)
    ============================================================ */
 .sea-bridge-connector {
   position: relative;
@@ -2765,22 +2765,96 @@ body {
   justify-content: center;
   padding: 24px 0;
   z-index: 4;
+  width: 100%;
 }
 
-/* 1. 已通关搭建好的金色木板栈桥 */
-.bridge-plank-track {
+/* 1. 未通关的跨海迷雾深水通道 */
+.sea-channel-locked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 96%;
+  background: linear-gradient(180deg, rgba(2, 44, 90, 0.65) 0%, rgba(3, 105, 161, 0.75) 100%);
+  border: 2.5px dashed #7dd3fc;
+  border-radius: 28px;
+  padding: 18px 14px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.channel-mist-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(90deg, #d97706 0%, #f59e0b 50%, #d97706 100%);
+  font-size: 13px;
+  font-weight: 800;
+  color: #bae6fd;
+  margin-bottom: 10px;
+}
+
+.mist-label {
+  color: #f0fdf4;
+  letter-spacing: 1px;
+}
+
+.mist-notice-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1.5px solid #38bdf8;
+  border-radius: 18px;
+  padding: 12px 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mist-lock-sign {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+
+.mist-text-col {
+  flex: 1;
+}
+
+.mist-main-title {
+  font-size: 14px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.mist-sub-desc {
+  font-size: 12px;
+  color: #e0f2fe;
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.sea-stepping-stones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+/* 2. 已通关的金色水上木栈桥 + 帆船通航 */
+.sea-channel-bridged {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 96%;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.35) 0%, rgba(217, 119, 6, 0.5) 100%);
   border: 3px solid #fde68a;
-  border-radius: 50px;
-  padding: 8px 24px;
-  box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.3),
-    0 0 25px rgba(253, 224, 71, 0.6);
-  position: relative;
+  border-radius: 28px;
+  padding: 18px 14px;
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.35), 0 0 25px rgba(253, 224, 71, 0.5);
+  box-sizing: border-box;
   animation: bridgeFloat 3s infinite ease-in-out alternate;
 }
 
@@ -2789,94 +2863,258 @@ body {
   100% { transform: translateY(-4px); }
 }
 
-/* 桥上木板纹理点与金色脚印 */
-.bridge-plank-node {
-  font-size: 18px;
-  user-select: none;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
-}
-
-.bridge-status-pill {
-  position: absolute;
-  bottom: -14px;
-  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-  color: #ffffff;
-  font-size: 11px;
+.channel-bridged-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
   font-weight: 900;
-  padding: 3px 12px;
-  border-radius: 50px;
-  border: 2px solid #86efac;
-  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4);
-  white-space: nowrap;
+  color: #fef08a;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
-/* 桥上的小木船 ⛵ */
-.bridge-boat-icon {
-  font-size: 26px;
+.golden-bridge-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0 12px;
+  width: 100%;
+}
+
+.bridge-rope-rail {
+  font-size: 12px;
+  font-weight: 900;
+  color: #fef08a;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+.bridge-planks-water {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.plank-wood {
+  font-size: 22px;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+}
+
+.bridge-ship-float {
+  font-size: 32px;
   animation: boatRock 2.2s infinite ease-in-out;
 }
 
 @keyframes boatRock {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-3px) rotate(6deg); }
+  50% { transform: translateY(-4px) rotate(6deg); }
 }
 
-/* 2. 未通关的待建迷雾水路 */
-.bridge-locked-track {
+.bridge-dolphin-jump {
+  font-size: 26px;
+  animation: dolphinJump 2.5s infinite ease-in-out;
+}
+
+@keyframes dolphinJump {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-6px) rotate(-12deg); }
+}
+
+.btn-sail-to-next {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  color: #ffffff;
+  border: 2px solid #86efac;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.45);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-sail-to-next:active {
+  transform: scale(0.96);
+}
+
+/* ============================================================
+   开心消消乐通天藤蔓S型攀爬地图 (Winding Beanstalk Climbing Map)
+   ============================================================ */
+.island-vine-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 10px 30px;
+  margin-top: 14px;
+  background: radial-gradient(ellipse at 50% 50%, #ffffff 0%, #f0fdf4 65%, #dcfce7 100%);
+  border: 3px solid #86efac;
+  border-radius: 36px;
+  box-shadow: inset 0 4px 16px rgba(22, 101, 52, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+  overflow: visible; /* 坚决告别任何横向滚动条！ */
+}
+
+/* 背景中央主藤蔓躯干 (通天绿藤) */
+.vine-stalk-spine {
+  position: absolute;
+  top: 24px;
+  bottom: 80px;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #86efac 0%, #22c55e 35%, #16a34a 70%, #15803d 100%);
+  border-radius: 20px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.2), 0 0 12px rgba(34, 197, 94, 0.35);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 蜿蜒藤蔓的摆动行 (左偏 / 居中 / 右偏) */
+.vine-step-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
+  margin: 4px 0;
+}
+
+.vine-step-row.pos-left { justify-content: flex-start; padding-left: 8%; }
+.vine-step-row.pos-mid-left { justify-content: flex-start; padding-left: 26%; }
+.vine-step-row.pos-mid-right { justify-content: flex-end; padding-right: 26%; }
+.vine-step-row.pos-right { justify-content: flex-end; padding-right: 8%; }
+.vine-step-row.pos-center { justify-content: center; }
+
+/* 荷叶 / 绿叶底座 */
+.vine-leaf-pad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vine-leaf-pad::before {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  width: 90px;
+  height: 38px;
+  background: radial-gradient(ellipse at 50% 50%, #4ade80 0%, #16a34a 85%);
+  border: 2px solid #86efac;
+  border-radius: 50%;
+  box-shadow: 0 6px 14px rgba(21, 128, 61, 0.35);
+  z-index: -1;
+  transform: rotate(-5deg);
+}
+
+/* 连向下一关的蜿蜒藤蔓小径（带跳跳石与嫩绿藤叶） */
+.vine-connector-branch {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border: 2px dashed rgba(255, 255, 255, 0.5);
-  border-radius: 50px;
-  padding: 8px 22px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(4px);
-  position: relative;
-}
-
-.bridge-locked-label {
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 800;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-
-/* 岛内关卡小径 - 超软萌自然波浪鹅卵石小径 */
-.island-path-nodes {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0fdf4 60%, #e2fbe8 100%);
-  border: 3px solid #bbf7d0;
-  border-radius: 36px;
-  padding: 34px 20px 30px;
-  position: relative;
-  margin-top: 14px;
-  gap: 6px;
-  overflow-x: auto;
-  box-shadow: inset 0 3px 12px rgba(34, 197, 94, 0.08), 0 8px 20px rgba(0, 0, 0, 0.03);
-}
-
-/* 巨型圆形关卡节点 (超Q弹果冻糖果风) */
-.island-level-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-  text-decoration: none;
-  user-select: none;
-  min-width: 82px;
+  width: 100%;
+  padding: 8px 0;
   z-index: 2;
 }
 
-/* 自然波浪起伏错落（消灭死板直线！） */
-.island-level-circle:nth-child(4n + 1) { transform: translateY(-12px); }
-.island-level-circle:nth-child(4n + 2) { transform: translateY(10px); }
-.island-level-circle:nth-child(4n + 3) { transform: translateY(-6px); }
-.island-level-circle:nth-child(4n + 4) { transform: translateY(12px); }
+.vine-stepping-pebble {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  border: 2px solid #cbd5e1;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.vine-stepping-pebble.passed {
+  background: #facc15;
+  border-color: #eab308;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.85);
+  transform: scale(1.2);
+}
+
+.vine-sprout-leaf {
+  font-size: 16px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+  animation: leafSway 3s infinite ease-in-out alternate;
+}
+
+@keyframes leafSway {
+  0% { transform: rotate(-8deg); }
+  100% { transform: rotate(8deg); }
+}
+
+.vine-sprout-flower {
+  font-size: 14px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+
+/* 终点：山顶神兽解救水晶圣殿 */
+.vine-summit-goal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 92%;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #fefce8 100%);
+  border: 3px solid #fde047;
+  border-radius: 26px;
+  box-shadow: 0 10px 24px rgba(234, 179, 8, 0.22);
+  z-index: 2;
+  margin-top: 10px;
+}
+
+.summit-cage-box {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+  border: 3px solid #f59e0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(217, 119, 6, 0.25);
+}
+
+.summit-pet-avatar {
+  font-size: 34px;
+  animation: petFloat 2.2s infinite ease-in-out;
+}
+
+@keyframes petFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.summit-goal-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.summit-goal-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #78350f;
+}
+
+.summit-goal-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: #92400e;
+  margin-top: 2px;
+}
 
 .island-level-circle:hover {
   transform: translateY(-8px) scale(1.1) !important;
@@ -3605,7 +3843,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#94a3b8; font-weight:700; margin-left:6px;">v3.3 (08:34)</span>
+            的精彩乐园 <span style="font-size:11px; color:#94a3b8; font-weight:700; margin-left:6px;">v3.4 (08:43)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -7170,7 +7408,7 @@ class App {
       : ['island_1', 'island_cat'];
     const compData = (window.syncManager && window.syncManager.data && window.syncManager.data.completedLevels) || {};
 
-    // 渲染俯视海洋群岛沙盘
+    // 渲染俯视海洋群岛沙盘 (开心消消乐通天藤蔓爬关与跨海浮桥)
     allIslands.forEach((island, idx) => {
       const isUnlocked = (idx === 0) || unlockedIds.includes(island.id) || (island.id === 'island_1') || (island.id === 'island_cat');
       const islandCompleted = compData[island.id] || [];
@@ -7178,6 +7416,8 @@ class App {
       const isAllDone = isUnlocked && levelsList.length > 0 && levelsList.every(lvl => islandCompleted.includes(lvl.id));
 
       const card = document.createElement('div');
+      card.id = island.id;
+      card.dataset.islandId = island.id;
       card.className = `sea-island-unit ${isUnlocked ? 'active-island' : 'island-fog-locked'}`;
 
       let statusTagHtml = '';
@@ -7189,7 +7429,9 @@ class App {
         statusTagHtml = `<span class="island-status-tag tag-exploring">🧭 正在探险 (${islandCompleted.length}/${levelsList.length})</span>`;
       }
 
-      // 渲染岛内S型藤蔓盘山关卡节点 (超Q弹果冻大圆钮)
+      // 蜿蜒藤蔓的摆动位置 (左偏 -> 居中偏左 -> 居中偏右 -> 右偏 -> 循环，彻底告别横向溢出滚动条！)
+      const swingPositions = ['pos-left', 'pos-mid-left', 'pos-mid-right', 'pos-right', 'pos-mid-right', 'pos-mid-left'];
+
       const nodesHtml = island.levels.map((lvl, nodeIdx) => {
         const isPassed = islandCompleted.includes(lvl.id);
         const isCurrent = isUnlocked && !isPassed && (nodeIdx === 0 || islandCompleted.includes(island.levels[nodeIdx - 1].id));
@@ -7209,42 +7451,54 @@ class App {
           starsStr = '⚪⚪⚪';
         }
 
-        // 彩色鹅卵石跳跳石小路
-        const steppingHtml = (nodeIdx < island.levels.length - 1)
+        const swingPos = swingPositions[nodeIdx % swingPositions.length];
+
+        // 连向下一关的蜿蜒藤蔓小径（带跳跳石与嫩绿藤叶）
+        const connectorHtml = (nodeIdx < island.levels.length - 1)
           ? `
-            <div class="level-path-stepping">
-              <span class="step-dot ${isPassed ? 'passed' : ''}"></span>
-              <span class="step-dot ${isPassed ? 'passed' : ''}"></span>
-              <span class="step-dot ${isPassed ? 'passed' : ''}"></span>
+            <div class="vine-connector-branch">
+              <span class="vine-sprout-leaf">🍃</span>
+              <span class="vine-stepping-pebble ${isPassed ? 'passed' : ''}"></span>
+              <span class="vine-stepping-pebble ${isPassed ? 'passed' : ''}"></span>
+              <span class="vine-stepping-pebble ${isPassed ? 'passed' : ''}"></span>
+              <span class="vine-sprout-flower">🌸</span>
             </div>
           `
           : '';
 
         return `
-          <div class="island-level-circle ${stateClass}" data-island-id="${island.id}" data-level-id="${lvl.id}" data-status="${isPassed ? 'cleared' : (isCurrent ? 'current' : 'locked')}">
-            ${isCurrent ? '<span class="current-bubble-tip">👉 开始闯关</span>' : ''}
-            <div class="level-stars-crown ${isPassed ? 'stars-won' : 'stars-empty'}">${starsStr}</div>
-            <div class="level-circle-body">${bodyIcon}</div>
-            <span class="level-name-pill">${lvl.themeTitle || lvl.badge || `第${nodeIdx+1}关`}</span>
+          <div class="vine-step-row ${swingPos}">
+            <div class="vine-leaf-pad">
+              <div class="island-level-circle ${stateClass}" data-island-id="${island.id}" data-level-id="${lvl.id}" data-status="${isPassed ? 'cleared' : (isCurrent ? 'current' : 'locked')}">
+                ${isCurrent ? '<span class="current-bubble-tip">👉 开始闯关</span>' : ''}
+                <div class="level-stars-crown ${isPassed ? 'stars-won' : 'stars-empty'}">${starsStr}</div>
+                <div class="level-circle-body">${bodyIcon}</div>
+                <span class="level-name-pill">${lvl.themeTitle || lvl.badge || `第${nodeIdx+1}关`}</span>
+              </div>
+            </div>
           </div>
-          ${steppingHtml}
+          ${connectorHtml}
         `;
       }).join('');
 
-      // 终点目标：待解救萌宠水晶台
+      // 终点目标：山顶神兽解救水晶圣殿
       const remainingCount = Math.max(0, levelsList.length - islandCompleted.length);
       const goalHtml = `
-        <div class="level-path-stepping">
-          <span class="step-dot ${isAllDone ? 'passed' : ''}"></span>
-          <span class="step-dot ${isAllDone ? 'passed' : ''}"></span>
+        <div class="vine-connector-branch">
+          <span class="vine-sprout-leaf">🍃</span>
+          <span class="vine-stepping-pebble ${isAllDone ? 'passed' : ''}"></span>
+          <span class="vine-stepping-pebble ${isAllDone ? 'passed' : ''}"></span>
+          <span class="vine-stepping-pebble ${isAllDone ? 'passed' : ''}"></span>
+          <span class="vine-sprout-flower">✨</span>
         </div>
-        <div class="island-goal-target" title="${isAllDone ? '已成功解救！' : '解救萌宠！'}">
-          <div class="goal-cage-box ${isAllDone ? 'cage-opened' : ''}">
-            ${isAllDone ? '👑' : (island.guardianEmoji || '🐱')}
+        <div class="vine-summit-goal ${isAllDone ? 'goal-cleared' : 'goal-locked'}" title="${isAllDone ? '已成功解救！' : '终点解救萌宠！'}">
+          <div class="summit-cage-box ${isAllDone ? 'cage-opened' : ''}">
+            <div class="summit-pet-avatar">${isAllDone ? '👑' : (island.guardianEmoji || '🐱')}</div>
           </div>
-          <span class="goal-badge">
-            ${isAllDone ? '🎉 成功解救！' : `终点: 剩${remainingCount}关`}
-          </span>
+          <div class="summit-goal-info">
+            <span class="summit-goal-title">${isAllDone ? '🎉 成功解救神兽！' : `🎯 终点: 拯救守护神兽`}</span>
+            <span class="summit-goal-sub">${isAllDone ? '神兽已戴上皇冠守护海岛！' : `攻克上方关卡 (还剩 ${remainingCount} 关)`}</span>
+          </div>
         </div>
       `;
 
@@ -7260,7 +7514,8 @@ class App {
           ${statusTagHtml}
         </div>
 
-        <div class="island-path-nodes">
+        <div class="island-vine-container">
+          <div class="vine-stalk-spine"></div>
           ${nodesHtml}
           ${goalHtml}
         </div>
@@ -7305,7 +7560,7 @@ class App {
 
       this.islandsContainer.appendChild(card);
 
-      // 【核心亮点】：如果后面还有下一座海岛，在两座岛之间架设海面水上浮桥
+      // 【核心亮点】：如果后面还有下一座海岛，在两座岛之间架设气势恢宏的跨海通道/浮桥
       if (idx < allIslands.length - 1) {
         const nextIsland = allIslands[idx + 1];
         const bridgeEl = document.createElement('div');
@@ -7314,24 +7569,68 @@ class App {
         if (isAllDone) {
           // 当前岛全部通关：搭建起金色发光水上木栈桥 + 小木船
           bridgeEl.innerHTML = `
-            <div class="bridge-plank-track">
-              <span class="bridge-boat-icon">⛵</span>
-              <span class="bridge-plank-node">🪵</span>
-              <span class="bridge-plank-node">🪵</span>
-              <span class="bridge-plank-node">🪵</span>
-              <span class="bridge-boat-icon">🐬</span>
-              <span class="bridge-status-pill">✨ 水上浮桥已连通 · 前往【${nextIsland.name}】</span>
+            <div class="sea-channel-bridged">
+              <div class="channel-bridged-header">
+                <span>🌊</span>
+                <span class="channel-title">✨ 金色跨海浮桥已连通 · 帆船通航 ✨</span>
+                <span>🌊</span>
+              </div>
+              <div class="golden-bridge-deck">
+                <div class="bridge-rope-rail">━━━━ 🏮 ━━━━ 🏮 ━━━━ 🏮 ━━━━</div>
+                <div class="bridge-planks-water">
+                  <span class="plank-wood">🪵</span>
+                  <span class="plank-wood">🪵</span>
+                  <span class="bridge-ship-float">⛵</span>
+                  <span class="plank-wood">🪵</span>
+                  <span class="bridge-dolphin-jump">🐬</span>
+                  <span class="plank-wood">🪵</span>
+                  <span class="plank-wood">🪵</span>
+                </div>
+                <div class="bridge-rope-rail">━━━━ 🏮 ━━━━ 🏮 ━━━━ 🏮 ━━━━</div>
+              </div>
+              <button class="btn-sail-to-next" data-target-id="${nextIsland.id}">
+                ⛵ 扬帆启航，前往【${nextIsland.name}】探险 ➔
+              </button>
             </div>
           `;
         } else {
-          // 当前岛未通关：显示迷雾水路提示
+          // 当前岛未通关：显示迷雾暗涌水路
           bridgeEl.innerHTML = `
-            <div class="bridge-locked-track">
-              <span style="font-size:18px;">🌊</span>
-              <span class="bridge-locked-label">🔒 征服【${island.name}】全部关卡，海面将自动搭起金色浮桥连通新岛</span>
-              <span style="font-size:18px;">🌊</span>
+            <div class="sea-channel-locked">
+              <div class="channel-mist-row">
+                <span class="mist-icon">☁️</span>
+                <span class="mist-wave">🌊</span>
+                <span class="mist-label">🌫️ 跨海迷雾封锁中 🌫️</span>
+                <span class="mist-wave">🌊</span>
+                <span class="mist-icon">☁️</span>
+              </div>
+              <div class="mist-notice-box">
+                <span class="mist-lock-sign">🔒</span>
+                <div class="mist-text-col">
+                  <div class="mist-main-title">前方跨海深水路迷雾笼罩</div>
+                  <div class="mist-sub-desc">请先攻克上方【${island.name}】解救神兽，海面将自动搭起金色浮桥！</div>
+                </div>
+              </div>
+              <div class="sea-stepping-stones">
+                <span class="submerged-stone">🪨</span>
+                <span class="sea-ripple">〰️</span>
+                <span class="submerged-stone">🪨</span>
+                <span class="sea-ripple">〰️</span>
+                <span class="submerged-stone">🪨</span>
+              </div>
             </div>
           `;
+        }
+
+        const sailBtn = bridgeEl.querySelector('.btn-sail-to-next');
+        if (sailBtn) {
+          sailBtn.addEventListener('click', () => {
+            window.soundEngine.playClick();
+            const targetEl = document.getElementById(nextIsland.id);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          });
         }
 
         this.islandsContainer.appendChild(bridgeEl);
