@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-09-24 17:59:23">
+  <meta name="build-version" content="2026-09-24 18:03:47">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -4577,204 +4577,306 @@ body {
   filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
 }
 
-/* 8. 半屏沉浸式果冻答题抽屉 (Bottom Sheet Modal) */
-.duo-quiz-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(6px);
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  animation: backdropFadeIn 0.25s ease forwards;
+/* ============================================================
+   8. 探险家 · 羊皮纸航海藏宝卷轴答题界面 (居中悬浮，绝不贴底)
+   ============================================================ */
+.parchment-modal-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(10, 25, 45, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 10000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+  animation: parchmentBackdropFade 0.25s ease forwards !important;
 }
 
-@keyframes backdropFadeIn {
+@keyframes parchmentBackdropFade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.duo-quiz-sheet {
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  background: #ffffff;
-  border-radius: 36px 36px 0 0;
-  padding: 16px 20px 32px;
-  box-sizing: border-box;
-  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.2);
-  animation: sheetSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  max-height: 85vh;
-  overflow-y: auto;
-  position: relative;
+/* 羊皮纸卷轴主容器 (居中展开，上下带有精美原木横轴与复古羊皮纸纹理) */
+.parchment-scroll-card {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 580px !important;
+  background: linear-gradient(180deg, #fdf8eb 0%, #fef3c7 40%, #fae8b2 100%) !important;
+  border: 4px solid #b45309 !important;
+  border-radius: 28px !important;
+  box-shadow: 
+    0 0 0 3px #fef3c7,
+    0 25px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 50px rgba(180, 83, 9, 0.15) !important;
+  padding: 24px 22px 28px !important;
+  box-sizing: border-box !important;
+  animation: scrollUnrollAnim 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
 }
 
-@keyframes sheetSlideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+@keyframes scrollUnrollAnim {
+  from { transform: scale(0.85) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-/* 抽屉顶部手柄与关闭按钮 */
-.duo-sheet-header {
+/* 顶部与底部木质卷轴横轴 */
+.parchment-scroll-card::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  right: 20px;
+  height: 14px;
+  background: linear-gradient(90deg, #78350f 0%, #b45309 50%, #78350f 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.parchment-scroll-card::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 20px;
+  right: 20px;
+  height: 14px;
+  background: linear-gradient(90deg, #78350f 0%, #b45309 50%, #78350f 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* 趴在卷轴顶端的探险小萌宠主角 */
+.parchment-mascot-peek {
+  position: absolute;
+  top: -56px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
+  pointer-events: none;
+  z-index: 20;
 }
 
-.duo-sheet-grabber {
-  width: 44px;
-  height: 5px;
-  background: #cbd5e1;
-  border-radius: 10px;
-  margin: 0 auto 10px;
+.parchment-avatar-emoji {
+  font-size: 52px;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+  animation: mascotWobble 2s infinite ease-in-out;
 }
 
-.duo-sheet-badge {
+@keyframes mascotWobble {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+
+.parchment-title-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #f0fdf4;
-  color: #166534;
+  background: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+  color: #fef3c7;
   font-size: 13px;
   font-weight: 900;
-  padding: 4px 12px;
+  padding: 4px 16px;
   border-radius: 50px;
-  border: 1.5px solid #bbf7d0;
+  border: 2px solid #fde68a;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  margin-top: -6px;
 }
 
-.btn-duo-close-sheet {
-  background: #f1f5f9;
-  border: none;
-  font-size: 16px;
-  font-weight: 800;
-  color: #64748b;
-  width: 32px;
-  height: 32px;
+/* 右上角贝壳关闭按钮 */
+.btn-parchment-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
+  background: #fef3c7;
+  border: 2px solid #d97706;
+  color: #78350f;
+  font-size: 16px;
+  font-weight: 900;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease;
+  z-index: 25;
 }
 
-.btn-duo-close-sheet:hover {
-  background: #e2e8f0;
+.btn-parchment-close:hover {
+  transform: scale(1.1);
+  background: #fde68a;
 }
 
-/* 抽屉题干卡片与语音 */
-.duo-sheet-question-card {
-  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
-  border: 2.5px solid #fde047;
-  border-radius: 22px;
+/* 羊皮纸题干框与小海螺读题 */
+.parchment-question-board {
+  background: rgba(255, 255, 255, 0.65);
+  border: 2px dashed #d97706;
+  border-radius: 20px;
   padding: 14px 16px;
-  margin-bottom: 16px;
+  margin: 14px 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.15);
+  box-shadow: inset 0 2px 6px rgba(180, 83, 9, 0.08);
 }
 
-.duo-sheet-question-text {
-  font-size: 17px;
+.parchment-question-text {
+  font-size: 18px;
   font-weight: 900;
-  color: #713f12;
-  line-height: 1.45;
+  color: #451a03;
+  line-height: 1.5;
   flex: 1;
 }
 
-.btn-duo-speech {
+/* 金色发光小海螺语音读题按钮 */
+.btn-conch-speech {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  gap: 6px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   color: #ffffff;
   border: 2px solid #fef08a;
   border-radius: 50px;
-  padding: 7px 14px;
-  font-size: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.35);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
   flex-shrink: 0;
-  animation: pulseSpeech 2s infinite ease-in-out;
+  animation: conchPulse 2.2s infinite ease-in-out;
+  touch-action: manipulation;
 }
 
-/* 抽屉可视化展台 (图文/生动大插图) */
-.duo-sheet-visual-display {
+@keyframes conchPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8)); }
+}
+
+/* 题目图文展示区 */
+.parchment-visual-display {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 4px 0 12px;
+  padding: 2px 0 12px;
 }
 
-/* 抽屉大号彩色果冻选项 */
-.duo-sheet-options {
+/* 3D 原木雕刻选项牌 */
+.parchment-options-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
-.btn-duo-option {
+.btn-wood-tablet {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 12px;
-  border-radius: 20px;
-  font-size: 17px;
+  padding: 16px 14px;
+  border-radius: 18px;
+  font-size: 18px;
   font-weight: 900;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
   transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
-  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
-  color: #166534;
-  border: 3px solid #86efac;
-  box-shadow: 0 6px 0 #86efac, 0 8px 18px rgba(34, 197, 94, 0.2);
+  background: linear-gradient(180deg, #fef9c3 0%, #fde047 30%, #eab308 100%);
+  color: #713f12;
+  border: 3px solid #fef08a;
+  box-shadow: 0 7px 0 #a16207, 0 10px 20px rgba(161, 98, 7, 0.3);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
-.btn-duo-option:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #86efac, 0 4px 8px rgba(34, 197, 94, 0.2);
+.btn-wood-tablet:active {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 #a16207, 0 4px 10px rgba(161, 98, 7, 0.3);
 }
 
-.btn-duo-option.opt-correct {
+.btn-wood-tablet.tablet-correct {
   background: linear-gradient(180deg, #86efac 0%, #22c55e 100%) !important;
   color: #ffffff !important;
-  border-color: #15803d !important;
-  box-shadow: 0 6px 0 #15803d !important;
+  border-color: #dcfce7 !important;
+  box-shadow: 0 7px 0 #15803d, 0 10px 24px rgba(34, 197, 94, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
 }
 
-.btn-duo-option.opt-wrong {
-  background: linear-gradient(180deg, #fecaca 0%, #ef4444 100%) !important;
+.btn-wood-tablet.tablet-wrong {
+  background: linear-gradient(180deg, #fca5a5 0%, #ef4444 100%) !important;
   color: #ffffff !important;
-  border-color: #b91c1c !important;
-  box-shadow: 0 6px 0 #b91c1c !important;
+  border-color: #fee2e2 !important;
+  box-shadow: 0 7px 0 #991b1b !important;
   animation: shakeWrong 0.4s ease;
 }
 
+/* 红色火漆印章动画 (通关盖章特效) */
+.parchment-stamp-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #dc2626 0%, #991b1b 80%, #7f1d1d 100%);
+  border: 4px dashed #fef08a;
+  box-shadow: 0 10px 30px rgba(153, 27, 27, 0.6), inset 0 0 16px rgba(0,0,0,0.4);
+  color: #fef08a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.stamp-active {
+  animation: stampSlamAnim 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes stampSlamAnim {
+  0% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+  60% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(-8deg); opacity: 1; }
+}
+
+.stamp-text {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.stamp-stars {
+  font-size: 16px;
+  margin-top: 2px;
+}
+
 /* 温柔小提示与防乱猜 */
-.duo-sheet-gentle-hint {
+.parchment-gentle-hint {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #f0fdf4;
-  border: 1.5px dashed #86efac;
+  background: #fefce8;
+  border: 1.5px dashed #d97706;
   border-radius: 16px;
   padding: 8px 12px;
   margin-top: 6px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  color: #15803d;
+  color: #92400e;
 }
 
-.duo-sheet-antiguess-alert {
+.parchment-antiguess-alert {
   background: #fef2f2;
   border: 2px solid #fecaca;
   color: #dc2626;
@@ -4786,6 +4888,7 @@ body {
   margin-top: 8px;
   display: none;
 }
+
 
 /* 彻底隐藏群岛大地图 (解决登岛时海图仍在上方导致关卡出现在最底部的Bug) */
 .islands-stage-hidden {
@@ -5117,7 +5220,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v11.0 终极整屏铺满-全设备自适应满屏海岛大世界 (17:59)</span>
+            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v12.0 探险家羊皮纸航海藏宝卷轴答题界面 (18:03)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -9429,12 +9532,12 @@ class App {
     }
   }
 
-  // ================== 打开多邻国半屏沉浸果冻答题抽屉 ==================
+  // ================== 打开探险家·羊皮纸航海藏宝卷轴答题界面 ==================
   openDuoQuizSheet(island, levelObj, levelIdx, levelsList, islandCompleted) {
     window.soundEngine.playClick();
 
-    // 移除已存在的抽屉弹窗
-    const oldBackdrop = document.querySelector('.duo-quiz-modal-backdrop');
+    // 移除已存在的弹窗
+    const oldBackdrop = document.querySelector('.parchment-modal-backdrop, .duo-quiz-modal-backdrop');
     if (oldBackdrop) oldBackdrop.remove();
 
     // 题目数据准备
@@ -9460,91 +9563,102 @@ class App {
     let visualHtml = '';
     if (Array.isArray(runLevel.items) && runLevel.items.length > 0) {
       visualHtml = `
-        <div class="duo-sheet-visual-display">
+        <div class="parchment-visual-display">
           ${runLevel.items.map(it => `<span style="font-size:38px; user-select:none;">${it}</span>`).join('')}
         </div>
       `;
     }
 
     const optionsHtml = optionsList.map((opt, oIdx) => `
-      <button class="btn-duo-option" data-opt-idx="${oIdx}">
+      <button class="btn-wood-tablet" data-opt-idx="${oIdx}">
         <span>${opt.text}</span>
       </button>
     `).join('');
 
     const modalBackdrop = document.createElement('div');
-    modalBackdrop.className = 'duo-quiz-modal-backdrop';
+    modalBackdrop.className = 'parchment-modal-backdrop';
     modalBackdrop.innerHTML = `
-      <div class="duo-quiz-sheet">
-        <div class="duo-sheet-grabber"></div>
-        <div class="duo-sheet-header">
-          <div class="duo-sheet-badge">
-            <span>${island.guardianEmoji || '🌴'}</span>
-            <span>${island.name} · 第 ${levelIdx + 1} 关</span>
+      <div class="parchment-scroll-card">
+        <!-- 趴在卷轴顶端的探险小萌宠 -->
+        <div class="parchment-mascot-peek">
+          <span class="parchment-avatar-emoji">${island.guardianEmoji || '🐱'}</span>
+          <div class="parchment-title-badge">
+            <span>📜</span>
+            <span>${island.name} · 第 ${levelIdx + 1} 关谜题</span>
           </div>
-          <button class="btn-duo-close-sheet" title="关闭">✕</button>
         </div>
 
-        <div class="duo-sheet-question-card">
-          <div class="duo-sheet-question-text">${questionText}</div>
-          <button id="btnDuoReplaySpeech" class="btn-duo-speech" title="重新读题">
-            <span>🔊 读题</span>
+        <button class="btn-parchment-close" title="收起卷轴">✕</button>
+
+        <!-- 羊皮纸题干框与小海螺读题 -->
+        <div class="parchment-question-board">
+          <div class="parchment-question-text">${questionText}</div>
+          <button id="btnConchSpeech" class="btn-conch-speech" title="轻按海螺读题">
+            <span>🐚 听读题</span>
           </button>
         </div>
 
         ${visualHtml}
 
-        <div class="duo-sheet-options">
+        <!-- 3D 原木雕刻选项牌 -->
+        <div class="parchment-options-grid">
           ${optionsHtml}
         </div>
 
-        <div id="duoGentleHint" class="duo-sheet-gentle-hint" style="display:none;">
-          <span>💡 提示：</span>
-          <span id="duoHintText">仔细听听声音，再试一次哦～</span>
+        <div id="parchmentGentleHint" class="parchment-gentle-hint" style="display:none;">
+          <span>💡 海风提示：</span>
+          <span id="parchmentHintText">仔细听听海螺的声音，再选一次哦～</span>
         </div>
 
-        <div id="duoAntiGuessAlert" class="duo-sheet-antiguess-alert">
-          ⏳ 别着急连续乱点哦，动脑筋想一想～ (冷却 2 秒)
+        <div id="parchmentAntiGuessAlert" class="parchment-antiguess-alert">
+          ⏳ 别着急连续乱点哦，静心思考一下～ (冷却 2 秒)
+        </div>
+
+        <!-- 通关火漆印章 (答对时盖章) -->
+        <div id="parchmentSealStamp" class="parchment-stamp-seal">
+          <span class="stamp-text">PASS!</span>
+          <span class="stamp-stars">⭐⭐⭐</span>
         </div>
       </div>
     `;
 
     document.body.appendChild(modalBackdrop);
 
-    // 自动离线语音朗读题干 (专为 5 岁幼童不认字设计)
+    // 自动离线语音朗读题干 (小海螺自动播报)
     setTimeout(() => {
       if (window.soundEngine) {
         window.soundEngine.speak(promptText);
       }
     }, 280);
 
-    // 绑定大喇叭重新朗读
-    const btnReplay = modalBackdrop.querySelector('#btnDuoReplaySpeech');
-    if (btnReplay) {
-      btnReplay.addEventListener('click', () => {
+    // 绑定小海螺重新读题
+    const btnConch = modalBackdrop.querySelector('#btnConchSpeech');
+    if (btnConch) {
+      btnConch.addEventListener('click', () => {
         window.soundEngine.playClick();
         window.soundEngine.speak(promptText);
       });
     }
 
-    // 关闭抽屉
-    const closeSheet = () => {
-      modalBackdrop.style.animation = 'backdropFadeIn 0.2s ease reverse forwards';
+    // 关闭卷轴
+    const closeParchment = () => {
+      modalBackdrop.style.animation = 'parchmentBackdropFade 0.2s ease reverse forwards';
       setTimeout(() => { modalBackdrop.remove(); }, 200);
     };
 
-    modalBackdrop.querySelector('.btn-duo-close-sheet').addEventListener('click', closeSheet);
+    modalBackdrop.querySelector('.btn-parchment-close').addEventListener('click', closeParchment);
     modalBackdrop.addEventListener('click', (e) => {
-      if (e.target === modalBackdrop) closeSheet();
+      if (e.target === modalBackdrop) closeParchment();
     });
 
-    // 选项答题处理
+    // 选项点击逻辑 (火漆印章 + 金币爆裂 + 迈步前进)
     let isCooling = false;
-    const hintBox = modalBackdrop.querySelector('#duoGentleHint');
-    const hintTextEl = modalBackdrop.querySelector('#duoHintText');
-    const antiGuessEl = modalBackdrop.querySelector('#duoAntiGuessAlert');
+    const hintBox = modalBackdrop.querySelector('#parchmentGentleHint');
+    const hintTextEl = modalBackdrop.querySelector('#parchmentHintText');
+    const antiGuessEl = modalBackdrop.querySelector('#parchmentAntiGuessAlert');
+    const stampEl = modalBackdrop.querySelector('#parchmentSealStamp');
 
-    modalBackdrop.querySelectorAll('.btn-duo-option').forEach(btn => {
+    modalBackdrop.querySelectorAll('.btn-wood-tablet').forEach(btn => {
       btn.addEventListener('click', () => {
         if (isCooling) {
           if (antiGuessEl) antiGuessEl.style.display = 'block';
@@ -9556,50 +9670,55 @@ class App {
         const selectedOpt = optionsList[optIdx];
 
         if (selectedOpt && selectedOpt.isCorrect) {
-          // 答对：音效 + 变绿 + 撒花
+          // 答对：音效 + 变绿 + 盖下火漆印章 + 漫天彩带
           window.soundEngine.playCorrect();
           window.soundEngine.playStar();
-          btn.classList.add('opt-correct');
+          btn.classList.add('tablet-correct');
+
+          // 触发火漆印章重重盖下特效！
+          if (stampEl) {
+            stampEl.classList.add('stamp-active');
+          }
 
           if (window.syncManager) {
             window.syncManager.recordTaskResult(levelObj.id, true, island.id);
           }
 
           if (window.confetti) {
-            try { window.confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } }); } catch (e) {}
+            try { window.confetti({ particleCount: 60, spread: 70, origin: { y: 0.5 } }); } catch (e) {}
           }
 
           const isLastTask = (levelIdx >= levelsList.length - 1);
 
           setTimeout(() => {
-            closeSheet();
+            closeParchment();
             if (isLastTask) {
               // 终极通关大解救！
               window.soundEngine.playVictory();
-              alert(`🎉 恭喜！【${island.name}】7 大关卡全部攻克！成功解救被困神兽【${island.petName}】！`);
+              alert(`🎉 恭喜！【${island.name}】全岛谜题全部破解！成功解救被困神兽【${island.petName}】！`);
               this.renderIslandLandingView(island.id);
             } else {
-              // 刷新多邻国 S 型探险地图，萌宠前进到下一个节点！
+              // 刷新地图，萌宠跳到下一个石板路节点！
               this.renderIslandLandingView(island.id);
             }
-          }, 650);
+          }, 700);
 
         } else {
-          // 答错：抖动 + 温柔提示
+          // 答错：木牌抖动 + 温柔提示
           window.soundEngine.playWrong();
-          btn.classList.add('opt-wrong');
+          btn.classList.add('tablet-wrong');
           isCooling = true;
 
           if (hintBox) {
             hintBox.style.display = 'flex';
-            if (hintTextEl) hintTextEl.textContent = selectedOpt.hint || '仔细听听题干读音，再试一次哦～';
+            if (hintTextEl) hintTextEl.textContent = selectedOpt.hint || '仔细听听小海螺的声音，再试一次哦～';
           }
           if (window.soundEngine) {
             window.soundEngine.speak('没关系，再仔细听听题目哦～');
           }
 
           setTimeout(() => {
-            btn.classList.remove('opt-wrong');
+            btn.classList.remove('tablet-wrong');
             isCooling = false;
             if (antiGuessEl) antiGuessEl.style.display = 'none';
           }, 1500);
