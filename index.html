@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-09-24 16:55:28">
+  <meta name="build-version" content="2026-09-24 17:23:52">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -4216,216 +4216,485 @@ body {
 }
 
 /* ============================================================
-   启蒙星萌岛 V8.0 - 参考图四 3D 微缩浮岛与图五实景递进闯关
+   启蒙星萌岛 V9.0 - 多邻国/消消乐式 3D 立体蜿蜒探险地图与沉浸抽屉
    ============================================================ */
 
-/* ---------------- 1. 彻底解决登岛缩退/错位 ---------------- */
+/* 1. 登岛主舞台 (全屏沉浸，告别缩退与生硬切块) */
 #islandLandingStage.island-landing-stage {
   width: 100% !important;
-  max-width: 480px !important;
+  max-width: 520px !important;
   margin: 0 auto !important;
   border-radius: 36px !important;
-  padding: 14px 10px 24px !important;
+  padding: 0 0 30px 0 !important;
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 50 !important;
   overflow: hidden !important;
-  box-shadow: 0 20px 48px rgba(2, 44, 90, 0.35) !important;
-  animation: stageEnterV8 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+  box-shadow: 0 20px 48px rgba(2, 44, 90, 0.25) !important;
+  animation: duoStageEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+  background: #f8fafc;
 }
 
-@keyframes stageEnterV8 {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes duoStageEnter {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ---------------- 2. 图四 3D 质感微缩浮岛大地图 ---------------- */
-.island-fig4-card {
-  position: relative;
-  width: 100%;
-  max-width: 390px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  cursor: pointer;
-  z-index: 5;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.island-fig4-card:hover {
-  transform: translateY(-4px) scale(1.02);
-}
-
-.island-fig4-card:active {
-  transform: scale(0.96);
-}
-
-.fig4-island-svg {
-  width: 100%;
-  height: auto;
-  max-height: 270px;
-  display: block;
-  filter: drop-shadow(0 18px 28px rgba(2, 44, 90, 0.35));
-  pointer-events: none;
-}
-
-/* 瀑布水流与水花入海动画 */
-.waterfall-stream {
-  stroke-dasharray: 6 4;
-  animation: waterfallFlow 1.2s infinite linear;
-}
-
-@keyframes waterfallFlow {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -20; }
-}
-
-.water-splash-ripple {
-  transform-origin: center;
-  animation: splashRipple 1.8s infinite ease-in-out;
-}
-
-@keyframes splashRipple {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.25); opacity: 0.9; }
-}
-
-/* 潜水艇航海浮标 */
-.submarine-buoy-icon {
-  font-size: 32px;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-  animation: boatRock 2.6s infinite ease-in-out;
-}
-
-/* ---------------- 3. 图五海岛实景大画卷 (Scenic World) ---------------- */
-.scenic-world-container {
-  position: relative;
-  width: 100%;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 14px 32px rgba(2, 44, 90, 0.25);
-  background: #ffffff;
-}
-
-/* 4大景点顶部步骤进度条 */
-.scenic-stepper-header {
+/* 2. 顶部航海罗盘导航栏 (常驻吸顶) */
+.duo-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.92);
-  border: 2px solid #bae6fd;
-  border-radius: 50px;
-  padding: 6px 14px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-.scenic-step-pill {
-  font-size: 11px;
-  font-weight: 800;
-  color: #64748b;
+.btn-duo-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: #f1f5f9;
-  padding: 3px 8px;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 14px;
   border-radius: 50px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.scenic-step-pill.active-step {
-  color: #0369a1;
-  background: #e0f2fe;
-  border-color: #38bdf8;
-  font-weight: 900;
-  transform: scale(1.05);
+.btn-duo-back:hover {
+  background: #e2e8f0;
+  transform: scale(1.04);
 }
 
-.scenic-step-pill.cleared-step {
-  color: #15803d;
-  background: #dcfce7;
-  border-color: #86efac;
-}
-
-/* 图五生动全景实景画布 SVG */
-.scenic-canvas-svg {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 600 / 380;
-  display: block;
-  pointer-events: none;
-}
-
-/* 实景中的卡通小人偶主角 (立于地面草坪) */
-.scenic-explorer-hero {
-  position: absolute;
-  bottom: 18%;
-  left: 28%;
-  transform: translate(-50%, 0);
-  z-index: 15;
+.duo-island-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: heroStepBounce 1.6s infinite ease-in-out;
+}
+
+.duo-island-name {
+  font-size: 16px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.duo-island-sub {
+  font-size: 11px;
+  font-weight: 800;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-top: 2px;
+}
+
+.duo-stats-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duo-star-pill {
+  font-size: 13px;
+  font-weight: 900;
+  color: #b45309;
+  background: #fef3c7;
+  border: 1.5px solid #fde68a;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+
+/* 3. 多邻国 S 型探险大世界峡谷容器 */
+.duo-trail-world {
+  position: relative;
+  width: 100%;
+  min-height: 860px;
+  padding: 24px 0 50px;
+  box-sizing: border-box;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* 5 岛自然生态背景渐变 */
+.duo-theme-water {
+  background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 20%, #bae6fd 45%, #fef08a 80%, #fde047 100%);
+}
+.duo-theme-lego {
+  background: linear-gradient(180deg, #fb923c 0%, #fed7aa 35%, #fef08a 70%, #fef9c3 100%);
+}
+.duo-theme-forest {
+  background: linear-gradient(180deg, #4ade80 0%, #bbf7d0 35%, #ecfccb 70%, #f7fee7 100%);
+}
+.duo-theme-fossil {
+  background: linear-gradient(180deg, #f59e0b 0%, #fde68a 40%, #ffedd5 75%, #fed7aa 100%);
+}
+.duo-theme-space {
+  background: linear-gradient(180deg, #a855f7 0%, #ddd6fe 40%, #fae8ff 75%, #fdf4ff 100%);
+}
+
+/* 4. S 型立体曲线 SVG 背景层 */
+.duo-trail-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 5. 关卡节点容器 (按从下往上攀登排列) */
+.duo-nodes-track {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse; /* 从第 1 关在底部往上攀登 */
+  align-items: center;
+  gap: 34px;
+  z-index: 10;
+  padding: 20px 0 40px;
+}
+
+/* 每一个关卡节点行 (通过 S 型交替偏移形成优美曲线) */
+.duo-node-row {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-pos-center { transform: translateX(0); }
+.row-pos-left { transform: translateX(-65px); }
+.row-pos-right { transform: translateX(65px); }
+.row-pos-far-left { transform: translateX(-90px); }
+.row-pos-far-right { transform: translateX(90px); }
+
+/* 6. 多邻国 3D 果冻关卡纽扣 (大号圆形，72px) */
+.duo-level-node {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+  z-index: 15;
+}
+
+.duo-node-num {
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.duo-node-title {
+  font-size: 9px;
+  font-weight: 800;
+  white-space: nowrap;
+  margin-top: 2px;
+  opacity: 0.9;
+}
+
+/* 状态 A: 已通关关卡 (翡翠绿 3D 立体纽扣) */
+.duo-node-cleared {
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
+  border: 4px solid #ffffff;
+  box-shadow: 0 8px 0 #15803d, 0 12px 20px rgba(22, 163, 74, 0.35);
+  color: #ffffff;
+}
+.duo-node-cleared:active {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 #15803d, 0 4px 10px rgba(22, 163, 74, 0.35);
+}
+
+/* 已通关顶部 3 颗小金星 */
+.duo-node-stars {
+  position: absolute;
+  top: -15px;
+  display: flex;
+  gap: 2px;
+  font-size: 13px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+  animation: starTwinkle 2.4s infinite ease-in-out;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* 状态 B: 当前挑战关卡 (耀眼金黄 3D 果冻纽扣 + 呼吸脉冲) */
+.duo-node-active {
+  background: linear-gradient(180deg, #facc15 0%, #eab308 100%);
+  border: 4.5px solid #ffffff;
+  box-shadow: 0 9px 0 #ca8a04, 0 14px 26px rgba(202, 138, 4, 0.45);
+  color: #78350f;
+  animation: activeNodeBounce 2.2s infinite ease-in-out;
+}
+
+.duo-node-active:active {
+  transform: translateY(7px);
+  box-shadow: 0 2px 0 #ca8a04, 0 5px 12px rgba(202, 138, 4, 0.45);
+}
+
+@keyframes activeNodeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* 当前关卡外部脉冲光环 */
+.duo-pulse-ring {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3.5px solid #facc15;
+  animation: pulseGlowRing 1.8s infinite ease-out;
   pointer-events: none;
 }
 
-.scenic-hero-avatar {
-  font-size: 42px;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+@keyframes pulseGlowRing {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(1.35); opacity: 0; }
 }
 
-.scenic-hero-tag {
-  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
-  color: #ffffff;
-  font-size: 10px;
+/* 当前关萌宠主角与对话气泡 */
+.duo-hero-character {
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 25;
+}
+
+.duo-char-avatar {
+  font-size: 38px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  animation: heroMascotBounce 1.4s infinite ease-in-out;
+}
+
+@keyframes heroMascotBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.duo-speech-bubble {
+  background: #ffffff;
+  color: #b45309;
+  font-size: 11px;
   font-weight: 900;
-  padding: 2px 8px;
-  border-radius: 50px;
-  border: 1px solid #fef08a;
-  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.4);
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1.5px solid #fde68a;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
   white-space: nowrap;
-  margin-top: -2px;
+  margin-top: -6px;
 }
 
-@keyframes heroStepBounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -8px) scale(1.04); }
+/* 状态 C: 未解锁关卡 (石质淡灰 3D 纽扣) */
+.duo-node-locked {
+  background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+  border: 4px solid #f8fafc;
+  box-shadow: 0 8px 0 #94a3b8, 0 10px 18px rgba(100, 116, 139, 0.2);
+  color: #64748b;
+  opacity: 0.92;
+}
+.duo-node-locked:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px 0 #94a3b8;
 }
 
-/* ---------------- 4. 场景沉浸式儿童答题面板 ---------------- */
-.inscene-quiz-container {
-  width: 100%;
-  background: linear-gradient(180deg, #ffffff 0%, #fefce8 100%);
+.duo-lock-symbol {
+  font-size: 24px;
+}
+
+/* 状态 D: 终极大决战神兽水牢 (第 7 关终点) */
+.duo-boss-altar {
+  position: relative;
+  width: 90px;
+  height: 90px;
   border-radius: 26px;
-  padding: 14px 12px 18px;
+  background: linear-gradient(180deg, #fef08a 0%, #f59e0b 100%);
+  border: 4.5px solid #ffffff;
+  box-shadow: 0 10px 0 #b45309, 0 16px 32px rgba(180, 83, 9, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  transition: transform 0.15s ease;
+}
+.duo-boss-altar:active {
+  transform: translateY(6px);
+  box-shadow: 0 3px 0 #b45309;
+}
+
+.duo-boss-cage-icon {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.duo-boss-tag {
+  background: #ea580c;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* 7. 沿途生动微缩装饰 (蘑菇房、椰树、贝壳、螃蟹) */
+.duo-scenic-prop {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  user-select: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+}
+
+/* 8. 半屏沉浸式果冻答题抽屉 (Bottom Sheet Modal) */
+.duo-quiz-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  animation: backdropFadeIn 0.25s ease forwards;
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.duo-quiz-sheet {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 36px 36px 0 0;
+  padding: 16px 20px 32px;
   box-sizing: border-box;
-  margin-top: 10px;
-  border: 3.5px solid #fde047;
-  box-shadow: 0 10px 26px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.2);
+  animation: sheetSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  max-height: 85vh;
+  overflow-y: auto;
   position: relative;
 }
 
-/* 原木题干看板与大喇叭语音 */
-.inscene-question-header {
+@keyframes sheetSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* 抽屉顶部手柄与关闭按钮 */
+.duo-sheet-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
-  border: 2px solid #fde047;
-  border-radius: 20px;
-  padding: 8px 12px;
   margin-bottom: 12px;
 }
 
-.btn-inscene-replay-speech {
+.duo-sheet-grabber {
+  width: 44px;
+  height: 5px;
+  background: #cbd5e1;
+  border-radius: 10px;
+  margin: 0 auto 10px;
+}
+
+.duo-sheet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  color: #166534;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1.5px solid #bbf7d0;
+}
+
+.btn-duo-close-sheet {
+  background: #f1f5f9;
+  border: none;
+  font-size: 16px;
+  font-weight: 800;
+  color: #64748b;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-duo-close-sheet:hover {
+  background: #e2e8f0;
+}
+
+/* 抽屉题干卡片与语音 */
+.duo-sheet-question-card {
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  border: 2.5px solid #fde047;
+  border-radius: 22px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.15);
+}
+
+.duo-sheet-question-text {
+  font-size: 17px;
+  font-weight: 900;
+  color: #713f12;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.btn-duo-speech {
+  display: inline-flex;
   align-items: center;
   gap: 4px;
   background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   color: #ffffff;
   border: 2px solid #fef08a;
   border-radius: 50px;
-  padding: 6px 12px;
+  padding: 7px 14px;
   font-size: 12px;
   font-weight: 900;
   cursor: pointer;
@@ -4434,74 +4703,78 @@ body {
   animation: pulseSpeech 2s infinite ease-in-out;
 }
 
-.inscene-question-text {
-  font-size: 16px;
-  font-weight: 900;
-  color: #78350f;
-  line-height: 1.4;
-  flex: 1;
-}
-
-/* 题目可视化展台 (图文/生动大插图) */
-.inscene-visual-display {
+/* 抽屉可视化展台 (图文/生动大插图) */
+.duo-sheet-visual-display {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 8px 0 12px;
+  padding: 4px 0 12px;
 }
 
-/* 大号彩色果冻选项按钮 (专为幼儿小手打造) */
-.inscene-options-grid {
+/* 抽屉大号彩色果冻选项 */
+.duo-sheet-options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  width: 100%;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
-.btn-inscene-option {
+.btn-duo-option {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
-  color: #166534;
-  border: 3px solid #86efac;
+  padding: 16px 12px;
   border-radius: 20px;
-  padding: 14px 10px;
   font-size: 17px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 6px 0 #86efac, 0 8px 16px rgba(34, 197, 94, 0.2);
-  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
   user-select: none;
+  touch-action: manipulation;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+  color: #166534;
+  border: 3px solid #86efac;
+  box-shadow: 0 6px 0 #86efac, 0 8px 18px rgba(34, 197, 94, 0.2);
 }
 
-.btn-inscene-option:active {
+.btn-duo-option:active {
   transform: translateY(4px);
   box-shadow: 0 2px 0 #86efac, 0 4px 8px rgba(34, 197, 94, 0.2);
 }
 
-/* 温柔小提示条 */
-.inscene-gentle-hint {
+.btn-duo-option.opt-correct {
+  background: linear-gradient(180deg, #86efac 0%, #22c55e 100%) !important;
+  color: #ffffff !important;
+  border-color: #15803d !important;
+  box-shadow: 0 6px 0 #15803d !important;
+}
+
+.btn-duo-option.opt-wrong {
+  background: linear-gradient(180deg, #fecaca 0%, #ef4444 100%) !important;
+  color: #ffffff !important;
+  border-color: #b91c1c !important;
+  box-shadow: 0 6px 0 #b91c1c !important;
+  animation: shakeWrong 0.4s ease;
+}
+
+/* 温柔小提示与防乱猜 */
+.duo-sheet-gentle-hint {
   display: flex;
   align-items: center;
   gap: 6px;
   background: #f0fdf4;
   border: 1.5px dashed #86efac;
   border-radius: 16px;
-  padding: 6px 12px;
-  margin-top: 10px;
+  padding: 8px 12px;
+  margin-top: 6px;
   font-size: 12px;
   font-weight: 800;
   color: #15803d;
 }
 
-/* 防乱猜冷却警报 */
-.inscene-antiguess-alert {
+.duo-sheet-antiguess-alert {
   background: #fef2f2;
   border: 2px solid #fecaca;
   color: #dc2626;
@@ -4564,7 +4837,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v8.0 图四3D微缩群岛与图五实景递进闯关 (16:55)</span>
+            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v9.0 多邻国立体S型探险地图与沉浸抽屉 (17:23)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -8544,7 +8817,7 @@ class App {
     this.islandsContainer.appendChild(addCard);
   }
 
-  // ================== 打开登岛探险沙盘 (彻底解决缩退/错位 Bug) ==================
+  // ================== 打开登岛探险大世界 (多邻国 S 型探险地图) ==================
   openIslandLandingView(islandId) {
     window.soundEngine.playClick();
     this.currentLandingIslandId = islandId;
@@ -8556,13 +8829,13 @@ class App {
     if (this.islandIntroHeader) this.islandIntroHeader.style.display = 'none';
     if (this.islandLandingStage) this.islandLandingStage.style.display = 'block';
 
-    // 立即瞬时置顶居中，防止发生缩退跳动
+    // 立即瞬时置顶居中，防止发生页面滚动错位
     window.scrollTo({ top: 0, behavior: 'instant' });
-    this.renderIslandLandingView(islandId, 0);
+    this.renderIslandLandingView(islandId);
   }
 
-  // ================== 渲染内层：100% 还原图五海岛实景与 4 大景点递进 ==================
-  renderIslandLandingView(islandId, targetLevelIdx = 0) {
+  // ================== 渲染多邻国 S 型探险大世界 ==================
+  renderIslandLandingView(islandId) {
     if (!this.islandLandingStage) {
       this.islandLandingStage = document.getElementById('islandLandingStage');
     }
@@ -8589,7 +8862,7 @@ class App {
     const compData = (window.syncManager && window.syncManager.data && window.syncManager.data.completedLevels) || {};
     const islandCompleted = compData[island.id] || [];
 
-    // 获取完整关卡题目列表
+    // 获取完整关卡题目列表 (确保至少 7 关)
     let levelsList = [];
     if (window.syncManager && typeof window.syncManager.getAllIslands === 'function') {
       const all = window.syncManager.getAllIslands();
@@ -8599,298 +8872,190 @@ class App {
       }
     }
     if (levelsList.length === 0 && island.levelIds && Array.isArray(island.levelIds)) {
-      levelsList = island.levelIds.map((lid, lidx) => ({
-        id: lid,
-        themeTitle: `${island.name} 第${lidx+1}关`,
-        badge: island.petName || '探险',
-        questionText: `第${lidx+1}关探险挑战`
-      }));
+      levelsList = island.levelIds.map((lid, lidx) => {
+        let foundLvl = null;
+        if (window.DefaultLevels) {
+          const pools = [
+            window.DefaultLevels.pinyinFoundation,
+            window.DefaultLevels.literacyFoundation,
+            window.DefaultLevels.mathFoundation,
+            window.DefaultLevels.pinyinAdvance,
+            window.DefaultLevels.literacyAdvance,
+            window.DefaultLevels.mathAdvance,
+            window.DefaultLevels.pinyinThinking,
+            window.DefaultLevels.literacyThinking,
+            window.DefaultLevels.mathThinking
+          ];
+          for (let p of pools) {
+            if (Array.isArray(p)) {
+              foundLvl = p.find(item => item && item.id === lid);
+              if (foundLvl) break;
+            }
+          }
+        }
+        return foundLvl || {
+          id: lid,
+          themeTitle: `${island.name} 第${lidx+1}关`,
+          badge: island.petName || '探险',
+          questionText: `第${lidx+1}关探险挑战：听清题目再选择哦！`,
+          promptSpeech: `第${lidx+1}关挑战：仔细听题目，选出正确答案吧！`,
+          options: [
+            { text: 'A. 正确答案', isCorrect: true },
+            { text: 'B. 再想想', isCorrect: false }
+          ]
+        };
+      });
     }
 
-    const isAllDone = levelsList.length > 0 && levelsList.every(lvl => islandCompleted.includes(lvl.id));
-    
-    // 计算当前正在作答的题目索引
-    let currentTaskIdx = targetLevelIdx;
-    if (currentTaskIdx < 0 || currentTaskIdx >= levelsList.length) {
-      const firstUnfinished = levelsList.findIndex(lvl => !islandCompleted.includes(lvl.id));
-      currentTaskIdx = firstUnfinished >= 0 ? firstUnfinished : 0;
+    if (levelsList.length === 0) {
+      levelsList = [
+        { id: `${island.id}_1`, themeTitle: '第1关' },
+        { id: `${island.id}_2`, themeTitle: '第2关' },
+        { id: `${island.id}_3`, themeTitle: '第3关' },
+        { id: `${island.id}_4`, themeTitle: '第4关' },
+        { id: `${island.id}_5`, themeTitle: '第5关' },
+        { id: `${island.id}_6`, themeTitle: '第6关' },
+        { id: `${island.id}_7`, themeTitle: '第7关 终点解救' }
+      ];
     }
-    const currentLevelObj = levelsList[currentTaskIdx] || levelsList[0];
 
-    // 4 大特色景点划分 (例如水波岛：1~2关海滩蘑菇屋 ➔ 3~4关椰林图腾 ➔ 5~6关飞瀑溶洞 ➔ 第7关海神殿水牢)
-    const scenicSpotIndex = Math.min(3, Math.floor(currentTaskIdx / 2));
-    const scenicSpotNames = [
-      '景点1: 海滩蘑菇屋',
-      '景点2: 椰林图腾滩',
-      '景点3: 飞瀑溶洞谷',
-      '景点4: 海神殿水牢'
-    ];
+    const totalLevels = levelsList.length;
+    const isAllDone = totalLevels > 0 && levelsList.every(lvl => islandCompleted.includes(lvl.id));
 
-    // 1. 顶部航海罗盘导航栏
+    // 计算当前正在挑战的关卡索引 (第一个未通关者；若全部通关则为最后一关)
+    let activeLevelIdx = levelsList.findIndex(lvl => !islandCompleted.includes(lvl.id));
+    if (activeLevelIdx === -1) activeLevelIdx = totalLevels - 1;
+
+    // 匹配 5 岛主题色彩类
+    let themeClass = 'duo-theme-water';
+    if (island.id === 'island_2') themeClass = 'duo-theme-lego';
+    else if (island.id === 'island_3') themeClass = 'duo-theme-forest';
+    else if (island.id === 'island_4') themeClass = 'duo-theme-fossil';
+    else if (island.id === 'island_5') themeClass = 'duo-theme-space';
+
+    // 1. 顶部全息航海导航栏
     const topBarHtml = `
-      <div class="landing-stage-topbar">
-        <button id="btnBackToOcean" class="btn-back-to-ocean">
-          <span class="compass-icon">🧭</span>
+      <div class="duo-topbar">
+        <button id="btnDuoBackToOcean" class="btn-duo-back">
+          <span>🧭</span>
           <span>⛵ 返回海洋</span>
         </button>
-        <div class="landing-island-title-group">
-          <span class="landing-pet-emoji">${island.guardianEmoji || '🏝️'}</span>
-          <span class="landing-island-title-text">${island.name}</span>
-          <span class="landing-stage-pill">第 ${currentTaskIdx + 1}/${levelsList.length} 关</span>
+        <div class="duo-island-info">
+          <span class="duo-island-name">${island.guardianEmoji || '🌴'} ${island.name}</span>
+          <span class="duo-island-sub">${isAllDone ? '👑 已成功解救神兽' : `已攻克 ${islandCompleted.length}/${totalLevels} 关`}</span>
         </div>
-        <div class="landing-top-stars">
-          <span>⭐ ${(window.syncManager && window.syncManager.data && window.syncManager.data.totalStars) || 0}</span>
-        </div>
-      </div>
-
-      <!-- 4 大景点渐进式步进器 -->
-      <div class="scenic-stepper-header">
-        ${scenicSpotNames.map((name, sIdx) => {
-          let cls = 'scenic-step-pill';
-          if (sIdx < scenicSpotIndex) cls += ' cleared-step';
-          else if (sIdx === scenicSpotIndex) cls += ' active-step';
-          return `<span class="${cls}">${sIdx < scenicSpotIndex ? '✅ ' : ''}${name}</span>`;
-        }).join('')}
-      </div>
-    `;
-
-    // 2. 【100% 还原图五】海岛实景大画卷 (蓝天白云、椰林、沙滩草地、红白斑点蘑菇石屋、红蛇贝壳图腾)
-    // 根据当前景点切换地标与环境
-    let landmarkSvg = '';
-    if (scenicSpotIndex === 0) {
-      // 景点 1：图五核心地标 —— 红白斑点大蘑菇石屋
-      landmarkSvg = `
-        <g id="fig5MushroomHouse" transform="translate(240, 115)">
-          <!-- 蘑菇石屋烟囱与炊烟 -->
-          <rect x="70" y="25" width="14" height="28" fill="#d1d5db" stroke="#6b7280" stroke-width="2"/>
-          <path d="M 77 20 Q 82 5 75 -10" stroke="rgba(255,255,255,0.75)" stroke-width="4" fill="none" stroke-linecap="round"/>
-          
-          <!-- 蘑菇屋白色石墙底座 -->
-          <path d="M 15 110 C 15 75, 105 75, 105 110 L 105 130 C 105 135, 15 135, 15 130 Z" fill="#fdfbf7" stroke="#e5e7eb" stroke-width="3"/>
-          <ellipse cx="60" cy="132" rx="46" ry="6" fill="#e5e7eb"/>
-
-          <!-- 经典红白斑点大蘑菇伞顶 (图五核心！) -->
-          <path d="M 0 85 C 0 10, 120 10, 120 85 C 120 95, 0 95, 0 85 Z" fill="#dc2626" stroke="#991b1b" stroke-width="3"/>
-          <!-- 伞顶白色大圆斑点 -->
-          <circle cx="35" cy="50" r="11" fill="#ffffff"/>
-          <circle cx="60" cy="35" r="9" fill="#ffffff"/>
-          <circle cx="85" cy="52" r="10" fill="#ffffff"/>
-          <circle cx="48" cy="72" r="7" fill="#ffffff"/>
-          <circle cx="75" cy="74" r="8" fill="#ffffff"/>
-
-          <!-- 木质小门与小窗 -->
-          <rect x="48" y="98" width="24" height="32" rx="4" fill="#92400e" stroke="#451a03" stroke-width="2"/>
-          <circle cx="66" cy="114" r="2.5" fill="#fde047"/>
-          <rect x="22" y="96" width="14" height="14" rx="2" fill="#bae6fd" stroke="#451a03" stroke-width="1.5"/>
-          <line x1="29" y1="96" x2="29" y2="110" stroke="#451a03" stroke-width="1.5"/>
-          <line x1="22" y1="103" x2="36" y2="103" stroke="#451a03" stroke-width="1.5"/>
-        </g>
-      `;
-    } else if (scenicSpotIndex === 1) {
-      // 景点 2：图腾面具与原始棕榈祭坛
-      landmarkSvg = `
-        <g id="fig5TotemLandmark" transform="translate(240, 95)">
-          <rect x="20" y="20" width="36" height="110" rx="6" fill="#b45309" stroke="#78350f" stroke-width="3"/>
-          <circle cx="38" cy="45" r="8" fill="#fef08a"/>
-          <polygon points="38,65 26,80 50,80" fill="#ef4444"/>
-          <line x1="26" y1="95" x2="50" y2="95" stroke="#451a03" stroke-width="4"/>
-          <rect x="65" y="40" width="30" height="90" rx="6" fill="#d97706" stroke="#78350f" stroke-width="3"/>
-          <circle cx="80" cy="65" r="7" fill="#67e8f9"/>
-          <polygon points="80,82 70,95 90,95" fill="#3b82f6"/>
-        </g>
-      `;
-    } else if (scenicSpotIndex === 2) {
-      // 景点 3：飞瀑溶洞与碧水清潭
-      landmarkSvg = `
-        <g id="fig5WaterfallLandmark" transform="translate(220, 85)">
-          <polygon points="20,140 10,40 50,20 120,30 140,140" fill="#78350f" stroke="#451a03" stroke-width="3"/>
-          <path class="waterfall-stream" d="M 65 30 L 65 140" stroke="#67e8f9" stroke-width="18" stroke-linecap="round"/>
-          <ellipse class="water-splash-ripple" cx="65" cy="142" rx="35" ry="8" fill="#a5f3fc"/>
-        </g>
-      `;
-    } else {
-      // 景点 4：山顶海神殿与小动物牢笼 (终点！)
-      landmarkSvg = `
-        <g id="fig5SummitCageLandmark" transform="translate(240, 90)">
-          <rect x="10" y="20" width="100" height="100" rx="16" fill="#fef9c3" stroke="#f59e0b" stroke-width="4"/>
-          <text x="60" y="75" font-size="46" text-anchor="middle" dominant-baseline="middle">${island.guardianEmoji || '🐱'}</text>
-          <line x1="30" y1="20" x2="30" y2="120" stroke="#b45309" stroke-width="3" stroke-dasharray="4 4"/>
-          <line x1="60" y1="20" x2="60" y2="120" stroke="#b45309" stroke-width="3" stroke-dasharray="4 4"/>
-          <line x1="90" y1="20" x2="90" y2="120" stroke="#b45309" stroke-width="3" stroke-dasharray="4 4"/>
-          <rect x="25" y="112" width="70" height="18" rx="8" fill="#ea580c"/>
-          <text x="60" y="124" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">解救神兽小奶猫</text>
-        </g>
-      `;
-    }
-
-    const scenicCanvasHtml = `
-      <div class="scenic-world-container">
-        <svg class="scenic-canvas-svg" viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8"/>
-              <stop offset="55%" stop-color="#7dd3fc"/>
-              <stop offset="85%" stop-color="#e0f2fe"/>
-              <stop offset="100%" stop-color="#bae6fd"/>
-            </linearGradient>
-            <linearGradient id="beachGroundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#a7f3d0"/>
-              <stop offset="35%" stop-color="#4ade80"/>
-              <stop offset="70%" stop-color="#fde047"/>
-              <stop offset="100%" stop-color="#f59e0b"/>
-            </linearGradient>
-          </defs>
-
-          <!-- 蓝天白云远景 (图五天空) -->
-          <rect x="0" y="0" width="600" height="230" fill="url(#skyGrad)"/>
-          <path d="M 50 80 Q 70 60 90 80 Q 110 50 140 70 Q 160 90 140 100 L 50 100 Z" fill="#ffffff" opacity="0.85"/>
-          <path d="M 420 60 Q 440 40 460 60 Q 480 35 510 55 Q 530 75 510 85 L 420 85 Z" fill="#ffffff" opacity="0.85"/>
-          <ellipse cx="530" cy="50" rx="35" ry="35" fill="#fef08a" opacity="0.6" filter="blur(6px)"/>
-
-          <!-- 远方碧蓝大海与海平面 -->
-          <rect x="0" y="210" width="600" height="35" fill="#0284c7"/>
-          <path d="M 0 220 Q 150 215 300 220 T 600 220" stroke="#bae6fd" stroke-width="2" fill="none"/>
-
-          <!-- 背景热带高耸椰子树 (图五左右椰树林) -->
-          <g id="leftPalms" transform="translate(10, 50)">
-            <path d="M 80 170 Q 50 90 70 10" stroke="#78350f" stroke-width="12" fill="none" stroke-linecap="round"/>
-            <path d="M 70 10 Q 20 0 -10 30" stroke="#15803d" stroke-width="9" fill="none" stroke-linecap="round"/>
-            <path d="M 70 10 Q 50 -30 30 -50" stroke="#16a34a" stroke-width="9" fill="none" stroke-linecap="round"/>
-            <path d="M 70 10 Q 100 -30 120 -35" stroke="#22c55e" stroke-width="9" fill="none" stroke-linecap="round"/>
-            <path d="M 70 10 Q 120 10 140 40" stroke="#15803d" stroke-width="9" fill="none" stroke-linecap="round"/>
-          </g>
-
-          <g id="rightPalms" transform="translate(450, 40)">
-            <path d="M 50 180 Q 75 90 60 10" stroke="#78350f" stroke-width="12" fill="none" stroke-linecap="round"/>
-            <path d="M 60 10 Q 10 0 -20 25" stroke="#15803d" stroke-width="9" fill="none" stroke-linecap="round"/>
-            <path d="M 60 10 Q 40 -30 20 -45" stroke="#16a34a" stroke-width="9" fill="none" stroke-linecap="round"/>
-            <path d="M 60 10 Q 90 -30 110 -35" stroke="#22c55e" stroke-width="9" fill="none" stroke-linecap="round"/>
-            <path d="M 60 10 Q 110 10 130 35" stroke="#15803d" stroke-width="9" fill="none" stroke-linecap="round"/>
-          </g>
-
-          <!-- 前景自然地表草坪与浅金沙滩 (图五地面) -->
-          <path d="M 0 230 Q 150 220 300 225 Q 450 230 600 225 L 600 380 L 0 380 Z" fill="url(#beachGroundGrad)"/>
-
-          <!-- 渲染当前景点的特色地标 (蘑菇屋 / 图腾 / 瀑布 / 神殿水牢) -->
-          ${landmarkSvg}
-
-          <!-- 图五地面生动生态细节：贝壳、红色小蛇、螃蟹、图腾雕刻面具碎片 -->
-          <g id="fig5GroundCreatures">
-            <!-- 红色蜿蜒小蛇 (图五底部正中央) -->
-            <path d="M 230 335 Q 240 310 255 330 T 275 330 T 290 325" stroke="#ef4444" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <circle cx="288" cy="323" r="3.5" fill="#fde047"/>
-            <circle cx="289" cy="322" r="1.5" fill="#000000"/>
-
-            <!-- 沙滩小螃蟹 (图五左下角) -->
-            <ellipse cx="50" cy="340" rx="14" ry="9" fill="#ea580c"/>
-            <circle cx="44" cy="333" r="2.5" fill="#000000"/>
-            <circle cx="56" cy="333" r="2.5" fill="#000000"/>
-            <path d="M 36 338 Q 28 330 32 322" stroke="#ea580c" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M 64 338 Q 72 330 68 322" stroke="#ea580c" stroke-width="3" fill="none" stroke-linecap="round"/>
-
-            <!-- 图腾面具石碑碎片 (图五右下角) -->
-            <rect x="480" y="320" width="22" height="38" rx="4" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2" transform="rotate(15, 480, 320)"/>
-            <circle cx="492" cy="332" r="3" fill="#fde047"/>
-            <rect x="520" y="315" width="24" height="42" rx="4" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(-10, 520, 315)"/>
-          </g>
-        </svg>
-
-        <!-- 探险小人偶主角立在草地上 -->
-        <div class="scenic-explorer-hero">
-          <span class="scenic-hero-avatar">🏃‍♂️</span>
-          <span class="scenic-hero-tag">小勇士探险中</span>
+        <div class="duo-stats-pills">
+          <div class="duo-star-pill">⭐ ${(window.syncManager && window.syncManager.data && window.syncManager.data.totalStars) || 0}</div>
         </div>
       </div>
     `;
 
-    // 3. 【场景沉浸式儿童答题面板】(完美保留自动语音读题、温柔提示、大号果冻按钮、防乱猜)
-    let runLevel = currentLevelObj;
-    if (window.levelEngine) {
-      if (currentLevelObj.displayType === 'items') {
-        runLevel = window.levelEngine.generateDynamicMathItems(5);
-      } else if (currentLevelObj.displayType === 'radical_combine') {
-        runLevel = window.levelEngine.generateDynamicRadicalCombine();
-      } else if (currentLevelObj.displayType === 'tone_car') {
-        runLevel = window.levelEngine.generateDynamicToneCar();
-      }
-      runLevel.id = currentLevelObj.id;
-    }
-
-    const questionText = runLevel.questionText || `找出正确答案，继续探险！`;
-    const promptText = runLevel.promptSpeech || questionText;
-    const optionsList = Array.isArray(runLevel.options) ? runLevel.options : [
-      { text: 'A. 正确', isCorrect: true },
-      { text: 'B. 思考', isCorrect: false }
+    // 2. 7 个关卡在 S 型曲线上交替排布的位置 classes (自底向上第 1 关到第 7 关)
+    const rowPositions = [
+      'row-pos-center',     // 第 1 关 (底部居中开端)
+      'row-pos-left',       // 第 2 关 (向左拐)
+      'row-pos-far-left',   // 第 3 关 (左侧大弯)
+      'row-pos-center',     // 第 4 关 (穿过峡谷中央)
+      'row-pos-right',      // 第 5 关 (向右拐)
+      'row-pos-far-right',  // 第 6 关 (右侧大弯)
+      'row-pos-center'      // 第 7 关 (山巅海神水牢祭坛)
     ];
 
-    // 生成生动插图展示 (如水果/汉字等)
-    let visualHtml = '';
-    if (Array.isArray(runLevel.items) && runLevel.items.length > 0) {
-      visualHtml = `
-        <div class="inscene-visual-display">
-          ${runLevel.items.map(it => `<span style="font-size:36px; user-select:none;">${it}</span>`).join('')}
+    // 3. 构建关卡节点列表
+    const nodesHtml = levelsList.map((lvl, idx) => {
+      const posClass = rowPositions[idx % rowPositions.length];
+      const isCleared = islandCompleted.includes(lvl.id);
+      const isActive = (idx === activeLevelIdx) && !isAllDone;
+      const isBossNode = (idx === totalLevels - 1);
+
+      let nodeHtml = '';
+      if (isBossNode) {
+        // 终点海神水牢大关
+        nodeHtml = `
+          <div class="duo-boss-altar ${isAllDone ? 'boss-rescued' : ''}" data-level-idx="${idx}" title="${isAllDone ? '点击温习神兽终极大挑战' : '破除牢笼解救神兽！'}">
+            <span class="duo-boss-cage-icon">${isAllDone ? `👑 ${island.guardianEmoji || '🐱'}` : '🔒 🐱'}</span>
+            <span class="duo-boss-tag">${isAllDone ? '✨ 已解救' : '第7关: 解救神兽'}</span>
+          </div>
+        `;
+      } else if (isCleared) {
+        // 已通关状态：翡翠绿果冻纽扣 + 3颗闪亮小金星
+        nodeHtml = `
+          <div class="duo-level-node duo-node-cleared" data-level-idx="${idx}" title="第${idx+1}关 (已通关，点击温习)">
+            <div class="duo-node-stars">⭐⭐⭐</div>
+            <span class="duo-node-num">${idx + 1}</span>
+            <span class="duo-node-title">已通关</span>
+          </div>
+        `;
+      } else if (isActive) {
+        // 当前关卡：高亮耀眼金黄 + 呼吸脉冲光环 + 活泼跳跃小萌宠主角
+        nodeHtml = `
+          <div class="duo-level-node duo-node-active" data-level-idx="${idx}" title="第${idx+1}关 (当前探险点，点击开闯！)">
+            <div class="duo-pulse-ring"></div>
+            <div class="duo-hero-character">
+              <span class="duo-char-avatar">${island.guardianEmoji || '🐱'}</span>
+              <span class="duo-speech-bubble">点我开闯！🚀</span>
+            </div>
+            <span class="duo-node-num">${idx + 1}</span>
+            <span class="duo-node-title">挑战中</span>
+          </div>
+        `;
+      } else {
+        // 未解锁关卡：石灰质感 + 铜锁
+        nodeHtml = `
+          <div class="duo-level-node duo-node-locked" data-level-idx="${idx}" title="第${idx+1}关 (未解锁)">
+            <span class="duo-lock-symbol">🔒</span>
+            <span class="duo-node-title">未解锁</span>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="duo-node-row ${posClass}">
+          ${nodeHtml}
         </div>
       `;
-    }
+    }).join('');
 
-    // 生成大号彩色果冻选项按钮
-    const optionsHtml = `
-      <div class="inscene-options-grid">
-        ${optionsList.map((opt, oIdx) => `
-          <button class="btn-inscene-option" data-opt-idx="${oIdx}">
-            <span>${opt.text}</span>
-          </button>
-        `).join('')}
-      </div>
+    // 4. 沿途生动微缩原野装饰物 (蘑菇房、椰树、贝壳、螃蟹、宝箱)
+    const propsHtml = `
+      <div class="duo-scenic-prop" style="top: 80px; left: 24px; font-size: 42px;">🍄</div>
+      <div class="duo-scenic-prop" style="top: 120px; right: 28px; font-size: 46px;">🌴</div>
+      <div class="duo-scenic-prop" style="top: 320px; left: 18px; font-size: 32px;">🦀</div>
+      <div class="duo-scenic-prop" style="top: 460px; right: 22px; font-size: 34px;">🐚</div>
+      <div class="duo-scenic-prop" style="top: 600px; left: 30px; font-size: 38px;">🌴</div>
+      <div class="duo-scenic-prop" style="top: 720px; right: 34px; font-size: 36px;">🎁</div>
     `;
 
-    const quizBoardHtml = `
-      <div class="inscene-quiz-container">
-        <div class="inscene-question-header">
-          <div class="inscene-question-text">${questionText}</div>
-          <button id="btnReplayInsceneSpeech" class="btn-inscene-replay-speech" title="点击重新语音读题">
-            <span>🔊 读题</span>
-          </button>
-        </div>
-
-        ${visualHtml}
-        ${optionsHtml}
-
-        <div id="insceneGentleHint" class="inscene-gentle-hint" style="display:none;">
-          <span>💡 提示：</span>
-          <span id="insceneHintText">仔细听听声音，再选一次哦～</span>
-        </div>
-
-        <div id="insceneAntiGuessAlert" class="inscene-antiguess-alert">
-          ⏳ 别着急连续乱点哦，动动小脑筋想一想～ (冷却 2 秒)
-        </div>
-      </div>
+    // 5. 背景贯穿 S 型蜿蜒步道 SVG
+    const trailSvgHtml = `
+      <svg class="duo-trail-svg" viewBox="0 0 380 860" preserveAspectRatio="none">
+        <defs>
+          <filter id="roadShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="rgba(180,83,9,0.25)"/>
+          </filter>
+        </defs>
+        <!-- 粗壮立体大地色探险主道 -->
+        <path d="M 190 820 C 120 740, 100 660, 100 600 C 100 520, 280 480, 280 400 C 280 320, 100 280, 100 200 C 100 120, 190 80, 190 40" 
+              stroke="#fef3c7" stroke-width="48" stroke-linecap="round" fill="none" filter="url(#roadShadow)"/>
+        <!-- 小径中心木纹/石板虚线印记 -->
+        <path d="M 190 820 C 120 740, 100 660, 100 600 C 100 520, 280 480, 280 400 C 280 320, 100 280, 100 200 C 100 120, 190 80, 190 40" 
+              stroke="#f59e0b" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round" fill="none" opacity="0.8"/>
+      </svg>
     `;
 
     this.islandLandingStage.innerHTML = `
       ${topBarHtml}
-      ${scenicCanvasHtml}
-      ${quizBoardHtml}
+      <div class="duo-trail-world ${themeClass}">
+        ${trailSvgHtml}
+        ${propsHtml}
+        <div class="duo-nodes-track">
+          ${nodesHtml}
+        </div>
+      </div>
     `;
 
-    // 4. 自动离线语音读题 (专为不认字幼儿设计，进入关卡立即自动读题)
-    setTimeout(() => {
-      if (window.soundEngine) {
-        window.soundEngine.speak(promptText);
-      }
-    }, 250);
-
-    // 绑定大喇叭重新读题按钮
-    const btnReplay = this.islandLandingStage.querySelector('#btnReplayInsceneSpeech');
-    if (btnReplay) {
-      btnReplay.addEventListener('click', () => {
-        window.soundEngine.playClick();
-        window.soundEngine.speak(promptText);
-      });
-    }
-
-    // 绑定返回海洋按钮
-    const btnBack = this.islandLandingStage.querySelector('#btnBackToOcean');
+    // 6. 绑定事件：返回海洋按钮
+    const btnBack = this.islandLandingStage.querySelector('#btnDuoBackToOcean');
     if (btnBack) {
       btnBack.addEventListener('click', () => {
         window.soundEngine.playClick();
@@ -8901,13 +9066,147 @@ class App {
       });
     }
 
-    // 5. 绑定选项答题逻辑 (答错温和引导，答对礼花欢呼，平滑迈步进入下一景点)
-    let isCooling = false;
-    const hintBox = this.islandLandingStage.querySelector('#insceneGentleHint');
-    const hintTextEl = this.islandLandingStage.querySelector('#insceneHintText');
-    const antiGuessEl = this.islandLandingStage.querySelector('#insceneAntiGuessAlert');
+    // 7. 绑定关卡踏石点击触发答题抽屉
+    const allNodes = this.islandLandingStage.querySelectorAll('.duo-level-node, .duo-boss-altar');
+    allNodes.forEach(nodeEl => {
+      nodeEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(nodeEl.dataset.levelIdx, 10);
+        const targetLvl = levelsList[idx];
 
-    this.islandLandingStage.querySelectorAll('.btn-inscene-option').forEach(btn => {
+        if (nodeEl.classList.contains('duo-node-locked')) {
+          // 未解锁点击：温和抖动引导
+          window.soundEngine.playWrong();
+          nodeEl.style.animation = 'shakeWrong 0.4s ease';
+          setTimeout(() => { nodeEl.style.animation = ''; }, 400);
+          if (window.soundEngine) {
+            window.soundEngine.speak('小朋友，要先把前面的小关卡攻克，才能解锁这里哦！');
+          }
+          return;
+        }
+
+        // 打开沉浸式半屏果冻答题抽屉
+        this.openDuoQuizSheet(island, targetLvl, idx, levelsList, islandCompleted);
+      });
+    });
+  }
+
+  // ================== 打开多邻国半屏沉浸果冻答题抽屉 ==================
+  openDuoQuizSheet(island, levelObj, levelIdx, levelsList, islandCompleted) {
+    window.soundEngine.playClick();
+
+    // 移除已存在的抽屉弹窗
+    const oldBackdrop = document.querySelector('.duo-quiz-modal-backdrop');
+    if (oldBackdrop) oldBackdrop.remove();
+
+    // 题目数据准备
+    let runLevel = levelObj;
+    if (window.levelEngine) {
+      if (levelObj.displayType === 'items') {
+        runLevel = window.levelEngine.generateDynamicMathItems(5);
+      } else if (levelObj.displayType === 'radical_combine') {
+        runLevel = window.levelEngine.generateDynamicRadicalCombine();
+      } else if (levelObj.displayType === 'tone_car') {
+        runLevel = window.levelEngine.generateDynamicToneCar();
+      }
+      runLevel.id = levelObj.id;
+    }
+
+    const questionText = runLevel.questionText || `听清题目，选出正确答案哦！`;
+    const promptText = runLevel.promptSpeech || questionText;
+    const optionsList = Array.isArray(runLevel.options) ? runLevel.options : [
+      { text: 'A. 正确答案', isCorrect: true },
+      { text: 'B. 动动小脑筋', isCorrect: false }
+    ];
+
+    let visualHtml = '';
+    if (Array.isArray(runLevel.items) && runLevel.items.length > 0) {
+      visualHtml = `
+        <div class="duo-sheet-visual-display">
+          ${runLevel.items.map(it => `<span style="font-size:38px; user-select:none;">${it}</span>`).join('')}
+        </div>
+      `;
+    }
+
+    const optionsHtml = optionsList.map((opt, oIdx) => `
+      <button class="btn-duo-option" data-opt-idx="${oIdx}">
+        <span>${opt.text}</span>
+      </button>
+    `).join('');
+
+    const modalBackdrop = document.createElement('div');
+    modalBackdrop.className = 'duo-quiz-modal-backdrop';
+    modalBackdrop.innerHTML = `
+      <div class="duo-quiz-sheet">
+        <div class="duo-sheet-grabber"></div>
+        <div class="duo-sheet-header">
+          <div class="duo-sheet-badge">
+            <span>${island.guardianEmoji || '🌴'}</span>
+            <span>${island.name} · 第 ${levelIdx + 1} 关</span>
+          </div>
+          <button class="btn-duo-close-sheet" title="关闭">✕</button>
+        </div>
+
+        <div class="duo-sheet-question-card">
+          <div class="duo-sheet-question-text">${questionText}</div>
+          <button id="btnDuoReplaySpeech" class="btn-duo-speech" title="重新读题">
+            <span>🔊 读题</span>
+          </button>
+        </div>
+
+        ${visualHtml}
+
+        <div class="duo-sheet-options">
+          ${optionsHtml}
+        </div>
+
+        <div id="duoGentleHint" class="duo-sheet-gentle-hint" style="display:none;">
+          <span>💡 提示：</span>
+          <span id="duoHintText">仔细听听声音，再试一次哦～</span>
+        </div>
+
+        <div id="duoAntiGuessAlert" class="duo-sheet-antiguess-alert">
+          ⏳ 别着急连续乱点哦，动脑筋想一想～ (冷却 2 秒)
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modalBackdrop);
+
+    // 自动离线语音朗读题干 (专为 5 岁幼童不认字设计)
+    setTimeout(() => {
+      if (window.soundEngine) {
+        window.soundEngine.speak(promptText);
+      }
+    }, 280);
+
+    // 绑定大喇叭重新朗读
+    const btnReplay = modalBackdrop.querySelector('#btnDuoReplaySpeech');
+    if (btnReplay) {
+      btnReplay.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        window.soundEngine.speak(promptText);
+      });
+    }
+
+    // 关闭抽屉
+    const closeSheet = () => {
+      modalBackdrop.style.animation = 'backdropFadeIn 0.2s ease reverse forwards';
+      setTimeout(() => { modalBackdrop.remove(); }, 200);
+    };
+
+    modalBackdrop.querySelector('.btn-duo-close-sheet').addEventListener('click', closeSheet);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeSheet();
+    });
+
+    // 选项答题处理
+    let isCooling = false;
+    const hintBox = modalBackdrop.querySelector('#duoGentleHint');
+    const hintTextEl = modalBackdrop.querySelector('#duoHintText');
+    const antiGuessEl = modalBackdrop.querySelector('#duoAntiGuessAlert');
+
+    modalBackdrop.querySelectorAll('.btn-duo-option').forEach(btn => {
       btn.addEventListener('click', () => {
         if (isCooling) {
           if (antiGuessEl) antiGuessEl.style.display = 'block';
@@ -8919,72 +9218,57 @@ class App {
         const selectedOpt = optionsList[optIdx];
 
         if (selectedOpt && selectedOpt.isCorrect) {
-          // 答对：礼花欢呼 + 星星音效 + 小人偶迈步前进
+          // 答对：音效 + 变绿 + 撒花
           window.soundEngine.playCorrect();
           window.soundEngine.playStar();
-          btn.style.background = 'linear-gradient(180deg, #dcfce7 0%, #22c55e 100%)';
-          btn.style.color = '#ffffff';
-          btn.style.borderColor = '#86efac';
+          btn.classList.add('opt-correct');
 
-          // 记录该关卡通过
           if (window.syncManager) {
-            window.syncManager.recordTaskResult(currentLevelObj.id, true, islandId);
+            window.syncManager.recordTaskResult(levelObj.id, true, island.id);
           }
 
-          // 触发礼花动画
           if (window.confetti) {
             try { window.confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } }); } catch (e) {}
           }
 
-          // 小人偶欢快向前迈步动画
-          const heroPawn = this.islandLandingStage.querySelector('.scenic-explorer-hero');
-          if (heroPawn) {
-            heroPawn.style.transition = 'left 0.8s ease, transform 0.8s ease';
-            heroPawn.style.left = '65%';
-          }
-
-          const isLastTask = (currentTaskIdx >= levelsList.length - 1);
+          const isLastTask = (levelIdx >= levelsList.length - 1);
 
           setTimeout(() => {
+            closeSheet();
             if (isLastTask) {
-              // 最后一关通关！成功解救萌宠！
-              window.soundEngine.playStar();
-              alert(`🎉 恭喜！【${island.name}】全岛 4 大景点全部攻克！成功打破水牢牢笼，救出了小萌宠【${island.petName}】！`);
-              this.currentLandingIslandId = null;
-              this.renderIslandsView();
-              const islandEl = document.getElementById(islandId);
-              if (islandEl) islandEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // 终极通关大解救！
+              window.soundEngine.playVictory();
+              alert(`🎉 恭喜！【${island.name}】7 大关卡全部攻克！成功解救被困神兽【${island.petName}】！`);
+              this.renderIslandLandingView(island.id);
             } else {
-              // 自动平滑推进到下一个题目/景点！
-              this.renderIslandLandingView(islandId, currentTaskIdx + 1);
+              // 刷新多邻国 S 型探险地图，萌宠前进到下一个节点！
+              this.renderIslandLandingView(island.id);
             }
-          }, 1100);
+          }, 650);
 
         } else {
-          // 答错：温和引导，不批评，弹出柔和提示并触发冷却
+          // 答错：抖动 + 温柔提示
           window.soundEngine.playWrong();
-          btn.style.background = '#fef2f2';
-          btn.style.color = '#dc2626';
-          btn.style.borderColor = '#fca5a5';
-
+          btn.classList.add('opt-wrong');
           isCooling = true;
+
           if (hintBox) {
             hintBox.style.display = 'flex';
-            if (hintTextEl) hintTextEl.textContent = selectedOpt.hint || '仔细看一看画面，再选一次试试哦～';
+            if (hintTextEl) hintTextEl.textContent = selectedOpt.hint || '仔细听听题干读音，再试一次哦～';
           }
           if (window.soundEngine) {
-            window.soundEngine.speak('没关系，再仔细想想哦～');
+            window.soundEngine.speak('没关系，再仔细听听题目哦～');
           }
 
           setTimeout(() => {
+            btn.classList.remove('opt-wrong');
             isCooling = false;
             if (antiGuessEl) antiGuessEl.style.display = 'none';
-          }, 1600);
+          }, 1500);
         }
       });
     });
   }
-
 
           renderCampView() {
     const activePet = window.syncManager.getActivePet();
