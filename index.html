@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-09-30 09:56:51">
+  <meta name="build-version" content="2026-09-30 11:53:26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -5822,8 +5822,462 @@ body {
   box-shadow: 0 5px 0 #92400e, 0 8px 18px rgba(217, 119, 6, 0.45);
 }
 
+/* ==========================================================================
+   ★ 梦幻五岛大航海沙盘：流光航线、探险家帆船、云海迷雾、胜旗与复古罗盘
+   ========================================================================== */
 
+/* 1. 梦幻金色流动航海轨迹 SVG */
+.sea-route-svg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
 
+.sea-route-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sea-route-path.route-active {
+  stroke: #fbbf24;
+  stroke-width: 4px;
+  stroke-dasharray: 8 10;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+  animation: seaRouteFlow 18s linear infinite;
+}
+
+.sea-route-path.route-locked {
+  stroke: rgba(255, 255, 255, 0.38);
+  stroke-width: 2.5px;
+  stroke-dasharray: 5 8;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes seaRouteFlow {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* 2. 复古金色航海罗盘 */
+.vintage-nautical-compass {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  z-index: 22;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.compass-rose-disc {
+  font-size: 26px;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+  animation: compassDrift 7s ease-in-out infinite alternate;
+}
+
+@keyframes compassDrift {
+  0% { transform: rotate(-8deg) scale(1); }
+  100% { transform: rotate(10deg) scale(1.04); }
+}
+
+.compass-label-text {
+  font-size: 11px;
+  font-weight: 900;
+  color: #ffffff;
+  background: rgba(2, 44, 90, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  padding: 2px 8px;
+  backdrop-filter: blur(6px);
+  letter-spacing: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. 探险家专属大帆船 (Flagship Explorer) */
+.spot-frontier-flagship {
+  z-index: 28 !important;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flagship-ripple-ring {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(56, 189, 248, 0.75);
+  background: radial-gradient(ellipse, rgba(56, 189, 248, 0.45) 0%, rgba(56, 189, 248, 0) 70%);
+  animation: flagshipRipple 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes flagshipRipple {
+  0% { transform: translateX(-50%) scale(0.7); opacity: 0.9; }
+  100% { transform: translateX(-50%) scale(1.4); opacity: 0; }
+}
+
+.flagship-vessel-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.spot-frontier-flagship:hover .flagship-vessel-box {
+  transform: translateY(-6px) scale(1.06);
+}
+
+.spot-frontier-flagship:active .flagship-vessel-box {
+  transform: translateY(2px) scale(0.96);
+}
+
+.flagship-boat-sprite {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: boatRock 2.6s ease-in-out infinite;
+}
+
+.boat-mast-sail {
+  font-size: 38px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.38));
+}
+
+.boat-captain-avatar {
+  position: absolute;
+  top: 1px;
+  right: -5px;
+  font-size: 18px;
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
+}
+
+.flagship-banner-tag {
+  margin-top: 3px;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: 2.5px solid #ffffff;
+  border-radius: 20px;
+  padding: 4px 12px;
+  box-shadow: 0 4px 0 #075985, 0 8px 18px rgba(2, 132, 199, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.banner-headline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #bae6fd;
+}
+
+.banner-pulsing-dot {
+  color: #34d399;
+  font-size: 9px;
+  animation: dotPulse 1.2s infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.banner-sub {
+  letter-spacing: 0.5px;
+}
+
+.banner-score {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0 4px;
+  border-radius: 6px;
+  font-size: 9px;
+}
+
+.banner-main-title {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 1px;
+}
+
+.banner-action-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fde047;
+  margin-top: 1px;
+}
+
+.banner-arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.spot-frontier-flagship:hover .banner-arrow {
+  transform: translateX(3px);
+}
+
+/* 4. 已解救海岛皇家金色胜利旗标 */
+.spot-cleared-compact {
+  z-index: 18;
+}
+
+.btn-royal-victory-flag {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 18px;
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #d97706, 0 6px 14px rgba(217, 119, 6, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-royal-victory-flag:hover {
+  transform: scale(1.08);
+  background: #fef08a;
+  box-shadow: 0 5px 0 #d97706, 0 8px 18px rgba(217, 119, 6, 0.35);
+}
+
+.btn-royal-victory-flag:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #d97706;
+}
+
+.victory-crown {
+  font-size: 13px;
+}
+
+.victory-name {
+  font-size: 11px;
+  font-weight: 900;
+  color: #78350f;
+}
+
+.victory-tag {
+  font-size: 9px;
+  font-weight: 900;
+  background: #10b981;
+  color: #ffffff;
+  padding: 1px 5px;
+  border-radius: 8px;
+}
+
+/* 5. 蓬松半透明梦幻云海迷雾与晶石锁 */
+.spot-dream-cloud-veil {
+  z-index: 16;
+}
+
+.dream-cloud-cluster {
+  position: relative;
+  width: 130px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dream-mist-aura {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.92) 0%, rgba(224, 242, 254, 0.65) 45%, transparent 75%);
+  filter: blur(8px);
+  animation: dreamAuraPulse 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes dreamAuraPulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.12); opacity: 0.65; }
+}
+
+.cloud-puff-floating {
+  position: absolute;
+  font-size: 32px;
+  filter: drop-shadow(0 4px 10px rgba(186, 230, 253, 0.8));
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.cloud-puff-a {
+  top: -8px;
+  left: 6px;
+  animation: cloudDriftA 5s ease-in-out infinite alternate;
+}
+
+.cloud-puff-b {
+  bottom: -6px;
+  right: 8px;
+  font-size: 26px;
+  animation: cloudDriftB 4.2s ease-in-out infinite alternate;
+}
+
+@keyframes cloudDriftA {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(8px, -5px); }
+}
+
+@keyframes cloudDriftB {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-7px, 6px); }
+}
+
+.mist-crystal-gold-seal {
+  position: relative;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 2px solid #f59e0b;
+  border-radius: 16px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.25);
+  transition: transform 0.2s;
+}
+
+.dream-cloud-cluster:hover .mist-crystal-gold-seal {
+  transform: scale(1.08);
+}
+
+.seal-lock-icon {
+  font-size: 13px;
+}
+
+.seal-island-name {
+  font-size: 11px;
+  font-weight: 900;
+  color: #78350f;
+}
+
+/* 6. 神兽迷雾呼救气泡与果冻动效 */
+.cloud-speech-bubble {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 2.5px solid #38bdf8;
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(2, 44, 90, 0.28);
+  z-index: 40;
+  min-width: 175px;
+  max-width: 220px;
+  pointer-events: none;
+}
+
+.bubble-arrow-point {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 8px solid #38bdf8;
+}
+
+.bubble-content-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #0369a1;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.pop-bubble-anim {
+  animation: bubblePop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes bubblePop {
+  0% { opacity: 0; transform: translateX(-50%) translateY(8px) scale(0.85); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+.jelly-wobble-anim {
+  animation: jellyWobble 0.5s ease;
+}
+
+@keyframes jellyWobble {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(0.92, 1.08); }
+  50% { transform: scale(1.08, 0.92); }
+  75% { transform: scale(0.96, 1.04); }
+}
+
+/* 手机竖屏尺寸适配微调 */
+@media (max-width: 768px) {
+  .vintage-nautical-compass {
+    top: 10px;
+    left: 10px;
+  }
+  .compass-rose-disc {
+    font-size: 20px;
+  }
+  .compass-label-text {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+  .boat-mast-sail {
+    font-size: 32px;
+  }
+  .boat-captain-avatar {
+    width: 22px;
+    height: 22px;
+    font-size: 15px;
+  }
+  .flagship-banner-tag {
+    padding: 3px 10px;
+  }
+  .banner-main-title {
+    font-size: 12px;
+  }
+  .dream-cloud-cluster {
+    width: 105px;
+    height: 80px;
+  }
+  .cloud-puff-floating {
+    font-size: 26px;
+  }
+}
 
 </style>
 </head>
@@ -5875,7 +6329,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v19.1 大世界极简轻盈重构·彻底告别拥挤 (09:56)</span>
+            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v19.2 梦幻大航海·旗舰流光与云海沙盘 (11:53)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -9591,13 +10045,16 @@ class App {
       if (!isl) return '';
 
       if (!st.unlocked) {
-        // 未解锁：轻薄晨雾 + 极简灵动小锁标 (点击弹气泡)
+        // 未解锁：蓬松半透明梦幻云海海雾 + 神秘黄金晶石封印 (点击弹神兽气泡)
         return `
-          <div class="grand-spot-hub ${spot} spot-mist-compact" id="spot_${isl.id}">
-            <div class="island-seamless-mist-overlay" data-mist-island="${isl.id}">
-              <div class="compact-lock-badge">
-                <span class="compact-lock-icon">🔒</span>
-                <span class="compact-lock-name">${short}</span>
+          <div class="grand-spot-hub ${spot} spot-dream-cloud-veil" id="spot_${isl.id}">
+            <div class="island-seamless-mist-overlay dream-cloud-cluster" data-mist-island="${isl.id}">
+              <div class="dream-mist-aura"></div>
+              <div class="cloud-puff-floating cloud-puff-a">☁️</div>
+              <div class="cloud-puff-floating cloud-puff-b">☁️</div>
+              <div class="mist-crystal-gold-seal">
+                <span class="seal-lock-icon">🔒</span>
+                <span class="seal-island-name">${short}</span>
               </div>
               <div class="cloud-speech-bubble" style="display:none;" id="mistBubble_${isl.id}">
                 <span class="bubble-arrow-point"></span>
@@ -9612,29 +10069,39 @@ class App {
       }
 
       if (idx === activeFrontierIdx) {
-        // 当前攻克前沿：唯一的呼吸焦点探险大按钮！
+        // 当前攻克前沿：停靠在沙滩码头的探险家专属大帆船 (Flagship Explorer)
         return `
-          <div class="grand-spot-hub ${spot} spot-frontier-active" id="spot_${isl.id}">
-            <div class="frontier-beacon-pulse"></div>
-            <button class="btn-frontier-focus-hero" data-dock-island="${isl.id}">
-              <span class="frontier-emoji">${emoji}</span>
-              <div class="frontier-text-col">
-                <div class="frontier-name">${isl.name}</div>
-                <div class="frontier-sub">正在挑战 · ${st.comp.length}/${st.levels.length || 7} 关</div>
+          <div class="grand-spot-hub ${spot} spot-frontier-flagship" id="spot_${isl.id}" data-dock-island="${isl.id}">
+            <div class="flagship-ripple-ring"></div>
+            <div class="flagship-vessel-box">
+              <div class="flagship-boat-sprite">
+                <span class="boat-mast-sail">⛵</span>
+                <span class="boat-captain-avatar">${emoji}</span>
               </div>
-              <span class="frontier-arrow">➔</span>
-            </button>
+              <div class="flagship-banner-tag">
+                <div class="banner-headline">
+                  <span class="banner-pulsing-dot">●</span>
+                  <span class="banner-sub">当前航向</span>
+                  <span class="banner-score">${st.comp.length}/${st.levels.length || 7}关</span>
+                </div>
+                <div class="banner-main-title">${isl.name}</div>
+                <div class="banner-action-row">
+                  <span>扬帆开闯</span>
+                  <span class="banner-arrow">➔</span>
+                </div>
+              </div>
+            </div>
           </div>
         `;
       }
 
-      // 已通关的岛屿：小巧清爽的金色王冠徽章
+      // 已通关海岛：小巧清爽的金色王冠胜旗
       return `
         <div class="grand-spot-hub ${spot} spot-cleared-compact" id="spot_${isl.id}">
-          <button class="btn-island-cleared-chip" data-dock-island="${isl.id}" title="点击巡视${short}">
-            <span class="chip-crown">👑</span>
-            <span class="chip-title">${short}</span>
-            <span class="chip-status">已解救</span>
+          <button class="btn-royal-victory-flag" data-dock-island="${isl.id}" title="点击巡视${short}">
+            <span class="victory-crown">👑</span>
+            <span class="victory-name">${short}</span>
+            <span class="victory-tag">已解救</span>
           </button>
         </div>
       `;
@@ -9652,13 +10119,39 @@ class App {
       `;
     };
 
+    // 动态绘制海图金色流动虚线航线 (SVG 矢量路径)
+    const seaRouteSvgHtml = isWideScreen ? `
+      <svg class="sea-route-svg-canvas" viewBox="0 0 1000 562.5" preserveAspectRatio="none">
+        <path d="M 130 460 Q 200 440, 270 425 T 410 435" class="sea-route-path ${st1.done ? 'route-active' : 'route-locked'}" />
+        <path d="M 410 435 Q 430 380, 445 320 T 440 215" class="sea-route-path ${st2.done ? 'route-active' : 'route-locked'}" />
+        <path d="M 440 215 Q 520 230, 580 240 T 700 270" class="sea-route-path ${st3.done ? 'route-active' : 'route-locked'}" />
+        <path d="M 700 270 Q 740 210, 775 165 T 880 135" class="sea-route-path ${st4.done ? 'route-active' : 'route-locked'}" />
+      </svg>
+    ` : `
+      <svg class="sea-route-svg-canvas" viewBox="0 0 540 960" preserveAspectRatio="none">
+        <path d="M 170 890 Q 220 780, 270 740 T 385 690" class="sea-route-path ${st1.done ? 'route-active' : 'route-locked'}" />
+        <path d="M 385 690 Q 320 620, 270 560 T 150 490" class="sea-route-path ${st2.done ? 'route-active' : 'route-locked'}" />
+        <path d="M 150 490 Q 210 430, 270 395 T 390 355" class="sea-route-path ${st3.done ? 'route-active' : 'route-locked'}" />
+        <path d="M 390 355 Q 350 280, 315 220 T 230 145" class="sea-route-path ${st4.done ? 'route-active' : 'route-locked'}" />
+      </svg>
+    `;
+
     grandCanvas.innerHTML = `
       <img src="${mapUrl}" class="archipelago-bg-img" alt="五岛大洋航海全景大沙盘">
+
+      <!-- 梦幻金光流动航海轨迹 -->
+      ${seaRouteSvgHtml}
+
+      <!-- 复古金色航海罗盘 -->
+      <div class="vintage-nautical-compass">
+        <div class="compass-rose-disc">🧭</div>
+        <div class="compass-label-text">大洋航海图</div>
+      </div>
 
       <!-- 岛 1：猫猫水波云岛 -->
       ${renderIslandCleanHubHtml(islandConfigs[0], 0)}
 
-      <!-- 桥 1 航道微标 (仅在通航后漂浮可爱小帆船) -->
+      <!-- 桥 1 航道微标 -->
       ${renderBridgeCleanHubHtml(st1.done, 'spot-bridge-1 spot-sea-bridge', island2, '金色栈桥')}
 
       <!-- 岛 2：萌兔蔬果乐高岛 -->
