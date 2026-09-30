@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-09-30 14:30:15">
+  <meta name="build-version" content="2026-09-30 14:38:55">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -5390,95 +5390,90 @@ body {
     border-radius: 26px !important;
   }
 
-  /* 宽屏 5 座独立海岛与海峡间浮现桥梁精准坐标 (基于全新独立无桥大洋底图) */
-  /* 岛 1：猫猫水波云岛 (左下角沙滩城堡) */
+  /* 宽屏 5 座独立海岛与海峡间浮现桥梁精准坐标 (帆船停靠在浅海港湾，绝不遮挡岛上建筑) */
+  /* 岛 1：猫猫水波云岛 (沙滩码头船坞旁) */
   .archipelago-stage-wide .spot-island-cat {
-    top: 73%;
-    left: 19%;
+    top: 80%;
+    left: 25%;
     bottom: auto;
     transform: translate(-50%, -50%);
     width: auto;
-    max-width: 220px;
     z-index: 10;
   }
 
-  /* 桥 1：金色木栈桥 (仅在岛1通关后，在海峡间浮现) */
+  /* 桥 1：金色木栈桥 (仅在岛1通关后浮现于海峡中央) */
   .archipelago-stage-wide .spot-bridge-1 {
-    top: 50%;
-    left: 19%;
+    top: 49%;
+    left: 18%;
     bottom: auto;
     transform: translate(-50%, -50%);
     z-index: 16;
   }
 
-  /* 岛 2：机灵萌兔蔬果乐高岛 (左上角风车农庄) */
+  /* 岛 2：机灵萌兔蔬果乐高岛 (停靠在乐高农庄下方的浅水海面，绝不遮挡作物与风车) */
   .archipelago-stage-wide .spot-island-rabbit {
-    top: 27%;
-    left: 20%;
+    top: 36%;
+    left: 15%;
     bottom: auto;
     transform: translate(-50%, -50%);
     width: auto;
-    max-width: 220px;
     z-index: 10;
   }
 
   /* 桥 2：魔法藤蔓吊桥 (仅在岛2通关后浮现) */
   .archipelago-stage-wide .spot-bridge-2 {
-    top: 37%;
-    left: 35%;
+    top: 38%;
+    left: 36%;
     bottom: auto;
     transform: translate(-50%, -50%);
     z-index: 16;
   }
 
-  /* 岛 3：聪聪小熊魔法森林岛 (正中央巨型发光树屋) */
+  /* 岛 3：聪聪小熊魔法森林岛 (停靠在树下清泉水湾处，绝不遮挡巨树和树屋) */
   .archipelago-stage-wide .spot-island-bear {
-    top: 48%;
-    left: 50%;
+    top: 57%;
+    left: 47%;
     bottom: auto;
     transform: translate(-50%, -50%);
     width: auto;
-    max-width: 220px;
     z-index: 10;
   }
 
   /* 桥 3：远古龙骨石桥 (仅在岛3通关后浮现) */
   .archipelago-stage-wide .spot-bridge-3 {
-    top: 60%;
-    left: 62%;
+    top: 61%;
+    left: 63%;
     bottom: auto;
     transform: translate(-50%, -50%);
     z-index: 16;
   }
 
-  /* 岛 4：憨憨小龙远古化石岛 (右下角恐龙巨头火山) */
+  /* 岛 4：憨憨小龙远古化石岛 (停靠在火山下方的沙滩旁，绝不遮挡恐龙骨架) */
   .archipelago-stage-wide .spot-island-dino {
-    top: 72%;
-    left: 74%;
+    top: 78%;
+    left: 70%;
     bottom: auto;
     transform: translate(-50%, -50%);
     width: auto;
-    max-width: 220px;
     z-index: 10;
   }
 
   /* 桥 4：星光极光光桥 (仅在岛4通关后浮现) */
   .archipelago-stage-wide .spot-bridge-4 {
-    top: 48%;
+    top: 46%;
     left: 79%;
     bottom: auto;
     transform: translate(-50%, -50%);
     z-index: 16;
   }
 
-  /* 岛 5：星际小狐太空城堡岛 (右上角星环水晶城堡) */
+  /* 岛 5：星际小狐太空城堡岛 (悬浮星环水湾旁) */
   .archipelago-stage-wide .spot-island-fox {
-    top: 25%;
-    left: 83%;
+    top: 32%;
+    left: 81%;
     bottom: auto;
     transform: translate(-50%, -50%);
     width: auto;
-    max-width: 220px;
     z-index: 10;
   }
 
@@ -5516,6 +5511,8 @@ body {
   width: 92%;
   display: flex;
   justify-content: center;
+}
+
 /* 轻量已通关海岛小金章 */
 .btn-island-cleared-chip {
   background: rgba(255, 255, 255, 0.92);
@@ -5652,13 +5649,12 @@ body {
 }
 
 /* 手机竖屏：5 岛自下而上 S 型攀升路线与 4 桥排布 */
-/* 手机竖屏：5座独立海岛 S 型攀升与通关后海峡桥梁浮现精准坐标 */
+/* 手机竖屏：5座独立海岛 S 型攀升精准港湾坐标 (避开岛屿建筑本体) */
 .archipelago-stage-portrait .spot-island-cat {
-  top: 85%;
-  left: 30%;
+  top: 89%;
+  left: 32%;
   transform: translate(-50%, -50%);
   width: auto;
-  max-width: 190px;
   z-index: 10;
 }
 .archipelago-stage-portrait .spot-bridge-1 {
@@ -5668,11 +5664,10 @@ body {
   z-index: 16;
 }
 .archipelago-stage-portrait .spot-island-rabbit {
-  top: 67%;
-  left: 72%;
+  top: 72%;
+  left: 65%;
   transform: translate(-50%, -50%);
   width: auto;
-  max-width: 190px;
   z-index: 10;
 }
 .archipelago-stage-portrait .spot-bridge-2 {
@@ -5682,11 +5677,10 @@ body {
   z-index: 16;
 }
 .archipelago-stage-portrait .spot-island-bear {
-  top: 48%;
-  left: 50%;
+  top: 53%;
+  left: 48%;
   transform: translate(-50%, -50%);
   width: auto;
-  max-width: 190px;
   z-index: 10;
 }
 .archipelago-stage-portrait .spot-bridge-3 {
@@ -5696,11 +5690,10 @@ body {
   z-index: 16;
 }
 .archipelago-stage-portrait .spot-island-dino {
-  top: 26%;
-  left: 30%;
+  top: 31%;
+  left: 28%;
   transform: translate(-50%, -50%);
   width: auto;
-  max-width: 190px;
   z-index: 10;
 }
 .archipelago-stage-portrait .spot-bridge-4 {
@@ -5710,11 +5703,10 @@ body {
   z-index: 16;
 }
 .archipelago-stage-portrait .spot-island-fox {
-  top: 12%;
-  left: 72%;
+  top: 14%;
+  left: 71%;
   transform: translate(-50%, -50%);
   width: auto;
-  max-width: 190px;
   z-index: 10;
 }
 
@@ -5910,11 +5902,11 @@ body {
 
 .flagship-ripple-ring {
   position: absolute;
-  bottom: 8px;
+  bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 76px;
-  height: 28px;
+  width: 72px;
+  height: 24px;
   border-radius: 50%;
   border: 2px solid rgba(56, 189, 248, 0.75);
   background: radial-gradient(ellipse, rgba(56, 189, 248, 0.45) 0%, rgba(56, 189, 248, 0) 70%);
@@ -5937,7 +5929,7 @@ body {
 }
 
 .spot-frontier-flagship:hover .flagship-vessel-box {
-  transform: translateY(-6px) scale(1.06);
+  transform: translateY(-6px) scale(1.08);
 }
 
 .spot-frontier-flagship:active .flagship-vessel-box {
@@ -5973,132 +5965,156 @@ body {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
 }
 
-/* 航海卡标：彻底告别文字挤压重叠，清爽游戏水晶卡 */
-.flagship-interactive-card {
-  margin-top: 3px;
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.96) 0%, rgba(3, 105, 161, 0.96) 100%);
+/* 扬帆开闯小胶囊：极简拟物，不遮挡风景 */
+.flagship-sail-pill {
+  margin-top: 2px;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
   border: 2px solid #ffffff;
-  border-radius: 18px;
-  padding: 5px 14px;
-  box-shadow: 0 4px 0 #075985, 0 10px 24px rgba(2, 132, 199, 0.42);
-  display: flex;
-  flex-direction: column;
+  border-radius: 20px;
+  padding: 3px 12px;
+  display: inline-flex;
   align-items: center;
-  text-align: center;
+  gap: 5px;
+  box-shadow: 0 3px 0 #075985, 0 6px 14px rgba(2, 132, 199, 0.45);
+  cursor: pointer;
   white-space: nowrap;
-  backdrop-filter: blur(6px);
-  pointer-events: auto;
+  transition: all 0.15s ease;
 }
 
-.flagship-card-badge {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 800;
-  color: #bae6fd;
+.flagship-sail-pill:hover {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  box-shadow: 0 4px 0 #075985, 0 8px 18px rgba(2, 132, 199, 0.55);
 }
 
-.flagship-card-badge .badge-dot {
+.sail-pill-dot {
   color: #34d399;
   font-size: 8px;
   animation: dotPulse 1.2s infinite;
 }
 
-.flagship-card-badge .badge-count {
-  background: rgba(255, 255, 255, 0.22);
-  padding: 1px 5px;
-  border-radius: 8px;
-  font-size: 9px;
-  color: #ffffff;
-}
-
-.flagship-card-name {
-  font-size: 13px;
+.sail-pill-text {
+  font-size: 12px;
   font-weight: 900;
   color: #ffffff;
-  margin: 1px 0;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.flagship-card-action {
-  font-size: 11px;
+.sail-pill-arrow {
+  font-size: 12px;
   font-weight: 900;
   color: #fde047;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  margin-top: 1px;
-}
-
-.flagship-card-action .card-arrow {
-  font-size: 12px;
   transition: transform 0.2s ease;
 }
 
-.spot-frontier-flagship:hover .flagship-card-action .card-arrow {
+.spot-frontier-flagship:hover .sail-pill-arrow {
   transform: translateX(3px);
 }
 
-/* 4. 已解救海岛皇家金色胜利旗标 */
+/* 4. 已解救海岛皇家金色胜利小旗标 */
 .spot-cleared-compact {
   z-index: 18;
 }
 
-.btn-royal-victory-flag {
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+.btn-royal-banner-flag {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
   border: 2px solid #f59e0b;
-  border-radius: 18px;
-  padding: 4px 12px;
+  border-radius: 16px;
+  padding: 2px 10px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   cursor: pointer;
   box-shadow: 0 3px 0 #d97706, 0 6px 14px rgba(217, 119, 6, 0.25);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
-.btn-royal-victory-flag:hover {
+.btn-royal-banner-flag:hover {
   transform: scale(1.08);
   background: #fef08a;
-  box-shadow: 0 5px 0 #d97706, 0 8px 18px rgba(217, 119, 6, 0.35);
 }
 
-.btn-royal-victory-flag:active {
+.btn-royal-banner-flag:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 #d97706;
 }
 
-.victory-crown {
-  font-size: 14px;
+.banner-flag-crown {
+  font-size: 13px;
 }
 
-.victory-name {
-  font-size: 12px;
+.banner-flag-label {
+  font-size: 11px;
   font-weight: 900;
   color: #78350f;
 }
 
-.victory-tag {
-  font-size: 10px;
-  font-weight: 900;
-  background: #10b981;
-  color: #ffffff;
-  padding: 1px 6px;
-  border-radius: 8px;
+/* 5. 跨海通道浮标 (通关后浮现于海面，如水上罗盘浮标) */
+.spot-unlocked-bridge {
+  z-index: 17;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
-/* 5. 蓬松半透明梦幻云海海雾与黄金晶石封印锁 */
+.channel-buoy-beacon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: buoyBob 2.8s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.channel-buoy-beacon:hover {
+  transform: scale(1.15);
+}
+
+@keyframes buoyBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.buoy-water-ring {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(52, 211, 153, 0.7);
+  background: radial-gradient(ellipse, rgba(52, 211, 153, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.buoy-ico {
+  font-size: 24px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+}
+
+.buoy-tag {
+  font-size: 9px;
+  font-weight: 900;
+  color: #065f46;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #10b981;
+  border-radius: 10px;
+  padding: 1px 6px;
+  margin-top: -2px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+  white-space: nowrap;
+}
+
+/* 6. 蓬松半透明梦幻云海海雾与黄金晶石封印锁 */
 .spot-dream-cloud-veil {
   z-index: 16;
 }
 
 .dream-cloud-cluster {
   position: relative;
-  width: 200px;
-  height: 160px;
+  width: 220px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6110,15 +6126,15 @@ body {
   position: absolute;
   inset: -15px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(224, 242, 254, 0.82) 42%, rgba(186, 230, 253, 0.45) 68%, transparent 100%);
-  filter: blur(10px);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(224, 242, 254, 0.85) 42%, rgba(186, 230, 253, 0.45) 68%, transparent 100%);
+  filter: blur(12px);
   animation: dreamAuraPulse 4.5s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes dreamAuraPulse {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.12); opacity: 0.72; }
+  0%, 100% { transform: scale(1); opacity: 0.92; }
+  50% { transform: scale(1.12); opacity: 0.75; }
 }
 
 .cloud-puff-floating {
@@ -6130,21 +6146,21 @@ body {
 }
 
 .cloud-puff-a {
-  top: 6px;
-  left: 14px;
+  top: 10px;
+  left: 20px;
   animation: cloudDriftA 5s ease-in-out infinite alternate;
 }
 
 .cloud-puff-b {
-  bottom: 8px;
-  right: 16px;
+  bottom: 12px;
+  right: 22px;
   font-size: 28px;
   animation: cloudDriftB 4.2s ease-in-out infinite alternate;
 }
 
 .cloud-puff-c {
-  top: 24px;
-  right: 20px;
+  top: 26px;
+  right: 28px;
   font-size: 24px;
   animation: cloudDriftA 6s ease-in-out infinite alternate;
 }
@@ -6165,85 +6181,23 @@ body {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   border: 2px solid #f59e0b;
-  border-radius: 18px;
-  padding: 5px 12px;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 14px rgba(180, 83, 9, 0.28);
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(180, 83, 9, 0.32);
   transition: transform 0.2s;
-  white-space: nowrap;
 }
 
 .dream-cloud-cluster:hover .mist-crystal-gold-seal {
-  transform: scale(1.08);
-  box-shadow: 0 6px 18px rgba(180, 83, 9, 0.38);
+  transform: scale(1.12);
+  box-shadow: 0 6px 18px rgba(180, 83, 9, 0.45);
 }
 
 .seal-lock-icon {
-  font-size: 14px;
-}
-
-.seal-island-name {
-  font-size: 12px;
-  font-weight: 900;
-  color: #78350f;
-}
-
-/* 6. 神通关后海峡间浮现的渡海通道徽标 */
-.spot-unlocked-bridge {
-  z-index: 17;
-  pointer-events: auto;
-}
-
-.bridge-magical-pass-pill {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border: 2px solid #10b981;
-  border-radius: 22px;
-  padding: 4px 12px;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  animation: bridgeGlowPulse 2.5s ease-in-out infinite;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.bridge-magical-pass-pill:hover {
-  transform: scale(1.08);
-  border-color: #059669;
-  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5);
-}
-
-.bridge-pass-icon {
   font-size: 18px;
-}
-
-.bridge-pass-text-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.bridge-pass-title {
-  font-size: 11px;
-  font-weight: 900;
-  color: #065f46;
-  line-height: 1.2;
-}
-
-.bridge-pass-tag {
-  font-size: 9px;
-  font-weight: 800;
-  color: #059669;
-}
-
-@keyframes bridgeGlowPulse {
-  0%, 100% { transform: translateY(0); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
-  50% { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5); }
 }
 
 /* 7. 神兽迷雾呼救气泡与果冻动效 */
@@ -6258,8 +6212,8 @@ body {
   padding: 8px 14px;
   box-shadow: 0 8px 26px rgba(2, 44, 90, 0.3);
   z-index: 40;
-  min-width: 180px;
-  max-width: 230px;
+  min-width: 190px;
+  max-width: 240px;
   pointer-events: none;
 }
 
@@ -6278,10 +6232,7 @@ body {
 .bubble-content-text {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: 11px;
-  font-weight: 800;
-  color: #0369a1;
+  gap: 8px;
   line-height: 1.4;
   text-align: left;
 }
@@ -6327,15 +6278,15 @@ body {
     height: 22px;
     font-size: 15px;
   }
-  .flagship-interactive-card {
-    padding: 4px 10px;
+  .flagship-sail-pill {
+    padding: 2px 10px;
   }
-  .flagship-card-name {
-    font-size: 12px;
+  .sail-pill-text {
+    font-size: 11px;
   }
   .dream-cloud-cluster {
-    width: 150px;
-    height: 120px;
+    width: 160px;
+    height: 130px;
   }
   .cloud-puff-floating {
     font-size: 26px;
@@ -6392,7 +6343,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v19.3 五岛独立·海峡桥梁通关解锁·大帆船水晶徽章 (14:30)</span>
+            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v19.4 纯手绘无字大洋·港湾大帆船与灵动航标 (14:38)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -10108,23 +10059,25 @@ class App {
       if (!isl) return '';
 
       if (!st.unlocked) {
-        // 未解锁海岛：柔和梦幻的大面积晨雾光晕 + 黄金晶石封印锁 (点击触发神兽呼救)
+        // 未解锁海岛：柔和梦幻的大面积晨雾光晕 + 黄金晶石小锁 (无任何多余杂字，点击触发神兽呼救)
         return `
           <div class="grand-spot-hub ${spot} spot-dream-cloud-veil" id="spot_${isl.id}">
-            <div class="island-seamless-mist-overlay dream-cloud-cluster" data-mist-island="${isl.id}">
+            <div class="island-seamless-mist-overlay dream-cloud-cluster" data-mist-island="${isl.id}" title="【${short}】迷雾封锁中，点击查看解救线索">
               <div class="dream-mist-aura"></div>
               <div class="cloud-puff-floating cloud-puff-a">☁️</div>
               <div class="cloud-puff-floating cloud-puff-b">☁️</div>
               <div class="cloud-puff-floating cloud-puff-c">☁️</div>
               <div class="mist-crystal-gold-seal">
                 <span class="seal-lock-icon">🔒</span>
-                <span class="seal-island-name">${short} (未解锁)</span>
               </div>
               <div class="cloud-speech-bubble" style="display:none;" id="mistBubble_${isl.id}">
                 <span class="bubble-arrow-point"></span>
                 <div class="bubble-content-text">
                   <span class="bubble-mascot-emoji">${emoji}</span>
-                  <span>解救【${prev}】的神兽，即可驱散迷雾跨海通航！</span>
+                  <div>
+                    <div style="font-weight:900; color:#0369a1; font-size:12px;">【${isl.name}】</div>
+                    <div style="font-size:11px; color:#475569; margin-top:2px;">通关【${prev}】解救神兽，即可驱散海雾通航！</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -10133,39 +10086,31 @@ class App {
       }
 
       if (idx === activeFrontierIdx) {
-        // 当前攻克前沿：停靠在沙滩码头的探险家专属大帆船 (Flagship Explorer)
+        // 当前攻克前沿：停靠在海湾浅水区的探险大帆船 (Flagship Explorer)
         return `
-          <div class="grand-spot-hub ${spot} spot-frontier-flagship" id="spot_${isl.id}" data-dock-island="${isl.id}">
+          <div class="grand-spot-hub ${spot} spot-frontier-flagship" id="spot_${isl.id}" data-dock-island="${isl.id}" title="点击扬帆开闯【${isl.name}】">
             <div class="flagship-ripple-ring"></div>
             <div class="flagship-vessel-box">
               <div class="flagship-boat-sprite">
                 <span class="boat-mast-sail">⛵</span>
                 <span class="boat-captain-avatar">${emoji}</span>
               </div>
-              <div class="flagship-interactive-card">
-                <div class="flagship-card-badge">
-                  <span class="badge-dot">●</span>
-                  <span>当前探索</span>
-                  <span class="badge-count">${st.comp.length}/${st.levels.length || 7}关</span>
-                </div>
-                <div class="flagship-card-name">${isl.name}</div>
-                <div class="flagship-card-action">
-                  <span>扬帆登岛</span>
-                  <span class="card-arrow">➔</span>
-                </div>
+              <div class="flagship-sail-pill">
+                <span class="sail-pill-dot">●</span>
+                <span class="sail-pill-text">扬帆登岛</span>
+                <span class="sail-pill-arrow">➔</span>
               </div>
             </div>
           </div>
         `;
       }
 
-      // 已通关海岛：小巧清爽的金色王冠胜旗
+      // 已通关海岛：插在沙滩码头边的黄金胜利旗标 (极简精致)
       return `
         <div class="grand-spot-hub ${spot} spot-cleared-compact" id="spot_${isl.id}">
-          <button class="btn-royal-victory-flag" data-dock-island="${isl.id}" title="点击巡视【${isl.name}】">
-            <span class="victory-crown">👑</span>
-            <span class="victory-name">${short}</span>
-            <span class="victory-tag">已解救</span>
+          <button class="btn-royal-banner-flag" data-dock-island="${isl.id}" title="点击重访【${isl.name}】">
+            <span class="banner-flag-crown">👑</span>
+            <span class="banner-flag-label">${short}</span>
           </button>
         </div>
       `;
@@ -10176,12 +10121,10 @@ class App {
       if (!nextIsl || !prevDone) return ''; // 未通关前直接不渲染，海面上纯净无桥
       return `
         <div class="grand-spot-hub ${spotClass} spot-unlocked-bridge" data-dock-island="${nextIsl.id}" title="沿【${bridgeTitle}】前往【${nextIsl.name}】">
-          <div class="bridge-magical-pass-pill">
-            <span class="bridge-pass-icon">${bridgeEmoji || '🌉'}</span>
-            <div class="bridge-pass-text-col">
-              <span class="bridge-pass-title">${bridgeTitle}</span>
-              <span class="bridge-pass-tag">已通航 ➔</span>
-            </div>
+          <div class="channel-buoy-beacon">
+            <span class="buoy-water-ring"></span>
+            <span class="buoy-ico">${bridgeEmoji || '🌉'}</span>
+            <span class="buoy-tag">通航中</span>
           </div>
         </div>
       `;
