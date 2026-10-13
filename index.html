@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="build-version" content="2026-10-08 11:17:01">
+  <meta name="build-version" content="2026-10-13 11:31:17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -3572,6 +3572,397 @@ body {
   transform: scale(0.96);
 }
 
+/* ========================================================
+   🧭 未知新大陆 · 迷雾浮动特效与精致探索卡片 (Far Continent Discovery)
+   ======================================================== */
+.far-ocean-continent-scene {
+  width: 100% !important;
+  max-width: 1200px;
+  box-sizing: border-box !important;
+  margin: 18px auto 14px auto;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #dbeafe 0%, #eff6ff 45%, #f8fafc 100%);
+  border: 2px solid #bae6fd;
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.far-ocean-continent-scene:hover {
+  border-color: #7dd3fc;
+  box-shadow: 0 16px 36px rgba(2, 132, 199, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* 1. 顶部神秘迷雾世界 */
+.far-continent-mist-world {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, 0.3) 0%, rgba(186, 230, 253, 0.15) 50%, rgba(224, 242, 254, 0.6) 100%);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* 晨曦天际线光晕 */
+.mist-dawn-glow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  height: 100px;
+  background: radial-gradient(ellipse at center, rgba(254, 240, 138, 0.55) 0%, rgba(253, 224, 71, 0.2) 50%, transparent 80%);
+  filter: blur(12px);
+  pointer-events: none;
+  animation: dawnGlowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes dawnGlowPulse {
+  0% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 0.9; transform: translateX(-50%) scale(1.08); }
+}
+
+/* 远景神秘海市蜃楼（城堡与群山剪影） */
+.mist-distant-mirage {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  filter: drop-shadow(0 4px 12px rgba(2, 132, 199, 0.25));
+  pointer-events: none;
+}
+
+.mirage-elements {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0.82;
+  animation: mirageFloat 5s ease-in-out infinite alternate;
+}
+
+@keyframes mirageFloat {
+  0% { transform: translateY(0); filter: blur(0.5px); }
+  100% { transform: translateY(-4px); filter: blur(0px); }
+}
+
+.mirage-item {
+  display: inline-block;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.mirage-castle-left, .mirage-castle-right {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.3));
+}
+
+.mirage-mountain-left, .mirage-mountain-right {
+  font-size: 24px;
+  opacity: 0.85;
+}
+
+.mirage-rainbow {
+  font-size: 32px;
+  animation: rainbowSway 4s ease-in-out infinite alternate;
+}
+
+@keyframes rainbowSway {
+  0% { transform: scale(0.95) rotate(-2deg); }
+  100% { transform: scale(1.05) rotate(2deg); }
+}
+
+/* 闪烁魔法微粒 */
+.mirage-sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mirage-sparkles .sparkle {
+  position: absolute;
+  font-size: 14px;
+  color: #f59e0b;
+  animation: sparkleTwinkle 2.2s infinite ease-in-out alternate;
+}
+
+.mirage-sparkles .sp-1 { top: -6px; left: 10%; animation-delay: 0.2s; }
+.mirage-sparkles .sp-2 { top: -2px; right: 12%; animation-delay: 0.8s; }
+.mirage-sparkles .sp-3 { top: 12px; left: 50%; animation-delay: 1.4s; }
+
+@keyframes sparkleTwinkle {
+  0% { opacity: 0.2; transform: scale(0.7) rotate(0deg); }
+  100% { opacity: 1; transform: scale(1.2) rotate(35deg); }
+}
+
+/* 2. 流动迷雾层 (两层错速视差 CSS 动画) */
+.mist-floating-layer {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  top: 0;
+  left: -50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.mist-layer-back {
+  z-index: 1;
+  opacity: 0.45;
+  filter: blur(3px);
+  animation: mistDriftBack 28s linear infinite;
+}
+
+.mist-layer-front {
+  z-index: 3;
+  opacity: 0.65;
+  filter: blur(1.5px);
+  animation: mistDriftFront 20s linear infinite alternate;
+}
+
+@keyframes mistDriftBack {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(25%); }
+}
+
+@keyframes mistDriftFront {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-8%) translateY(3px); }
+  100% { transform: translateX(8%) translateY(-2px); }
+}
+
+.cloud-puff {
+  font-size: 38px;
+  line-height: 1;
+  user-select: none;
+  animation: puffFloat 4s ease-in-out infinite alternate;
+}
+
+.puff-1 { font-size: 34px; animation-delay: 0.2s; }
+.puff-2 { font-size: 46px; animation-delay: 1.1s; }
+.puff-3 { font-size: 40px; animation-delay: 0.6s; }
+.puff-4 { font-size: 50px; animation-delay: 1.8s; }
+.puff-5 { font-size: 36px; animation-delay: 0.9s; }
+
+.puff-a { font-size: 42px; animation-delay: 0.4s; }
+.puff-b { font-size: 38px; animation-delay: 1.3s; }
+.puff-c { font-size: 48px; animation-delay: 0.8s; }
+.puff-d { font-size: 36px; animation-delay: 1.6s; }
+
+@keyframes puffFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+/* 交互提示气泡 */
+.mist-interactive-toast {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  color: #f8fafc;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* 3. 精致航海探索卡片 (Expedition Card) */
+.far-continent-expedition-card {
+  position: relative;
+  z-index: 4;
+  margin: -10px 16px 14px 16px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* 航行小帆船 */
+.expedition-ship-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(2, 132, 199, 0.15);
+}
+
+.expedition-ship-icon {
+  font-size: 26px;
+  animation: shipSailSway 3s ease-in-out infinite alternate;
+}
+
+@keyframes shipSailSway {
+  0% { transform: translateY(1px) rotate(-3deg); }
+  100% { transform: translateY(-3px) rotate(4deg); }
+}
+
+.ship-water-ripple {
+  position: absolute;
+  bottom: 5px;
+  width: 28px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.4);
+  filter: blur(1px);
+  animation: rippleSpread 2s ease-out infinite;
+}
+
+@keyframes rippleSpread {
+  0% { transform: scaleX(0.7); opacity: 0.8; }
+  100% { transform: scaleX(1.3); opacity: 0.2; }
+}
+
+/* 信息文字区 */
+.expedition-info-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.expedition-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.expedition-tag-pill {
+  font-size: 11px;
+  font-weight: 800;
+  color: #0369a1;
+  background: #e0f2fe;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid #bae6fd;
+}
+
+.expedition-status-pill {
+  font-size: 11px;
+  font-weight: 800;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid #fde68a;
+  animation: statusPillBreathe 2s infinite ease-in-out alternate;
+}
+
+@keyframes statusPillBreathe {
+  0% { transform: scale(0.98); opacity: 0.88; }
+  100% { transform: scale(1.02); opacity: 1; }
+}
+
+.expedition-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: 0.3px;
+}
+
+.expedition-subtitle {
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.45;
+  white-space: normal;
+}
+
+/* 操作互动槽：远眺按钮 */
+.expedition-action-slot {
+  flex-shrink: 0;
+}
+
+.expedition-compass-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.expedition-compass-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45);
+}
+
+.expedition-compass-btn:active {
+  transform: scale(0.94);
+}
+
+.compass-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.compass-lbl {
+  font-size: 11px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .far-continent-mist-world {
+    height: 110px;
+  }
+  .far-continent-expedition-card {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 10px;
+  }
+  .expedition-badge-row {
+    justify-content: center;
+  }
+  .expedition-ship-wrap {
+    margin: 0 auto;
+  }
+  .expedition-compass-btn {
+    flex-direction: row;
+    gap: 6px;
+    padding: 8px 16px;
+  }
+}
+
 /* ➕ 探索/增加新岛屿大卡片 */
 .island-add-trigger-card {
   width: 100% !important;
@@ -6432,7 +6823,7 @@ body {
             <img src="data:image/png;base64,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" class="deco-star-sm" alt="星星">
           </div>
           <div class="hero-subtitle">
-            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v20.8 五岛全景完工·岛5太空城堡岛纯手绘双端画卷落地 (11:17)</span>
+            的精彩乐园 <span style="font-size:11px; color:#0284c7; font-weight:800; margin-left:6px; background:#e0f2fe; padding:2px 8px; border-radius:10px; border:1px solid #bae6fd;">v20.8 五岛全景完工·岛5太空城堡岛纯手绘双端画卷落地 (11:31)</span>
             <img src="data:image/png;base64,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" class="deco-heart-sm" alt="爱心">
           </div>
         </div>
@@ -10398,31 +10789,98 @@ class App {
       stageContainer.scrollLeft = scrollLeft - walk;
     };
 
-    // 最底部未知新大陆与扩展卡片
+    // 最底部未知新大陆与扩展卡片：迷雾浮动特效 + 精致探索卡片
     const farContinentEl = document.createElement('div');
     farContinentEl.className = 'far-ocean-continent-scene';
     farContinentEl.innerHTML = `
-      <div class="far-continent-cloud-sea">
-        <div class="cloud-sea-wave-line">☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</div>
-        <div class="far-mystery-castle">
-          <span class="far-icon">🏰</span>
-          <span class="far-icon-sparkle">✨</span>
-          <span class="far-icon-mountain">⛰️</span>
-          <span class="far-icon-rainbow">🌈</span>
-          <span class="far-icon-mountain">⛰️</span>
-          <span class="far-icon-sparkle">✨</span>
-          <span class="far-icon">🏰</span>
+      <div class="far-continent-mist-world" title="点击远眺未知海域">
+        <div class="mist-dawn-glow"></div>
+        <div class="mist-distant-mirage">
+          <div class="mirage-elements">
+            <span class="mirage-item mirage-castle-left">🏰</span>
+            <span class="mirage-item mirage-mountain-left">⛰️</span>
+            <span class="mirage-item mirage-rainbow">🌈</span>
+            <span class="mirage-item mirage-mountain-right">⛰️</span>
+            <span class="mirage-item mirage-castle-right">🏰</span>
+          </div>
+          <div class="mirage-sparkles">
+            <span class="sparkle sp-1">✨</span>
+            <span class="sparkle sp-2">✨</span>
+            <span class="sparkle sp-3">✨</span>
+          </div>
         </div>
-        <div class="cloud-sea-wave-line">☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</div>
+        <div class="mist-floating-layer mist-layer-back">
+          <div class="cloud-puff puff-1">☁️</div>
+          <div class="cloud-puff puff-2">☁️</div>
+          <div class="cloud-puff puff-3">☁️</div>
+          <div class="cloud-puff puff-4">☁️</div>
+          <div class="cloud-puff puff-5">☁️</div>
+        </div>
+        <div class="mist-floating-layer mist-layer-front">
+          <div class="cloud-puff puff-a">☁️</div>
+          <div class="cloud-puff puff-b">☁️</div>
+          <div class="cloud-puff puff-c">☁️</div>
+          <div class="cloud-puff puff-d">☁️</div>
+        </div>
+        <div class="mist-interactive-toast" style="display:none;">
+          <span>🔭 前方发现神秘迷雾海域，新奇大陆正在绘制中！</span>
+        </div>
       </div>
-      <div class="far-continent-badge">
-        <span class="continent-badge-icon">⛵</span>
-        <div class="continent-badge-text-box">
-          <div class="continent-badge-title">未知新大陆 · 远航探索中</div>
-          <div class="continent-badge-sub">勇敢的小航海家正在绘制海图，敬请期待！</div>
+      <div class="far-continent-expedition-card">
+        <div class="expedition-ship-wrap">
+          <div class="expedition-ship-icon">⛵</div>
+          <div class="ship-water-ripple"></div>
+        </div>
+        <div class="expedition-info-box">
+          <div class="expedition-badge-row">
+            <span class="expedition-tag-pill">🧭 远航前沿</span>
+            <span class="expedition-status-pill">海图绘制中</span>
+          </div>
+          <div class="expedition-title">未知新大陆 · 远洋探索中</div>
+          <div class="expedition-subtitle">
+            勇敢的小航海家正在绘制海图，破除前序群岛迷雾后，这片神秘世界将为你揭晓！
+          </div>
+        </div>
+        <div class="expedition-action-slot">
+          <div class="expedition-compass-btn" title="远眺望远镜">
+            <span class="compass-icon">🔭</span>
+            <span class="compass-lbl">远眺</span>
+          </div>
         </div>
       </div>
     `;
+
+    // 交互：点击远眺或点击迷雾
+    const mistWorld = farContinentEl.querySelector('.far-continent-mist-world');
+    const toastEl = farContinentEl.querySelector('.mist-interactive-toast');
+    const compassBtn = farContinentEl.querySelector('.expedition-compass-btn');
+    let mistToastTimer = null;
+
+    const handleFarContinentLookout = (e) => {
+      if (e) e.stopPropagation();
+      window.soundEngine.playClick();
+      window.soundEngine.speak('远洋水手报告：前方海面发现神秘微光，新大陆正等待解锁！');
+
+      if (toastEl) {
+        toastEl.style.display = 'block';
+        toastEl.classList.remove('pop-bubble-anim');
+        void toastEl.offsetWidth;
+        toastEl.classList.add('pop-bubble-anim');
+
+        if (mistToastTimer) clearTimeout(mistToastTimer);
+        mistToastTimer = setTimeout(() => {
+          toastEl.style.display = 'none';
+        }, 3600);
+      }
+    };
+
+    if (mistWorld) {
+      mistWorld.addEventListener('click', handleFarContinentLookout);
+    }
+    if (compassBtn) {
+      compassBtn.addEventListener('click', handleFarContinentLookout);
+    }
+
     this.islandsContainer.appendChild(farContinentEl);
 
     const addCard = document.createElement('div');
